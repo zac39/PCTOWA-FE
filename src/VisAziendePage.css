@@ -1,0 +1,108 @@
+.container {
+    padding: 30px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: right;
+  }
+  
+  .filter-button {
+    background-color: #ABD6CD;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    width: 200px;
+  }
+  
+  .azienda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .azienda-card {
+    background-color: #ABD6CD;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .azienda-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .azienda-dati {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .azienda-sitoWeb {
+    text-align: left;
+    min-width: 250px;
+  }
+  
+  .azienda-sitoWeb a {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .azienda-titolo {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .azienda-indirizzo {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #4b5563;
+  }
+
+
+
+
+
+  
+  .colore {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin: 0 16px;
+  }
+  
+  .bottoni {
+    display: flex;
+    gap: 10px;
+    height: max-content;
+  }
+  
+  .btn {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-weight: lighter;
+    color: black;
+    cursor: pointer;
+    font-size: larger;
+  }
+  
+  .contatti {
+    background-color: #7BA89F; /* dark gray */
+  }
+  
+  .turni {
+    background-color: #7BA89F; /* gray */
+  }
+  
