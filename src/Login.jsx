@@ -10,7 +10,7 @@ function Login({ onLoginSuccess }) {
     setErrore('');
 
     try {
-      const res = await fetch('http://192.168.1.193:5000/api/v1/login', {
+      const res = await fetch('http://zacserv.duckdns.org:5000/api/v1/user/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
