@@ -9,6 +9,127 @@
     margin-bottom: 30px;
     justify-content: right;
   }
+
+
+  .filter-container {
+    position: relative;
+    width: 200px;
+  }
+  
+  .filter-input {
+    width: 100%;
+    padding: 6px 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .suggestion-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f0f0f0;
+  }
+
+
+  /* @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .filter-container {
+      width: 100%;
+    }
+  
+    .azienda-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .bottoni {
+      width: 100%;
+      justify-content: space-between;
+    }
+  } */
+
+
+
+/* Container dei filtri */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Input dei filtri */
+.filter-container {
+  position: relative;
+  width: 200px;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-input:focus {
+  border-color: #007BFF;
+}
+
+/* Lista dei suggerimenti */
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 180px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Singolo elemento suggerimento */
+.suggestion-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+
   
   .filter-button {
     background-color: #ABD6CD;
