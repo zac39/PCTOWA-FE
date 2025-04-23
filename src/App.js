@@ -9,6 +9,9 @@ import {
 import Login from './Login';
 import IndirizziPage from './IndirizziPage';
 import VisAziendePage from './VisAziendePage';
+import VisStudentiPage from './VisStudentiPage'; // ✅ Importa la nuova pagina
+import VisAziendaPage from './VisAziendaPage'; // Importa la nuova pagina
+
 
 function MainApp({ onLogout }) {
   const location = useLocation();
@@ -19,13 +22,19 @@ function MainApp({ onLogout }) {
       {isHome && (
         <>
           <h1>Benvenuto! 🎉</h1>
-          <button onClick={onLogout}>Logout</button> {/* ✅ Usa onLogout */}
+          <button onClick={onLogout}>Logout</button>
           <nav style={{ marginTop: '20px' }}>
             <Link to="/indirizzi">
               <button>Vai agli indirizzi 📍</button>
             </Link>
             <Link to="/aziende" style={{ marginLeft: '10px' }}>
               <button>Vai alle aziende 🏢</button>
+            </Link>
+            <Link to="/azienda" style={{ marginLeft: '10px' }}>
+              <button>Vai alla azienda </button>
+            </Link>
+            <Link to="/studenti" style={{ marginLeft: '10px' }}>
+              <button>Vai agli studenti 🎓</button>
             </Link>
           </nav>
         </>
@@ -36,6 +45,8 @@ function MainApp({ onLogout }) {
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/aziende" element={<VisAziendePage />} />
+          <Route path="/azienda" element={<VisAziendaPage />} />
+          <Route path="/studenti" element={<VisStudentiPage />} />
           <Route path="/" element={null} />
         </Routes>
       </div>
@@ -44,14 +55,7 @@ function MainApp({ onLogout }) {
 }
 
 function App() {
-
-  //const [autenticato, setAutenticato] = useState(true); // forza accesso
-
-
-  const [autenticato, setAutenticato] = useState(
-    !!localStorage.getItem('token') // controlla se esiste già un token
-  );
-
+  const [autenticato, setAutenticato] = useState(true);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
