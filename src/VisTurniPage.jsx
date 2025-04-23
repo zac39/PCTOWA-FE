@@ -1,18 +1,20 @@
 import React from 'react';
-import './VisAziendaPage.css';
+import { useParams } from 'react-router-dom'; // Importa il hook per i parametri della rotta
+import './VisTurniPage.css';
+
 
 //TODO: sistema il logo 
 
-const aziendeData = [
+const turniData = [
   {
-    idAzienda: 1,
+    idturno: 1,
     ragioneSociale: "Università di Verona",
     codiceAteco: 123456,
     partitaIVA: 12345678910,
     fax: "non so cosa sia un fax",
     pec: "neanche una pec",
-    telefonoAzienda: "+39 123 123 1234",
-    emailAzienda: "email@gmail.com",
+    telefonoturno: "+39 123 123 1234",
+    emailturno: "email@gmail.com",
     dataConvenzione: "01/01/2001",
     scadenzaConvenzione: "01/02/2002",
     categoria: "Scarpe",
@@ -38,14 +40,14 @@ const aziendeData = [
     },
   },
   {
-    idAzienda: 2,
+    idturno: 2,
     ragioneSociale: "Tech Company SRL",
     codiceAteco: 654321,
     partitaIVA: 98765432101,
     fax: "non so cosa sia un fax",
     pec: "neanche una pec",
-    telefonoAzienda: "+39 987 987 9876",
-    emailAzienda: "tech@gmail.com",
+    telefonoturno: "+39 987 987 9876",
+    emailturno: "tech@gmail.com",
     dataConvenzione: "01/03/2022",
     scadenzaConvenzione: "01/03/2023",
     categoria: "Tecnologia",
@@ -74,14 +76,14 @@ const aziendeData = [
     },
   },
   {
-    idAzienda: 2,
+    idturno: 2,
     ragioneSociale: "Tech Company SRL",
     codiceAteco: 654321,
     partitaIVA: 98765432101,
     fax: "non so cosa sia un fax",
     pec: "neanche una pec",
-    telefonoAzienda: "+39 987 987 9876",
-    emailAzienda: "tech@gmail.com",
+    telefonoturno: "+39 987 987 9876",
+    emailturno: "tech@gmail.com",
     dataConvenzione: "01/03/2022",
     scadenzaConvenzione: "01/03/2023",
     categoria: "Tecnologia",
@@ -110,14 +112,14 @@ const aziendeData = [
     },
   },
   {
-    idAzienda: 2,
+    idturno: 2,
     ragioneSociale: "Tech Company SRL",
     codiceAteco: 654321,
     partitaIVA: 98765432101,
     fax: "non so cosa sia un fax",
     pec: "neanche una pec",
-    telefonoAzienda: "+39 987 987 9876",
-    emailAzienda: "tech@gmail.com",
+    telefonoturno: "+39 987 987 9876",
+    emailturno: "tech@gmail.com",
     dataConvenzione: "01/03/2022",
     scadenzaConvenzione: "01/03/2023",
     categoria: "Tecnologia",
@@ -146,14 +148,14 @@ const aziendeData = [
     },
   },
   {
-    idAzienda: 2,
+    idturno: 2,
     ragioneSociale: "Tech Company SRL",
     codiceAteco: 654321,
     partitaIVA: 98765432101,
     fax: "non so cosa sia un fax",
     pec: "neanche una pec",
-    telefonoAzienda: "+39 987 987 9876",
-    emailAzienda: "tech@gmail.com",
+    telefonoturno: "+39 987 987 9876",
+    emailturno: "tech@gmail.com",
     dataConvenzione: "01/03/2022",
     scadenzaConvenzione: "01/03/2023",
     categoria: "Tecnologia",
@@ -184,46 +186,52 @@ const aziendeData = [
 
 ];
 
-export default function VisAziendaPage() {
+export default function VisturnoPage() {
+
+  const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+
+
   return (
-    <div className="azienda-container">
-      {aziendeData.map((azienda) => (
-        <div className="azienda-card" key={azienda.idAzienda}>
-          <div className="azienda-header">
-            {/* Informazioni Azienda */}
-            <div className="azienda-info">
-              <h2 className="azienda-title">{azienda.ragioneSociale}</h2>
-              <p className="azienda-address">
-                {`${azienda.indirizzo.indirizzo}, ${azienda.indirizzo.cap}, ${azienda.indirizzo.comune}, ${azienda.indirizzo.stato}`}
+    <div className="turno-container">
+      <p>{aziendaId}</p>
+
+      {turniData.map((turno) => (
+        <div className="turno-card" key={turno.idturno}>
+          <div className="turno-header">
+            {/* Informazioni turno */}
+            <div className="turno-info">
+              <h2 className="turno-title">{turno.ragioneSociale}</h2>
+              <p className="turno-address">
+                {`${turno.indirizzo.indirizzo}, ${turno.indirizzo.cap}, ${turno.indirizzo.comune}, ${turno.indirizzo.stato}`}
               </p>
               <a
-                href={azienda.sitoWeb}
+                href={turno.sitoWeb}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="azienda-link"
+                className="turno-link"
               >
-                {azienda.sitoWeb}
+                {turno.sitoWeb}
               </a>
             </div>
 
-            {/* Logo Azienda */}
-            <div className="azienda-logo">
-              {azienda.indirizzoLogo ? (
+            {/* Logo turno */}
+            <div className="turno-logo">
+              {turno.indirizzoLogo ? (
                 <img
-                  src={azienda.indirizzoLogo}
-                  alt={`Logo di ${azienda.ragioneSociale}`}
+                  src={turno.indirizzoLogo}
+                  alt={`Logo di ${turno.ragioneSociale}`}
                 />
               ) : (
-                <div className="azienda-logo-placeholder"></div>
+                <div className="turno-logo-placeholder"></div>
               )}
             </div>
           </div>
 
             {/* Materie */}
-            {/* {azienda.materie && (
-                <div className="azienda-materie">
+            {/* {turno.materie && (
+                <div className="turno-materie">
                 <strong>Materie: </strong>
-                {azienda.materie.map((materia, index) => (
+                {turno.materie.map((materia, index) => (
                     <span key={index} className="materia-badge">
                     {materia}
                     </span>
@@ -233,10 +241,10 @@ export default function VisAziendaPage() {
 
 
             {/* Materie */}
-            <div className="azienda-materie">
+            <div className="turno-materie">
             <strong>Materie: </strong>
-            {azienda.materie &&
-                azienda.materie.map((materia, index) => (
+            {turno.materie &&
+                turno.materie.map((materia, index) => (
                 <span
                     key={index}
                     className="materia-badge"
@@ -249,25 +257,25 @@ export default function VisAziendaPage() {
 
 
             {/* Dati Extra */}
-            {azienda.datiExtra && (
-                <div className="azienda-dati-extra">
+            {turno.datiExtra && (
+                <div className="turno-dati-extra">
                 <div className="dati-extra-grid">
-                    <p><strong>Data inizio:</strong> <span>{azienda.datiExtra.dataInizio}</span></p>
-                    <p><strong>Data fine:</strong> <span>{azienda.datiExtra.dataFine}</span></p>
-                    <p><strong>Posti disponibili:</strong> <span>{azienda.datiExtra.postiDisponibili}</span></p>
-                    <p><strong>Posti totali:</strong> <span>{azienda.datiExtra.postiTotali}</span></p>
-                    <p><strong>Ore totali:</strong> <span>{azienda.datiExtra.oreTotali}</span></p>
-                    <p><strong>Orario inizio:</strong> <span>{azienda.datiExtra.orarioInizio}</span></p>
-                    <p><strong>Orario fine:</strong> <span>{azienda.datiExtra.orarioFine}</span></p>
+                    <p><strong>Data inizio:</strong> <span>{turno.datiExtra.dataInizio}</span></p>
+                    <p><strong>Data fine:</strong> <span>{turno.datiExtra.dataFine}</span></p>
+                    <p><strong>Posti disponibili:</strong> <span>{turno.datiExtra.postiDisponibili}</span></p>
+                    <p><strong>Posti totali:</strong> <span>{turno.datiExtra.postiTotali}</span></p>
+                    <p><strong>Ore totali:</strong> <span>{turno.datiExtra.oreTotali}</span></p>
+                    <p><strong>Orario inizio:</strong> <span>{turno.datiExtra.orarioInizio}</span></p>
+                    <p><strong>Orario fine:</strong> <span>{turno.datiExtra.orarioFine}</span></p>
                 </div>
                 </div>
             )}
 
           {/* Azioni */}
-          <div className="azienda-actions">
-            <button className="azienda-button">Tutor</button>
-            <button className="azienda-button">Assegna</button>
-            <button className="azienda-button">Azienda</button>
+          <div className="turno-actions">
+            <button className="turno-button">Tutor</button>
+            <button className="turno-button">Assegna</button>
+            <button className="turno-button">turno</button>
           </div>
         </div>
       ))}

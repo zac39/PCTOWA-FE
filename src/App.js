@@ -10,7 +10,7 @@ import Login from './Login';
 import IndirizziPage from './IndirizziPage';
 import VisAziendePage from './VisAziendePage';
 import VisStudentiPage from './VisStudentiPage'; // ✅ Importa la nuova pagina
-import VisAziendaPage from './VisAziendaPage'; // Importa la nuova pagina
+import VisTurniPage from './VisTurniPage'; // Importa la nuova pagina
 
 
 function MainApp({ onLogout }) {
@@ -30,9 +30,6 @@ function MainApp({ onLogout }) {
             <Link to="/aziende" style={{ marginLeft: '10px' }}>
               <button>Vai alle aziende 🏢</button>
             </Link>
-            <Link to="/azienda" style={{ marginLeft: '10px' }}>
-              <button>Vai alla azienda </button>
-            </Link>
             <Link to="/studenti" style={{ marginLeft: '10px' }}>
               <button>Vai agli studenti 🎓</button>
             </Link>
@@ -45,8 +42,8 @@ function MainApp({ onLogout }) {
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/aziende" element={<VisAziendePage />} />
-          <Route path="/azienda" element={<VisAziendaPage />} />
           <Route path="/studenti" element={<VisStudentiPage />} />
+          <Route path="/turni/:aziendaId" element={<VisTurniPage />} />
           <Route path="/" element={null} />
         </Routes>
       </div>

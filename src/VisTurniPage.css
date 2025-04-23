@@ -1,4 +1,4 @@
-.azienda-container {
+.turno-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -6,7 +6,7 @@
     justify-content: center;
   }
   
-  .azienda-card {
+  .turno-card {
     background-color: #abd6cd;
     border-radius: 10px;
     padding: 20px;
@@ -17,16 +17,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  /* Intestazione Azienda */
-  .azienda-header {
+  /* Intestazione turno */
+  .turno-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 15px;
   }
   
- /* Azienda Info */
-.azienda-info {
+ /* turno Info */
+.turno-info {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -35,21 +35,21 @@
     align-items: flex-start; /* Forza gli elementi a partire da sinistra */
   }
   
-  .azienda-title {
+  .turno-title {
     font-size: 18px;
     font-weight: bold;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-address {
+  .turno-address {
     font-size: 14px;
     color: #555;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-link {
+  .turno-link {
     color: #007bff;
     text-decoration: none;
     font-size: 14px;
@@ -57,32 +57,32 @@
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-link:hover {
+  .turno-link:hover {
     text-decoration: underline;
   }
   
-  /* Logo Azienda */
-  .azienda-logo {
+  /* Logo turno */
+  .turno-logo {
     width: 100px;
     height: 100px;
     margin-left: 10px;
   }
   
-  .azienda-logo img {
+  .turno-logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
   }
   
-  .azienda-logo-placeholder {
+  .turno-logo-placeholder {
     width: 100%;
     height: 100%;
     background-color: #ccc;
     border-radius: 5px;
   }
   
-  .azienda-container {
+  .turno-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -90,7 +90,7 @@
     justify-content: center;
   }
   
-  .azienda-card {
+  .turno-card {
     background-color: #abd6cd;
     border-radius: 10px;
     padding: 20px;
@@ -101,16 +101,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  /* Intestazione Azienda */
-  .azienda-header {
+  /* Intestazione turno */
+  .turno-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 15px;
   }
   
- /* Azienda Info */
-.azienda-info {
+ /* turno Info */
+.turno-info {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -119,21 +119,21 @@
     align-items: flex-start; /* Forza gli elementi a partire da sinistra */
   }
   
-  .azienda-title {
+  .turno-title {
     font-size: 18px;
     font-weight: bold;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-address {
+  .turno-address {
     font-size: 14px;
     color: #555;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-link {
+  .turno-link {
     color: #007bff;
     text-decoration: none;
     font-size: 14px;
@@ -141,25 +141,25 @@
     text-align: left; /* Allinea a sinistra */
   }
   
-  .azienda-link:hover {
+  .turno-link:hover {
     text-decoration: underline;
   }
   
-  /* Logo Azienda */
-  .azienda-logo {
+  /* Logo turno */
+  .turno-logo {
     width: 100px;
     height: 100px;
     margin-left: 10px;
   }
   
-  .azienda-logo img {
+  .turno-logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
   }
   
-  .azienda-logo-placeholder {
+  .turno-logo-placeholder {
     width: 100%;
     height: 100%;
     background-color: #ccc;
@@ -167,7 +167,7 @@
   }
   
 /* Materie */
-    .azienda-materie {
+    .turno-materie {
         margin-bottom: 15px;
         text-align: left !important; /* Forza l'allineamento a sinistra */
     }
@@ -183,7 +183,7 @@
   }
   
   /* Dati Extra */
-  .azienda-dati-extra {
+  .turno-dati-extra {
     font-size: 14px;
     color: #333;
     margin-bottom: 15px;
@@ -214,12 +214,12 @@
   }
   
   /* Azioni */
-  .azienda-actions {
+  .turno-actions {
     display: flex;
     gap: 10px;
   }
   
-  .azienda-button {
+  .turno-button {
     background-color: #7BA89F;
     color: #000;
     border: none;
@@ -230,18 +230,18 @@
     flex: 1;
   }
   
-  .azienda-button:hover {
+  .turno-button:hover {
     background-color: #7BA89F;
   }
   
 /* Azioni */
-.azienda-actions {
+.turno-actions {
     display: flex;
     gap: 10px;
     justify-content: flex-end; /* Allinea i bottoni verso destra */
   }
   
-  .azienda-button {
+  .turno-button {
     background-color: #7BA89F;
     color: #000;
     border: none;
@@ -252,6 +252,6 @@
     flex: 0; /* Impedisce che i bottoni si allarghino */
   }
   
-  .azienda-button:hover {
+  .turno-button:hover {
     background-color: #4a5e52;
   }
