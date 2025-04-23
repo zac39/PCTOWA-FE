@@ -1,0 +1,257 @@
+.turno-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .turno-card {
+    background-color: #abd6cd;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Intestazione turno */
+  .turno-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+ /* turno Info */
+.turno-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left; /* Allinea tutto a sinistra */
+    align-items: flex-start; /* Forza gli elementi a partire da sinistra */
+  }
+  
+  .turno-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-address {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    word-wrap: break-word;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Logo turno */
+  .turno-logo {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+  }
+  
+  .turno-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .turno-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+  .turno-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .turno-card {
+    background-color: #abd6cd;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Intestazione turno */
+  .turno-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+ /* turno Info */
+.turno-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left; /* Allinea tutto a sinistra */
+    align-items: flex-start; /* Forza gli elementi a partire da sinistra */
+  }
+  
+  .turno-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-address {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    word-wrap: break-word;
+    text-align: left; /* Allinea a sinistra */
+  }
+  
+  .turno-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Logo turno */
+  .turno-logo {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+  }
+  
+  .turno-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .turno-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+/* Materie */
+    .turno-materie {
+        margin-bottom: 15px;
+        text-align: left !important; /* Forza l'allineamento a sinistra */
+    }
+  
+  .materia-badge {
+    display: inline-block;
+    color: #000; /* Testo bianco per contrastare con lo sfondo */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin: 2px;
+    text-align: center;
+  }
+  
+  /* Dati Extra */
+  .turno-dati-extra {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left !important; /* Forza l'allineamento a sinistra */
+  }
+  
+  .dati-extra-grid {
+    display: grid;
+    grid-template-columns: auto auto; /* Due colonne: una per etichette, una per valori */
+    column-gap: 10px; /* Spazio tra le colonne */
+    row-gap: 5px; /* Spazio tra le righe */
+    text-align: left !important; /* Forza l'allineamento a sinistra */
+  }
+  
+  .dati-extra-grid p {
+    margin: 0; /* Rimuove margini verticali */
+    display: contents; /* Permette di mantenere le righe in griglia */
+  }
+  
+  .dati-extra-grid strong {
+    text-align: left; /* Allinea le etichette a sinistra */
+    font-weight: normal; /* Rende il valore meno evidente rispetto all'etichetta */
+  }
+  
+  .dati-extra-grid span {
+    text-align: left; /* Allinea i valori a sinistra */
+    font-weight: bold; /* Rende il valore più evidente */
+  }
+  
+  /* Azioni */
+  .turno-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .turno-button {
+    background-color: #7BA89F;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    flex: 1;
+  }
+  
+  .turno-button:hover {
+    background-color: #7BA89F;
+  }
+  
+/* Azioni */
+.turno-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Allinea i bottoni verso destra */
+  }
+  
+  .turno-button {
+    background-color: #7BA89F;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    flex: 0; /* Impedisce che i bottoni si allarghino */
+  }
+  
+  .turno-button:hover {
+    background-color: #4a5e52;
+  }

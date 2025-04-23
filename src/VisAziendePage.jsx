@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './VisAziendePage.css';
 
 //TODO: prendere effettivamente i dati e fare le richieste
 
 
 const aziende = [
-  { nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-yellow-400' },
-  { nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-blue-500' },
-  { nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-purple-500' },
-  { nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-red-600' },
+  {id:1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-yellow-400' },
+  {id:2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-blue-500' },
+  {id:3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-purple-500' },
+  {id:4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-red-600' },
 ];
 
 const opzioniFiltro = {
@@ -21,6 +22,13 @@ const opzioniFiltro = {
 };
 
 export default function VisAziendePage() {
+
+  const navigate = useNavigate(); // Hook per la navigazione
+
+  function handleTurniClick(id) {
+    navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
+  }
+
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
     Settore: '',
@@ -94,7 +102,9 @@ export default function VisAziendePage() {
             <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
             <div className="bottoni">
               <button className="btn contatti">Contatti</button>
-              <button className="btn turni">Turni</button>
+              <button className="btn turni" 
+                      onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+              >Turni</button>
             </div>
           </div>
         ))}

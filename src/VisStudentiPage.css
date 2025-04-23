@@ -1,0 +1,114 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: right;
+}
+
+
+.filter-container {
+  position: relative;
+  width: 200px;
+}
+
+
+.studenti-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.studente-card {
+  background-color: #abd6cd;
+  border-radius: 10px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1fr; /* 4 colonne: Nome, Indirizzo, Classe, Azione/Stato */
+  align-items: center; /* Centra verticalmente gli elementi */
+  gap: 10px;
+}
+
+.studente-info,
+.azienda-info {
+  display: contents; /* Permette di usare la griglia del contenitore */
+}
+
+/* Nome dello studente e dell'azienda */
+.studente-nome,
+.azienda-nome {
+  font-size: 18px;
+  font-weight: bold;
+  grid-column: 1; /* Prima colonna */
+}
+
+/* Indirizzo dello studente e dell'azienda */
+.studente-indirizzo,
+.azienda-indirizzo {
+  font-size: 14px;
+  color: #555;
+  grid-column: 2; /* Seconda colonna */
+}
+
+/* Classe dello studente e dell'azienda */
+.studente-classe,
+.azienda-classe {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  grid-column: 3; /* Terza colonna */
+  text-align: center; /* Centrare il testo */
+}
+
+/* Contenitore per stato e azione */
+.student-buttons {
+  display: flex; /* Allineamento orizzontale */
+  gap: 10px; /* Spazio tra stato e bottone */
+  grid-column: 4; /* Quarta colonna */
+  justify-content: flex-start; /* Allinea gli elementi a sinistra */
+  align-items: center; /* Centra verticalmente */
+  height: 100%; /* Adatta l'altezza al contenitore */
+}
+
+/* Stato dello studente */
+.studente-stato {
+  padding: 5px 10px; /* Spaziatura interna */
+  border-radius: 5px; /* Angoli arrotondati */
+  font-size: 14px; /* Dimensione del testo */
+  font-weight: bold; /* Testo in grassetto */
+  text-align: center;
+  height: 50px; /* Altezza uniforme */
+  width: 100%; /* Larghezza uniforme */
+  display: flex;
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+  box-sizing: border-box; /* Include padding e bordo nella dimensione */
+}
+
+/* Bottone azione dello studente */
+.studente-azione,
+.azienda-azione {
+  background-color: #5a7262;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px; /* Dimensione del testo */
+  font-weight: bold;
+  cursor: pointer;
+  height: 50px; /* Altezza uniforme */
+  width: 100%; /* Larghezza uniforme */
+  display: flex; /* Usa Flexbox */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+  box-sizing: border-box; /* Include padding e bordo nella dimensione */
+}
+
+/* Spaziatura tra righe */
+.azienda-info {
+  margin-top: 10px; /* Distanza tra studente e azienda */
+}
