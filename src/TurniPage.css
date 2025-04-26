@@ -15,6 +15,10 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    /* Uniforma l'altezza */
+    justify-content: space-between; /* Distribuisce gli elementi con spazio tra loro */
+    min-height: 350px; /* Imposta un'altezza minima per tutti i riquadri */
   }
   
   /* Intestazione turno */
@@ -167,20 +171,26 @@
   }
   
 /* Materie */
-    .turno-materie {
-        margin-bottom: 15px;
-        text-align: left !important; /* Forza l'allineamento a sinistra */
-    }
+.turno-materie {
+  margin-bottom: 15px;
+  text-align: left !important; /* Forza l'allineamento a sinistra */
+  flex-grow: 1; /* Permette di espandere lo spazio delle materie */
+  min-height: 50px; /* Riserva spazio per le materie anche quando non ci sono */
+  display: flex; /* Imposta un layout flessibile */
+  flex-wrap: wrap; /* Permette il wrapping dei badge */
+  align-items: center; /* Allinea verticalmente al centro */
+  justify-content: flex-start; /* Allinea orizzontalmente a sinistra */
+}
   
-  .materia-badge {
-    display: inline-block;
-    color: #000; /* Testo bianco per contrastare con lo sfondo */
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin: 2px;
-    text-align: center;
-  }
+.materia-badge {
+  display: inline-block;
+  color: #000; /* Testo nero */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin: 2px;
+  text-align: center;
+}
   
   /* Dati Extra */
   .turno-dati-extra {
@@ -188,7 +198,9 @@
     color: #333;
     margin-bottom: 15px;
     text-align: left !important; /* Forza l'allineamento a sinistra */
+    flex-grow: 0; /* Non cresce per occupare spazio */
   }
+  
   
   .dati-extra-grid {
     display: grid;
@@ -217,6 +229,8 @@
   .turno-actions {
     display: flex;
     gap: 10px;
+    justify-content: flex-end; /* Allinea i bottoni verso destra */
+    margin-top: auto; /* Spinge questa sezione verso il basso */
   }
   
   .turno-button {
