@@ -61,16 +61,16 @@ export default function ViscontattiPage() {
 
 
   return (
-    <div className="contatti-container">
+    <div className="contatto-container">
       <p>{aziendaId}</p>
 
       {contattiData.contatti.map((contatto) => (
-        <div className="contatti-card" key={contatto.idContatto}>
-          <div className="azienda-header">
+        <div className="contatto-card" key={contatto.idContatto}>
+          <div className="contatto-header">
             {/* Informazioni contatto */}
-            <div className="azienda-info">
-              <h2 className="azienda-title">{contattiData.ragioneSociale}</h2>
-              <p className="azienda-address">
+            <div className="contatto-info">
+              <h2 className="contatto-title">{contattiData.ragioneSociale}</h2>
+              <p className="contatto-address">
                 {`${contattiData.indirizzo.indirizzo}, ${contattiData.indirizzo.cap}, ${contattiData.indirizzo.comune}, ${contattiData.indirizzo.stato}`}
               </p>
               
@@ -82,18 +82,18 @@ export default function ViscontattiPage() {
               >
                 {contattiData.sitoWeb}
               </a>
-              
+
             </div>
 
             {/* Logo contatto */}
-            <div className="azienda-logo">
+            <div className="contatto-logo">
                 {contattiData.indirizzoLogo ? (
                     <img
                     src={contattiData.indirizzoLogo}
                     alt={`Logo di ${contattiData.ragioneSociale}`}
                     />
                 ) : (
-                    <div className="azienda-logo-placeholder"></div> /* Placeholder */
+                    <div className="contatto-logo-placeholder"></div> /* Placeholder */
                 )}
             </div>
           </div>
