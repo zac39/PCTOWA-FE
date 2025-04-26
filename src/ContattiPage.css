@@ -1,4 +1,4 @@
-.contatti-container {
+.contatto-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Riduce lo spazio tra le schede */
@@ -6,7 +6,7 @@
     justify-content: center; /* Centra le schede */
 }
 
-.contatti-card {
+.contatto-card {
     background-color: #abd6cd;
     border-radius: 10px; /* Angoli arrotondati */
     padding: 10px; /* Spaziatura interna ridotta */
@@ -19,7 +19,7 @@
 }
 
 /* Intestazione azienda */
-.azienda-header {
+.contatto-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -27,7 +27,7 @@
 }
 
 /* Info azienda */
-.azienda-info {
+.contatto-info {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -36,14 +36,14 @@
     align-items: flex-start; /* Forza gli elementi a partire da sinistra */
 }
 
-.azienda-title {
+.contatto-title {
     font-size: 14px; /* Dimensione del font ridotta */
     font-weight: bold;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
 }
 
-.azienda-address {
+.contatto-address {
     font-size: 11px; /* Dimensione del font ridotta */
     color: #555;
     margin: 0;
@@ -60,25 +60,25 @@
     padding: 0; /* Rimuove padding */
 }
 
-.azienda-link:hover {
+.contatto-link:hover {
     text-decoration: underline;
 }
 
 /* Logo azienda */
-.azienda-logo {
+.contatto-logo {
     width: 60px; /* Dimensione del logo ridotta */
     height: 60px;
     margin-left: 8px;
 }
 
-.azienda-logo img {
+.contatto-logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.azienda-logo-placeholder {
+.contatto-logo-placeholder {
     width: 100%;
     height: 100%;
     background-color: #ccc;
