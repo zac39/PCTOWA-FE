@@ -21,9 +21,27 @@
 /* Intestazione azienda */
 .azienda-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column; /* Disposizione in colonna */
+    align-items: flex-start; /* Allinea gli elementi a sinistra */
     margin-bottom: 5px; /* Margine inferiore ridotto */
+    gap: 5px; /* Spaziatura tra gli elementi */
+    position: relative; /* Necessario per posizionare il logo */
+}
+
+/* Logo azienda */
+.azienda-logo {
+    width: 60px; /* Dimensione del logo ridotta */
+    height: 60px;
+    position: absolute; /* Posiziona il logo in modo assoluto */
+    top: 0; /* Allinea in alto */
+    right: 0; /* Allinea a destra */
+}
+
+.azienda-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 /* Info azienda */
@@ -62,27 +80,6 @@
 
 .azienda-link:hover {
     text-decoration: underline;
-}
-
-/* Logo azienda */
-.azienda-logo {
-    width: 60px; /* Dimensione del logo ridotta */
-    height: 60px;
-    margin-left: 8px;
-}
-
-.azienda-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.azienda-logo-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #ccc;
-    border-radius: 5px;
 }
 
 /* Dati del contatto */
