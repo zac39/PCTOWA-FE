@@ -8,9 +8,10 @@ import {
 } from 'react-router-dom';
 import Login from './Login';
 import IndirizziPage from './IndirizziPage';
-import VisAziendePage from './VisAziendePage';
-import VisStudentiPage from './VisStudentiPage'; // ✅ Importa la nuova pagina
-import VisTurniPage from './VisTurniPage'; // Importa la nuova pagina
+import ListaAziendePage from './listaAziendePage';
+import StudentiPage from './listaStudentiPage'; // ✅ Importa la nuova pagina
+import TurniPage from './TurniPage'; // Importa la nuova pagina
+import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 
 
@@ -28,7 +29,7 @@ function MainApp({ onLogout }) {
             <Link to="/indirizzi">
               <button>Vai agli indirizzi 📍</button>
             </Link>
-            <Link to="/aziende" style={{ marginLeft: '10px' }}>
+            <Link to="/listaAziende" style={{ marginLeft: '10px' }}>
               <button>Vai alle aziende 🏢</button>
             </Link>
             <Link to="/studenti" style={{ marginLeft: '10px' }}>
@@ -42,9 +43,10 @@ function MainApp({ onLogout }) {
       <div style={{ marginTop: isHome ? '40px' : '0px' }}>
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
-          <Route path="/aziende" element={<VisAziendePage />} />
-          <Route path="/studenti" element={<VisStudentiPage />} />
-          <Route path="/turni/:aziendaId" element={<VisTurniPage />} />
+          <Route path="/listaAziende" element={<ListaAziendePage />} />
+          <Route path="/studenti" element={<StudentiPage />} />
+          <Route path="/turni/:aziendaId" element={<TurniPage />} />
+          <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/" element={null} />
         </Routes>

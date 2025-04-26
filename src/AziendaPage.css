@@ -1,0 +1,122 @@
+
+.azinda-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.azinda-card {
+    background-color: #abd6cd;
+    border-radius: 10px;
+    padding: 15px; /* Aumentato */
+    max-width: 600px; /* Aumentato */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Ombra migliorata */
+    position: relative; /* Aggiunto per abilitare il posizionamento assoluto dei figli */
+    height: 500px; /* Imposta un'altezza minima per il contenitore */
+}
+
+
+/* Intestazione azinda */
+.azinda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px; /* Aumentato */
+}
+
+/* azinda Info */
+.azinda-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Aumentato */
+    text-align: left; /* Allinea tutto a sinistra */
+    align-items: flex-start; /* Forza gli elementi a partire da sinistra */
+}
+
+.azinda-title {
+    font-size: 24px; /* Aumentato */
+    font-weight: bold;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+}
+
+.azinda-address {
+    font-size: 18px; /* Aumentato */
+    color: #555;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+}
+
+.azinda-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px; /* Aumentato */
+    word-wrap: break-word;
+    text-align: left; /* Allinea a sinistra */
+}
+
+.azinda-link:hover {
+    text-decoration: underline;
+}
+
+/* Logo azinda */
+.azinda-logo {
+    width: 120px; /* Aumentato */
+    height: 120px; /* Aumentato */
+    margin-left: 10px;
+}
+
+.azinda-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.azinda-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+/* Azioni */
+.azinda-actions {
+    position: absolute; /* Posizionamento assoluto */
+    bottom: 15px; /* Distanza dal basso */
+    right: 15px; /* Distanza dalla destra */
+    display: flex;
+    gap: 20px; /* Spaziatura tra i pulsanti */
+}
+
+.azinda-button {
+    background-color: #7BA89F;
+    color: #000;
+    border: none;
+    padding: 15px 20px; /* Aumentato */
+    border-radius: 5px;
+    font-size: 18px; /* Aumentato */
+    cursor: pointer;
+    flex: 0; /* Impedisce che i bottoni si allarghino */
+}
+
+.azinda-button:hover {
+    background-color: #4a5e52;
+}
+
+/* Dati Extra */
+.azinda-dati-extra {
+    margin-top: 10px; /* Aggiunto spazio */
+    font-size: 18px; /* Aumentato */
+}
+
+.dati-extra-grid p {
+    margin: 10px 0; /* Aumentato */
+    font-size: 18px; /* Aumentato */
+}
