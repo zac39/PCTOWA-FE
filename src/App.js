@@ -12,6 +12,7 @@ import ListaAziendePage from './listaAziendePage';
 import StudentiPage from './listaStudentiPage'; // ✅ Importa la nuova pagina
 import TurniPage from './TurniPage'; // Importa la nuova pagina
 import AziendaPage from './AziendaPage';
+import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 
 
 function MainApp({ onLogout }) {
@@ -46,6 +47,7 @@ function MainApp({ onLogout }) {
           <Route path="/studenti" element={<StudentiPage />} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
+          <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/" element={null} />
         </Routes>
       </div>
