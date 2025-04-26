@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
-import './VisAziendePage.css';
+import './listaAziendePage.css';
 
 //TODO: prendere effettivamente i dati e fare le richieste
 
-
 const aziende = [
-  {id:1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-yellow-400' },
-  {id:2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-blue-500' },
-  {id:3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-purple-500' },
-  {id:4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'bg-red-600' },
+  { id: 1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'yellow' },
+  { id: 2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'blue' },
+  { id: 3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'purple' },
+  { id: 4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'red' },
 ];
 
 const opzioniFiltro = {
@@ -22,8 +21,12 @@ const opzioniFiltro = {
 };
 
 export default function VisAziendePage() {
-
   const navigate = useNavigate(); // Hook per la navigazione
+
+  // Gestore per navigare alla pagina "azienda.jsx"
+  function handleAziendaClick(id) {
+    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
+  }
 
   function handleTurniClick(id) {
     navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
@@ -68,30 +71,35 @@ export default function VisAziendePage() {
     }),
   };
 
-
   return (
     <div className="container">
-    <div className="filters">
-      {Object.keys(opzioniFiltro).map((filtro) => (
-        <div key={filtro} className="filter-container">
-          <Select
-            options={opzioniFiltro[filtro].map(opt => ({ value: opt, label: opt }))}
-            onChange={(selectedOption) => handleSelectChange(filtro, selectedOption)}
-            placeholder={`${filtro}`}
-            isClearable
-            styles={customStyles} // Applica lo stile personalizzato
-            classNamePrefix="react-select"
-          />
-        </div>
-      ))}
-    </div>
-
+      <div className="filters">
+        {Object.keys(opzioniFiltro).map((filtro) => (
+          <div key={filtro} className="filter-container">
+            <Select
+              options={opzioniFiltro[filtro].map(opt => ({ value: opt, label: opt }))}
+              onChange={(selectedOption) => handleSelectChange(filtro, selectedOption)}
+              placeholder={`${filtro}`}
+              isClearable
+              styles={customStyles} // Applica lo stile personalizzato
+              classNamePrefix="react-select"
+            />
+          </div>
+        ))}
+      </div>
 
       <div className="azienda-list">
         {aziende.map((azienda, index) => (
           <div className="azienda-card" key={index}>
             <div className="azienda-dati">
-              <h2 className="azienda-titolo">{azienda.nome}</h2>
+              {/* Aggiunto gestore di click sul nome */}
+              <h2
+                className="azienda-titolo"
+                onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
+                style={{ cursor: 'pointer', color: '#007bff', textDecoration: 'underline' }} // Stile per enfatizzare il link
+              >
+                {azienda.nome}
+              </h2>
               <p className="azienda-indirizzo">{azienda.indirizzo}</p>
             </div>
             <div className="azienda-sitoWeb">
@@ -102,9 +110,12 @@ export default function VisAziendePage() {
             <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
             <div className="bottoni">
               <button className="btn contatti">Contatti</button>
-              <button className="btn turni" 
-                      onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
-              >Turni</button>
+              <button
+                className="btn turni"
+                onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+              >
+                Turni
+              </button>
             </div>
           </div>
         ))}

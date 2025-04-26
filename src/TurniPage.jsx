@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'; // Importa il hook per i parametri della rotta
-import './VisTurniPage.css';
+import './TurniPage.css';
 
 
 //TODO: sistema il logo 
