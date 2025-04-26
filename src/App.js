@@ -11,6 +11,7 @@ import IndirizziPage from './IndirizziPage';
 import VisAziendePage from './VisAziendePage';
 import VisStudentiPage from './VisStudentiPage'; // ✅ Importa la nuova pagina
 import VisTurniPage from './VisTurniPage'; // Importa la nuova pagina
+import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 
 
 function MainApp({ onLogout }) {
@@ -44,6 +45,7 @@ function MainApp({ onLogout }) {
           <Route path="/aziende" element={<VisAziendePage />} />
           <Route path="/studenti" element={<VisStudentiPage />} />
           <Route path="/turni/:aziendaId" element={<VisTurniPage />} />
+          <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/" element={null} />
         </Routes>
       </div>

@@ -28,6 +28,10 @@ export default function VisAziendePage() {
   function handleTurniClick(id) {
     navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
   }
+  function handleContattiClick(id) {
+    navigate(`/contatti/${id}`); // Naviga alla pagina dei turni passando l'ID
+  }
+
 
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
@@ -101,10 +105,12 @@ export default function VisAziendePage() {
             </div>
             <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
             <div className="bottoni">
-              <button className="btn contatti">Contatti</button>
+              <button className="btn contatti"
+                      onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+                >Contatti</button>
               <button className="btn turni" 
                       onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
-              >Turni</button>
+                >Turni</button>
             </div>
           </div>
         ))}
