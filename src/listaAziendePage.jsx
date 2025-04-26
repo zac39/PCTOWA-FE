@@ -96,7 +96,7 @@ export default function VisAziendePage() {
               <h2
                 className="azienda-titolo"
                 onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
-                style={{ cursor: 'pointer', color: '#007bff', textDecoration: 'underline' }} // Stile per enfatizzare il link
+                style={{ cursor: 'pointer', color: '#000', textDecoration: 'underline' }} // Stile per enfatizzare il link
               >
                 {azienda.nome}
               </h2>

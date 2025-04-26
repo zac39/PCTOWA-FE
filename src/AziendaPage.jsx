@@ -89,7 +89,7 @@ export default function VisazindaPage() {
           <div className="azinda-actions">
             <button className="azinda-button">Tutor</button>
             <button className="azinda-button">Assegna</button>
-            <button className="azinda-button">azinda</button>
+            <button className="azinda-button">Azienda</button>
           </div>
         </div>
     </div>

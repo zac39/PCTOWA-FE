@@ -1,17 +1,16 @@
 
 .azinda-container {
     display: flex;
-    justify-content: center; /* Centra orizzontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Assicura che il contenitore occupi l'intera altezza della finestra */
-    width: 100%; /* Opzionale: Assicura che occupi tutta la larghezza */
-    background-color: #f5f5f5; /* Opzionale: aggiunge uno sfondo */
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
 }
 
 .azinda-card {
     background-color: #abd6cd;
     border-radius: 10px;
-    padding: 40px; /* Aumentato */
+    padding: 15px; /* Aumentato */
     max-width: 600px; /* Aumentato */
     width: 100%;
     display: flex;
@@ -20,12 +19,14 @@
     position: relative; /* Aggiunto per abilitare il posizionamento assoluto dei figli */
     height: 500px; /* Imposta un'altezza minima per il contenitore */
 }
+
+
 /* Intestazione azinda */
 .azinda-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px; /* Aumentato */
+    margin-bottom: 10px; /* Aumentato */
 }
 
 /* azinda Info */
@@ -88,8 +89,8 @@
 /* Azioni */
 .azinda-actions {
     position: absolute; /* Posizionamento assoluto */
-    bottom: 20px; /* Distanza dal basso */
-    right: 20px; /* Distanza dalla destra */
+    bottom: 15px; /* Distanza dal basso */
+    right: 15px; /* Distanza dalla destra */
     display: flex;
     gap: 20px; /* Spaziatura tra i pulsanti */
 }
@@ -111,7 +112,7 @@
 
 /* Dati Extra */
 .azinda-dati-extra {
-    margin-top: 20px; /* Aggiunto spazio */
+    margin-top: 10px; /* Aggiunto spazio */
     font-size: 18px; /* Aumentato */
 }
 
