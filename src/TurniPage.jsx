@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'; // Importa il hook per i parametri della rotta
+import { useNavigate } from 'react-router-dom'; // Importa il hook per i parametri della rotta
 import './TurniPage.css';
 
 
@@ -9,7 +10,7 @@ const turniData =
   {
     idAzienda: 1,
     ragioneSociale: "Università di Verona",
-    indirizzoLogo: null,
+    indirizzoLogo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.F5sVfnFWuwpVehf1J1SIMAHaE7%26pid%3DApi&f=1&ipt=d766df7c72080b158906873cd3235b5e4cfe64d9f13063684c0a7db2485e1bab&ipo=images",
     sitoWeb: "https://www.google.it/search?q=campo+minato",
     materie: null,
     indirizzo: {
@@ -66,6 +67,12 @@ const turniData =
 export default function VisturnoPage() {
 
   const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+  const navigate = useNavigate(); // Hook per la navigazione
+  
+
+  function handleAziendaClick(id) {
+    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
+  }
 
 
   return (
@@ -77,7 +84,10 @@ export default function VisturnoPage() {
           <div className="turno-header">
             {/* Informazioni turno */}
             <div className="turno-info">
-              <h2 className="turno-title">{turniData.ragioneSociale}</h2>
+              <h2 className="turno-title"
+                  onClick={() => handleAziendaClick(aziendaId)} // Naviga alla pagina dell'azienda
+                  style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
+              >{turniData.ragioneSociale}</h2>
               <p className="turno-address">
                 {`${turniData.indirizzo.indirizzo}, ${turniData.indirizzo.cap}, ${turniData.indirizzo.comune}, ${turniData.indirizzo.stato}`}
               </p>
@@ -154,7 +164,6 @@ export default function VisturnoPage() {
           <div className="turno-actions">
             <button className="turno-button">Tutor</button>
             <button className="turno-button">Assegna</button>
-            <button className="turno-button">Turno</button>
           </div>
         </div>
       ))}

@@ -57,7 +57,7 @@
       width: 100%;
     }
   
-    .azienda-card {
+    .aziende-card {
       flex-direction: column;
       align-items: flex-start;
     }
@@ -132,7 +132,7 @@
 
   
   .filter-button {
-    background-color: #ABD6CD;
+    background-color: var(--primary-color);
     border: none;
     padding: 6px 14px;
     border-radius: 6px;
@@ -141,14 +141,14 @@
     width: 200px;
   }
   
-  .azienda-list {
+  .aziende-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
   
-  .azienda-card {
-    background-color: #ABD6CD;
+  .aziende-card {
+    background-color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -157,35 +157,35 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   
-  .azienda-info {
+  .aziende-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
   }
   
-  .azienda-dati {
+  .aziende-dati {
     display: flex;
     flex-direction: column;
   }
   
-  .azienda-sitoWeb {
+  .aziende-sitoWeb {
     text-align: left;
     min-width: 250px;
   }
   
-  .azienda-sitoWeb a {
+  .aziende-sitoWeb a {
     color: blue;
     text-decoration: underline;
   }
   
-  .azienda-titolo {
+  .aziende-titolo {
     margin: 0;
     font-size: 18px;
     font-weight: bold;
   }
   
-  .azienda-indirizzo {
+  .aziende-indirizzo {
     margin: 4px 0 0;
     font-size: 13px;
     color: #4b5563;
@@ -216,10 +216,20 @@
   }
   
   .contatti {
-    background-color: #7BA89F; /* dark gray */
+    background-color: var(--secondary-color); /* dark gray */
   }
+
+  .contatti:hover {
+    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+    color: #fff; /* Colore del testo al passaggio del mouse */
+}
   
   .turni {
-    background-color: #7BA89F; /* gray */
+    background-color: var(--secondary-color); /* gray */
   }
   
+
+  .turni:hover {
+    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+    color: #fff; /* Colore del testo al passaggio del mouse */
+}

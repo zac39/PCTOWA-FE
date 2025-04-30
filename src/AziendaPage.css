@@ -1,5 +1,5 @@
 
-.azinda-container {
+.azienda-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -7,111 +7,90 @@
     justify-content: center;
 }
 
-.azinda-card {
-    background-color: #abd6cd;
+.azienda-card {
+    background-color: var(--primary-color);
     border-radius: 10px;
-    padding: 15px; /* Aumentato */
-    max-width: 600px; /* Aumentato */
+    padding: 20px;
+    max-width: 400px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Ombra migliorata */
-    position: relative; /* Aggiunto per abilitare il posizionamento assoluto dei figli */
-    height: 500px; /* Imposta un'altezza minima per il contenitore */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    /* Uniforma l'altezza */
+    justify-content: space-between; /* Distribuisce gli elementi con spazio tra loro */
+    min-height: 350px; /* Imposta un'altezza minima per tutti i riquadri */
 }
 
 
-/* Intestazione azinda */
-.azinda-header {
+/* Intestazione azienda */
+.azienda-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 10px; /* Aumentato */
+    margin-bottom: 15px;
 }
 
-/* azinda Info */
-.azinda-info {
+/* azienda Info */
+.azienda-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Aumentato */
+    gap: 5px;
     text-align: left; /* Allinea tutto a sinistra */
     align-items: flex-start; /* Forza gli elementi a partire da sinistra */
 }
 
-.azinda-title {
-    font-size: 24px; /* Aumentato */
+.azienda-title {
+    font-size: 18px;
     font-weight: bold;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
 }
 
-.azinda-address {
-    font-size: 18px; /* Aumentato */
+.azienda-address {
+    font-size: 14px;
     color: #555;
     margin: 0;
     text-align: left; /* Allinea a sinistra */
 }
 
-.azinda-link {
+.azienda-link {
     color: #007bff;
     text-decoration: none;
-    font-size: 18px; /* Aumentato */
+    font-size: 14px;
     word-wrap: break-word;
     text-align: left; /* Allinea a sinistra */
 }
 
-.azinda-link:hover {
+.azienda-link:hover {
     text-decoration: underline;
 }
 
-/* Logo azinda */
-.azinda-logo {
+/* Logo azienda */
+.azienda-logo {
     width: 120px; /* Aumentato */
     height: 120px; /* Aumentato */
     margin-left: 10px;
 }
 
-.azinda-logo img {
+.azienda-logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.azinda-logo-placeholder {
+.azienda-logo-placeholder {
     width: 100%;
     height: 100%;
     background-color: #ccc;
     border-radius: 5px;
 }
 
-/* Azioni */
-.azinda-actions {
-    position: absolute; /* Posizionamento assoluto */
-    bottom: 15px; /* Distanza dal basso */
-    right: 15px; /* Distanza dalla destra */
-    display: flex;
-    gap: 20px; /* Spaziatura tra i pulsanti */
-}
-
-.azinda-button {
-    background-color: #7BA89F;
-    color: #000;
-    border: none;
-    padding: 15px 20px; /* Aumentato */
-    border-radius: 5px;
-    font-size: 18px; /* Aumentato */
-    cursor: pointer;
-    flex: 0; /* Impedisce che i bottoni si allarghino */
-}
-
-.azinda-button:hover {
-    background-color: #4a5e52;
-}
 
 /* Dati Extra */
-.azinda-dati-extra {
+.azienda-dati-extra {
     margin-top: 10px; /* Aggiunto spazio */
     font-size: 18px; /* Aumentato */
 }
@@ -119,4 +98,29 @@
 .dati-extra-grid p {
     margin: 10px 0; /* Aumentato */
     font-size: 18px; /* Aumentato */
+}
+
+
+/* Azioni */
+.azienda-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Allinea i bottoni verso destra */
+    margin-top: auto; /* Spinge i bottoni verso il basso */
+}
+
+.azienda-button {
+    background-color: var(--secondary-color);
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    flex: 0; /* Impedisce che i bottoni si allarghino */
+}
+
+.azienda-button:hover {
+    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+    color: #fff; /* Colore del testo al passaggio del mouse */
 }
