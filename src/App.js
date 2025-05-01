@@ -13,6 +13,8 @@ import StudentiPage from './listaStudentiPage'; // ✅ Importa la nuova pagina
 import TurniPage from './TurniPage'; // Importa la nuova pagina
 import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage'; // Importa la nuova pagina
+import SidebarMenu from './SidebarMenu';
+
 
 
 function MainApp({ onLogout }) {
@@ -55,6 +57,7 @@ function MainApp({ onLogout }) {
             </Link>
           </nav>
         </>
+
       )}
 
       {/* Qui vengono mostrate solo le route */}
@@ -83,11 +86,13 @@ function App() {
 
   return (
     <Router>
+      <SidebarMenu>
       {autenticato ? (
         <MainApp onLogout={handleLogout} />
       ) : (
         <Login onLoginSuccess={() => setAutenticato(true)} />
       )}
+      </SidebarMenu>
     </Router>
   );
 }

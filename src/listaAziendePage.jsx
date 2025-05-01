@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './listaAziendePage.css';
 
+
 //TODO: prendere effettivamente i dati e fare le richieste
 
 const aziende = [
