@@ -157,24 +157,27 @@ export default function VisStudentiPage() {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: '#ABD6CD',
-      border: '1px solid #ccc',
-      borderRadius: '4px',
+      backgroundColor: 'var(--primary-color)', // Colore di sfondo dei filtri
+      border: '1px solid var(--filter-border-color)', // Colore del bordo
+      borderRadius: '8px',
       boxShadow: 'none',
       ':hover': {
-        borderColor: '#888',
+        borderColor: 'var(--filter-border-color)', // Cambia il colore del bordo al passaggio del mouse
       },
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: '#ABD6CD',
+      backgroundColor: 'var(--primary-color)', // Colore di sfondo del menu a tendina
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? '#88B9A6' : '#ABD6CD',
-      color: '#000',
+      backgroundColor: state.isSelected
+        ? 'var(--secondary-color)' // Sfondo per opzione selezionata
+        : 'var(--primary-color)', // Sfondo normale
+      color: 'var(--text-color)', // Colore del testo
       ':hover': {
-        backgroundColor: '#88B9A6',
+        backgroundColor: 'var(--secondary-color)', // Sfondo al passaggio del mouse
+        color: 'var(--text-color)', // Colore del testo al passaggio
       },
     }),
   };
@@ -229,11 +232,11 @@ export default function VisStudentiPage() {
 
             {/* Riga dell'azienda, se presente */}
             {studente.azienda && (
-              <div className="azienda-info">
-                <h2 className="azienda-nome">{studente.azienda.nome}</h2>
-                <p className="azienda-indirizzo">{studente.azienda.indirizzo}</p>
-                <div className="azienda-classe">{studente.azienda.classe}</div>
-                <button className="azienda-azione">{studente.azienda.azione}</button>
+              <div className="aziendaAssegnata-info">
+                <h2 className="aziendaAssegnata-nome">{studente.azienda.nome}</h2>
+                <p className="aziendaAssegnata-indirizzo">{studente.azienda.indirizzo}</p>
+                <div className="aziendaAssegnata-classe">{studente.azienda.classe}</div>
+                <button className="aziendaAssegnata-azione">{studente.azienda.azione}</button>
               </div>
             )}
           </div>

@@ -27,48 +27,49 @@ const aziendaData = {
 }
 
 
-export default function VisazindaPage() {
+export default function VisAziendaPage() {
 
   const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
 
+  
 
   return (
     <div className="azienda-container">
       <p>{aziendaId}</p>
 
-        <div className="azinda-card">
-          <div className="azinda-header">
-            {/* Informazioni azinda */}
-            <div className="azinda-info">
-              <h2 className="azinda-title">{aziendaData.ragioneSociale}</h2>
-              <p className="azinda-address">
+        <div className="azienda-card">
+          <div className="azienda-header">
+            {/* Informazioni azienda */}
+            <div className="azienda-info">
+              <h2 className="azienda-title">{aziendaData.ragioneSociale}</h2>
+              <p className="azienda-address">
                 {`${aziendaData.indirizzo.indirizzo}, ${aziendaData.indirizzo.cap}, ${aziendaData.indirizzo.comune}, ${aziendaData.indirizzo.stato}`}
               </p>
               <a
                 href={aziendaData.sitoWeb}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="azinda-link"
+                className="azienda-link"
               >
                 {aziendaData.sitoWeb}
               </a>
             </div>
 
-            {/* Logo azinda */}
-            <div className="azinda-logo">
+            {/* Logo azienda */}
+            <div className="azienda-logo">
               {aziendaData.indirizzoLogo ? (
                 <img
                   src={aziendaData.indirizzoLogo}
                   alt={`Logo di ${aziendaData.ragioneSociale}`}
                 />
               ) : (
-                <div className="azinda-logo-placeholder"></div>
+                <div className="azienda-logo-placeholder"></div>
               )}
             </div>
           </div>
 
             {/* Dati Extra */}
-            <div className="azinda-dati-extra">
+            <div className="azienda-dati-extra">
             <div className="dati-extra-grid">
                 <p><strong>Categoria:</strong> <span>{aziendaData.categoria}</span></p>
                 <p><strong>Telefono:</strong> <span>{aziendaData.telefonoAzienda}</span></p>
@@ -86,10 +87,10 @@ export default function VisazindaPage() {
             </div>
 
           {/* Azioni */}
-          <div className="azinda-actions">
-            <button className="azinda-button">Tutor</button>
-            <button className="azinda-button">Assegna</button>
-            <button className="azinda-button">Azienda</button>
+          <div className="azienda-actions">
+            <button className="azienda-button">Tutor</button>
+            <button className="azienda-button">Assegna</button>
+            <button className="azienda-button">Azienda</button>
           </div>
         </div>
     </div>

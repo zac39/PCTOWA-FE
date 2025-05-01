@@ -24,7 +24,7 @@
 }
 
 .studente-card {
-  background-color: #abd6cd;
+  background-color: var(--primary-color);
   border-radius: 10px;
   padding: 15px;
   display: grid;
@@ -34,13 +34,13 @@
 }
 
 .studente-info,
-.azienda-info {
+.aziendaAssegnata-info {
   display: contents; /* Permette di usare la griglia del contenitore */
 }
 
 /* Nome dello studente e dell'azienda */
 .studente-nome,
-.azienda-nome {
+.aziendaAssegnata-nome {
   font-size: 18px;
   font-weight: bold;
   grid-column: 1; /* Prima colonna */
@@ -48,7 +48,7 @@
 
 /* Indirizzo dello studente e dell'azienda */
 .studente-indirizzo,
-.azienda-indirizzo {
+.aziendaAssegnata-indirizzo {
   font-size: 14px;
   color: #555;
   grid-column: 2; /* Seconda colonna */
@@ -56,7 +56,7 @@
 
 /* Classe dello studente e dell'azienda */
 .studente-classe,
-.azienda-classe {
+.aziendaAssegnata-classe {
   font-size: 14px;
   font-weight: bold;
   color: #333;
@@ -91,10 +91,10 @@
 
 /* Bottone azione dello studente */
 .studente-azione,
-.azienda-azione {
-  background-color: #5a7262;
+.aziendaAssegnata-azione {
+  background-color: var(--secondary-color);
   border: none;
-  color: #fff;
+  color: var(--text-color);
   padding: 10px 15px;
   border-radius: 5px;
   font-size: 14px; /* Dimensione del testo */
@@ -109,6 +109,6 @@
 }
 
 /* Spaziatura tra righe */
-.azienda-info {
+.aziendaAssegnata-info {
   margin-top: 10px; /* Distanza tra studente e azienda */
 }

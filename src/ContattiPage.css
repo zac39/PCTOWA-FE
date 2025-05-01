@@ -7,7 +7,7 @@
 }
 
 .contatto-card {
-    background-color: #abd6cd;
+    background-color: var(--primary-color);
     border-radius: 10px; /* Angoli arrotondati */
     padding: 10px; /* Spaziatura interna ridotta */
     max-width: 300px; /* Dimensione massima */
@@ -89,33 +89,9 @@
 .contatto-dati {
     margin: 5px 0; /* Margine superiore e inferiore ridotto */
     font-size: 11px; /* Dimensione del font ridotta */
-    color: #000;
+    color: var(--text-color);
     line-height: 0.7; /* Altezza delle righe ridotta */
     font-weight: bold;
     padding: 0; /* Rimuove padding verticale */
 }
 
-/* Azioni */
-.contatto-actions {
-    display: flex;
-    justify-content: space-between; /* Pulsanti separati agli estremi */
-    margin-top: 5px; /* Margine superiore ridotto per avvicinare i pulsanti */
-    gap: 5px; /* Spaziatura tra i pulsanti ridotta */
-}
-
-.contatto-button {
-    background-color: #7BA89F;
-    color: #000;
-    border: none;
-    padding: 5px 8px; /* Spaziatura interna ridotta */
-    border-radius: 5px;
-    font-size: 11px; /* Dimensione del font ridotta */
-    cursor: pointer;
-    flex: 1; /* I pulsanti occupano lo stesso spazio */
-    text-align: center; /* Centra il testo */
-}
-
-.contatto-button:hover {
-    background-color: #4a5e52; /* Colore al passaggio del mouse */
-    color: #fff; /* Colore del testo al passaggio del mouse */
-}

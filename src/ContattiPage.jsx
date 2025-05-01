@@ -1,7 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'; // Importa il hook per i parametri della rotta
+import Select from 'react-select';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './ContattiPage.css';
 
+
+//TODO: non sono molto convinta della grafica
 
 
 const contattiData =
@@ -48,17 +52,23 @@ const contattiData =
         cognome: "Blue",
         telefono: "1234567890",
         email: "david.rossi@gmail.com",
-        ruolo: "Responsabile",
+        ruolo: null,
       },
       
     ]
   }
 
 
+
 export default function ViscontattiPage() {
 
   const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+  const navigate = useNavigate(); // Hook per la navigazione
+  
 
+  function handleAziendaClick(id) {
+    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
+  }
 
   return (
     <div className="contatto-container">
@@ -69,7 +79,12 @@ export default function ViscontattiPage() {
           <div className="contatto-header">
             {/* Informazioni contatto */}
             <div className="contatto-info">
-              <h2 className="contatto-title">{contattiData.ragioneSociale}</h2>
+              <h2 className="contatto-title"
+                      onClick={() => handleAziendaClick(aziendaId)} // Naviga alla pagina dell'azienda
+                      style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
+                     
+              
+              >{contattiData.ragioneSociale}</h2>
               <p className="contatto-address">
                 {`${contattiData.indirizzo.indirizzo}, ${contattiData.indirizzo.cap}, ${contattiData.indirizzo.comune}, ${contattiData.indirizzo.stato}`}
               </p>
@@ -102,18 +117,15 @@ export default function ViscontattiPage() {
             {/* Dati Extra */}
             <div className="contatto-dati">
             <p>{`${contatto.nome} ${contatto.cognome}`}</p>
+
+            {contatto.ruolo && (
             <p>{`${contatto.ruolo}`}</p>
+            )}
             <p>{`${contatto.telefono}`}</p>
             <p>{`${contatto.email}`}</p>
 
             </div>
 
-          {/* Azioni */}
-          <div className="contatto-actions">
-            <button className="contatto-button">Tutor</button>
-            <button className="contatto-button">Assegna</button>
-            <button className="contatto-button">Turno</button>
-          </div>
         </div>
       ))}
     </div>

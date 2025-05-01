@@ -53,24 +53,27 @@ export default function VisAziendePage() {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: '#ABD6CD', // Sfondo personalizzato
-      border: '1px solid #ccc', // Bordo
-      borderRadius: '4px',
+      backgroundColor: 'var(--primary-color)', // Colore di sfondo dei filtri
+      border: '1px solid var(--filter-border-color)', // Colore del bordo
+      borderRadius: '8px',
       boxShadow: 'none',
       ':hover': {
-        borderColor: '#888', // Colore al passaggio del mouse
+        borderColor: 'var(--filter-border-color)', // Cambia il colore del bordo al passaggio del mouse
       },
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: '#ABD6CD', // Sfondo del menu a tendina
+      backgroundColor: 'var(--primary-color)', // Colore di sfondo del menu a tendina
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? '#88B9A6' : '#ABD6CD', // Sfondo per opzione selezionata
-      color: '#000', // Colore del testo
+      backgroundColor: state.isSelected
+        ? 'var(--secondary-color)' // Sfondo per opzione selezionata
+        : 'var(--primary-color)', // Sfondo normale
+      color: 'var(--text-color)', // Colore del testo
       ':hover': {
-        backgroundColor: '#88B9A6', // Sfondo al passaggio del mouse
+        backgroundColor: 'var(--secondary-color)', // Sfondo al passaggio del mouse
+        color: 'var(--text-color)', // Colore del testo al passaggio
       },
     }),
   };
@@ -92,19 +95,19 @@ export default function VisAziendePage() {
         ))}
       </div>
 
-      <div className="azienda-list">
+      <div className="aziende-list">
         {aziende.map((azienda, index) => (
-          <div className="azienda-card" key={index}>
-            <div className="azienda-dati">
+          <div className="aziende-card" key={index}>
+            <div className="aziende-dati">
               {/* Aggiunto gestore di click sul nome */}
               <h2
-                className="azienda-titolo"
+                className="aziende-titolo"
                 onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
-                style={{ cursor: 'pointer', color: '#000', textDecoration: 'underline' }} // Stile per enfatizzare il link
+                style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
               >
                 {azienda.nome}
               </h2>
-              <p className="azienda-indirizzo">{azienda.indirizzo}</p>
+              <p className="aziende-indirizzo">{azienda.indirizzo}</p>
             </div>
             <div className="azienda-sitoWeb">
               <a href={azienda.sitoWeb} target="_blank" rel="noopener noreferrer">
