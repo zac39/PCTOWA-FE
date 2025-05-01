@@ -108,6 +108,12 @@
   box-sizing: border-box; /* Include padding e bordo nella dimensione */
 }
 
+.studente-azione:hover, 
+.aziendaAssegnata-azione:hover {
+  background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+  color: #fff; /* Colore del testo al passaggio del mouse */
+}
+
 /* Spaziatura tra righe */
 .aziendaAssegnata-info {
   margin-top: 10px; /* Distanza tra studente e azienda */
