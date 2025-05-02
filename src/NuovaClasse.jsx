@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './NuovaClasse.css';
 
 // Funzione per generare un array di anni dall'anno corrente al 1900
@@ -13,13 +14,21 @@ const generateYears = () => {
 
 export default function NuovaClasse() {
   const years = generateYears();
+  const navigate = useNavigate(); // Hook per la navigazione
+  
+
+  function handleCaricaClick() {
+    navigate(`/caricaClassi`); // Naviga alla pagina dell'azienda passando l'ID
+  }
 
   return (
     <div className="nuova-classe-container">
       <div className="nuova-classe-card">
         <div className="nuova-classe-header">
           <h2>Gestione classi admin</h2>
-          <button className="carica-file-button">Carica file</button>
+          <button className="carica-file-button"
+           onClick={() => handleCaricaClick()} // Gestisce il click sul pulsante "Turni"
+          >Carica file</button>
         </div>
         <form className="nuova-classe-form">
           {/* Sezione classi con i menu a tendina */}
