@@ -14,6 +14,7 @@ import TurniPage from './TurniPage'; // Importa la nuova pagina
 import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 import SidebarMenu from './SidebarMenu';
+import tutorPage from './TutorPage'; // Importa la nuova pagina
 
 
 
@@ -69,6 +70,7 @@ function MainApp({ onLogout }) {
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
+          <Route path="/tutor/:aziendaId" element={<ContattiPage />} />
           <Route path="/" element={null} />
         </Routes>
       </div>

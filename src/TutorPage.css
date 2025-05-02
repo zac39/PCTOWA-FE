@@ -1,0 +1,104 @@
+.tutorSingolo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Riduce lo spazio tra le schede */
+    padding: 10px; /* Riduce il padding generale */
+    justify-content: center; /* Centra le schede */
+}
+
+.tutorSingolo-card {
+    background-color: var(--primary-color);
+    border-radius: 10px; /* Angoli arrotondati */
+    padding: 10px; /* Spaziatura interna ridotta */
+    max-width: 300px; /* Dimensione massima */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    justify-content: flex-start; /* Allinea tutto verso l'alto */
+}
+
+/* Intestazione azienda */
+.tutorSingolo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px; /* Margine inferiore ridotto */
+}
+
+/* Info azienda */
+.tutorSingolo-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Spaziatura minima tra le righe */
+    text-align: left; /* Allinea tutto a sinistra */
+    align-items: flex-start; /* Forza gli elementi a partire da sinistra */
+}
+
+.tutorSingolo-title {
+    font-size: 14px; /* Dimensione del font ridotta */
+    font-weight: bold;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+}
+
+.tutorSingolo-address {
+    font-size: 11px; /* Dimensione del font ridotta */
+    color: #555;
+    margin: 0;
+    text-align: left; /* Allinea a sinistra */
+}
+
+.tutorSingolo-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 10px; /* Font size ridotto */
+    word-wrap: break-word;
+    text-align: left; /* Allinea a sinistra */
+    margin: 0; /* Rimuove margini */
+    padding: 0; /* Rimuove padding */
+}
+
+.tutorSingolo-link:hover {
+    text-decoration: underline;
+}
+
+/* Logo azienda */
+.tutorSingolo-logo {
+    width: 60px; /* Dimensione del logo ridotta */
+    height: 60px;
+    margin-left: 8px;
+}
+
+.tutorSingolo-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.tutorSingolo-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+/* Dati del tutorSingolo */
+.tutorSingolo-dati {
+    margin: 5px 0; /* Margine superiore e inferiore ridotto */
+    font-size: 11px; /* Dimensione del font ridotta */
+    color: var(--text-color);
+    line-height: 0.7; /* Altezza delle righe ridotta */
+    font-weight: bold;
+    padding: 0; /* Rimuove padding verticale */
+}
+
+.tutorSingolo-nessun-dato {
+    font-size: 16px;
+    color: #ff0000; /* Rosso per enfatizzare */
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
