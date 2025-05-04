@@ -74,6 +74,10 @@ export default function VisturnoPage() {
     navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
   }
 
+  function handleTutorClick(id) {
+    navigate(`/tutor/${id}`); // Naviga alla pagina dell'azienda passando l'ID
+  }
+
 
   return (
     <div className="turno-container">
@@ -162,7 +166,9 @@ export default function VisturnoPage() {
 
           {/* Azioni */}
           <div className="turno-actions">
-            <button className="turno-button">Tutor</button>
+            <button className="turno-button"
+                  onClick={() => handleTutorClick(aziendaId)} // Gestisce il click sul pulsante "Turni"
+            >Tutor</button>
             <button className="turno-button">Assegna</button>
           </div>
         </div>

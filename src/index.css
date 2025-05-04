@@ -14,6 +14,7 @@ code {
 
 :root {
   --bg-color: white;
+  --on-bg-text-color: rgb(174, 174, 174);
   --text-color: black;
   --text-color-light: rgba(0, 0, 0, 0.6);
   --primary-color: #abd6cd;
@@ -25,6 +26,7 @@ code {
 
 [data-theme="dark"] {
   --bg-color: rgb(50, 50, 60);
+  --on-bg-text-color: rgb(147, 147, 147);
   --text-color: rgb(0, 0, 0);
   --primary-color: #d6abab;
   --secondary-color: #b97979;
