@@ -15,7 +15,7 @@ import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 import SidebarMenu from './SidebarMenu';
 import NuovaClasse from './NuovaClasse';
-import CaricaClassi from './CaricaClassi';
+import CaricaClassi from './CaricaDati';
 import NuovaAzienda from './NuovaAzienda';
 import  TutorPage from './TutorPage'; // Importa la nuova pagina
 

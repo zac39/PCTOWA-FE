@@ -1,47 +1,125 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
+
 import './NuovaAzienda.css';
 
 export default function NuovaAzienda() {
-  const [codiceAteco, setCodiceAteco] = useState('');
-  const [codiceAtecoError, setCodiceAtecoError] = useState('');
 
-  const validateCodiceAteco = (value) => {
-    const regex = /^\d{6}$/; // Accetta solo stringhe composte da 6 numeri.
-    if (!regex.test(value)) {
-      setCodiceAtecoError('Il codice Ateco deve essere composto da 6 numeri.');
-    } else {
-      setCodiceAtecoError('');
+  const navigate = useNavigate(); // Hook per la navigazione
+
+  function handleCaricaClick() {
+    navigate('/caricaClassi', { state: { from: 'nuovaAzienda' } }); // Passa lo stato "from" con valore "nuovaAzienda"
+  }
+
+  const [formData, setFormData] = useState({
+    codiceAteco: '',
+    partitaIVA: '',
+    telefono: '',
+    email: '',
+    fax: '',
+    pec: '',
+    ragioneSociale: '',
+    sitoWeb: '',
+    formaGiuridica: '',
+    categoria: '',
+    indirizzoLogo: '',
+    dataConvenzione: '',
+    scadenzaConvenzione: '',
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  // Validazione dinamica
+  const validateField = (name, value) => {
+    let error = '';
+
+    const validators = {
+      codiceAteco: /^\d{6}$/, // Deve essere composto da 6 numeri
+      partitaIVA: /^\d{11}$/, // Deve essere composto da 11 numeri
+      telefono: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
+      fax: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Stessa regex di telefono
+      email: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
+      pec: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Stessa regex di email
+      sitoWeb: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
+      indirizzoLogo: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
+      // Aggiungi ulteriori validatori se necessario
+    };
+
+    if (validators[name] && !validators[name].test(value)) {
+      switch (name) {
+        case 'codiceAteco':
+          error = 'Il codice Ateco deve essere composto da 6 numeri.';
+          break;
+        case 'partitaIVA':
+          error = 'La partita IVA deve essere composta da 11 numeri.';
+          break;
+        case 'telefono':
+          error = 'Inserire un numero di telefono valido.';
+          break;
+        case 'fax':
+          error = 'Inserire un numero di fax valido.';
+          break;
+        case 'email':
+          error = "Inserire un'email valida.";
+          break;
+        case 'pec':
+          error = "Inserire una PEC valida.";
+          break;
+        case 'sitoWeb':
+          error = "Inserire un URL valido.";
+          break;
+        case 'indirizzoLogo':
+          error = "Inserire un URL valido.";
+          break;
+        default:
+          error = `Il campo ${name} non è valido.`;
+      }
+    }
+
+    return error;
+  };
+
+  // Gestione dinamica del cambiamento degli input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // Aggiorna il valore dell'input
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    // Valida il campo
+    const error = validateField(name, value);
+
+    // Aggiorna gli errori
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+
+  // Gestione del submit del form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Controlla se ci sono errori
+    const newErrors = {};
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setFormErrors(newErrors);
+
+    // Se non ci sono errori, invia i dati
+    if (Object.keys(newErrors).length === 0) {
+      alert('Form inviato con successo!');
+      console.log('Dati del form:', formData);
     }
   };
-  
-
-  const handleCodiceAtecoChange = (e) => {
-    const value = e.target.value;
-    setCodiceAteco(value);
-    validateCodiceAteco(value);
-  };
-
-  const [partitaIVA, setPartitaIVA] = useState('');
-  const [partitaIVAError, setPartitaIVAError] = useState('');
-
-  const validatePartitaIVA = (value) => {
-    const regex = /^\d{11}$/; // Accetta solo stringhe composte da 6 numeri.
-    if (!regex.test(value)) {
-        setPartitaIVAError('La partita IVA deve essere composto da 11 numeri.');
-    } else {
-        setPartitaIVAError('');
-    }
-  };
-  
-
-  const handlePartitaIVAChange = (e) => {
-    const value = e.target.value;
-    setPartitaIVA(value);
-    validatePartitaIVA(value);
-  };
-
-
-
 
   return (
     <div className="nuova-azienda-container">
@@ -49,182 +127,53 @@ export default function NuovaAzienda() {
         {/* Header con titolo */}
         <div className="nuova-azienda-header">
           <h2>Nuova azienda</h2>
-          <button className="carica-file-button">Carica file</button>
+          <button className="carica-file-button"
+            onClick={() => handleCaricaClick()} // Gestisce il click sul pulsante "Turni"
+          >Carica file</button>
         </div>
 
         {/* Contenitore scorrevole */}
         <div className="nuova-azienda-scrollable">
-          <form className="nuova-azienda-form">
-            {/* Input per Ragione Sociale */}
-            <div className="azienda-form-group">
-              <label htmlFor="ragioneSociale">Ragione Sociale</label>
-              <input
-                type="text"
-                id="ragioneSociale"
-                name="ragioneSociale"
-                placeholder="Inserisci la ragione sociale"
-                className="azienda-form-input"
-              />
-            </div>
-
-            {/* Input per Codice Ateco */}
-            <div className="azienda-form-group">
-              <label htmlFor="codiceAteco">Codice Ateco</label>
-              <input
-                type="text"
-                id="codiceAteco"
-                name="codiceAteco"
-                placeholder="Inserisci il codice Ateco"
-                className="azienda-form-input"
-                value={codiceAteco}
-                onChange={handleCodiceAtecoChange}
-              />
-              {codiceAtecoError && <p className="error-message">{codiceAtecoError}</p>}
-            </div>
-
-            {/* Input per Partita IVA */}
-            <div className="azienda-form-group">
-              <label htmlFor="partitaIva">Partita IVA</label>
-              <input
-                type="text"
-                id="partitaIva"
-                name="partitaIva"
-                placeholder="Inserisci la partita IVA"
-                className="azienda-form-input"
-                value={partitaIVA}
-                onChange={handlePartitaIVAChange}
-              />    
-              {partitaIVAError && <p className="error-message">{partitaIVAError}</p>}
-
-            </div>
-
-            {/* Input per Telefono */}
-            <div className="azienda-form-group">
-              <label htmlFor="telefonoAzienda">Telefono</label>
-              <input
-                type="text"
-                id="telefonoAzienda"
-                name="telefonoAzienda"
-                placeholder="Inserisci il numero di telefono"
-                className="azienda-form-input"
-              />
-            </div>
-
-            {/* Input per Email */}
-            <div className="azienda-form-group">
-              <label htmlFor="emailAzienda">Email</label>
-              <input
-                type="email"
-                id="emailAzienda"
-                name="emailAzienda"
-                placeholder="Inserisci l'email aziendale"
-                className="azienda-form-input"
-              />
-            </div>
-
-
-          {/* Input per Fax */}
-          <div className="azienda-form-group">
-            <label htmlFor="faxAzienda">Fax</label>
-            <input
-              type="text"
-              id="faxAzienda"
-              name="faxAzienda"
-              placeholder="Inserisci il fax aziendale"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per PEC */}
-          <div className="azienda-form-group">
-            <label htmlFor="pecAzienda">PEC</label>
-            <input
-              type="text"
-              id="pecAzienda"
-              name="pecAzienda"
-              placeholder="Inserisci la PEC aziendale"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Data Convenzione */}
-          <div className="azienda-form-group">
-            <label htmlFor="dataConvenzione">Data Convenzione</label>
-            <input
-              type="date"
-              id="dataConvenzione"
-              name="dataConvenzione"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Scadenza Convenzione */}
-          <div className="azienda-form-group">
-            <label htmlFor="scadenzaConvenzione">Scadenza Convenzione</label>
-            <input
-              type="date"
-              id="scadenzaConvenzione"
-              name="scadenzaConvenzione"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Categoria */}
-          <div className="azienda-form-group">
-            <label htmlFor="categoria">Categoria</label>
-            <input
-              type="text"
-              id="categoria"
-              name="categoria"
-              placeholder="Inserisci la categoria"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Indirizzo Logo */}
-          <div className="azienda-form-group">
-            <label htmlFor="indirizzoLogo">Indirizzo Logo</label>
-            <input
-              type="text"
-              id="indirizzoLogo"
-              name="indirizzoLogo"
-              placeholder="Inserisci l'indirizzo del logo"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Sito Web */}
-          <div className="azienda-form-group">
-            <label htmlFor="sitoWeb">Sito Web</label>
-            <input
-              type="url"
-              id="sitoWeb"
-              name="sitoWeb"
-              placeholder="Inserisci il sito web"
-              className="azienda-form-input"
-            />
-          </div>
-
-          {/* Input per Forma Giuridica */}
-          <div className="azienda-form-group">
-            <label htmlFor="formaGiuridica">Forma Giuridica</label>
-            <input
-              type="text"
-              id="formaGiuridica"
-              name="formaGiuridica"
-              placeholder="Inserisci la forma giuridica"
-              className="azienda-form-input"
-            />
-          </div>
-
-
+          <form className="nuova-azienda-form" onSubmit={handleSubmit}>
+            {/* Esempio di input dinamico */}
+            {[
+              { label: 'Ragione Sociale', name: 'ragioneSociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
+              { label: 'Codice Ateco', name: 'codiceAteco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
+              { label: 'Partita IVA', name: 'partitaIVA', type: 'text', placeholder: 'Inserisci la partita IVA' },
+              { label: 'Telefono', name: 'telefono', type: 'text', placeholder: 'Inserisci il numero di telefono' },
+              { label: 'Email', name: 'email', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
+              { label: 'Sito Web', name: 'sitoWeb', type: 'url', placeholder: 'Inserisci il sito web' },
+              { label: 'Fax', name: 'fax', type: 'text', placeholder: 'Inserisci il fax aziendale' },
+              { label: 'PEC', name: 'pec', type: 'text', placeholder: 'Inserisci la PEC aziendale' },
+              { label: 'Data Convenzione', name: 'dataConvenzione', type: 'date' },
+              { label: 'Scadenza Convenzione', name: 'scadenzaConvenzione', type: 'date' },
+              { label: 'Categoria', name: 'categoria', type: 'text', placeholder: 'Inserisci la categoria' },
+              { label: 'Indirizzo Logo', name: 'indirizzoLogo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
+              { label: 'Forma Giuridica', name: 'formaGiuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
+            ].map((field) => (
+              <div className="azienda-form-group" key={field.name}>
+                <label htmlFor={field.name}>{field.label}</label>
+                <input
+                  type={field.type}
+                  id={field.name}
+                  name={field.name}
+                  placeholder={field.placeholder || ''}
+                  className="azienda-form-input"
+                  value={formData[field.name] || ''}
+                  onChange={handleInputChange}
+                />
+                {formErrors[field.name] && <p className="error-message">{formErrors[field.name]}</p>}
+              </div>
+            ))}
           </form>
         </div>
 
-        {/* Bottone Crea */}
-        <button type="submit" className="azienda-crea-button">
-          Crea
-        </button>
+        {/* Bottone Crea sempre visibile */}
+        <div className="azienda-crea-button-container">
+          <button type="submit" className="azienda-crea-button" onClick={handleSubmit}>
+            Crea
+          </button>
+        </div>
       </div>
     </div>
   );

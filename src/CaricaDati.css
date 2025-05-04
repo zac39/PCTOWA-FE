@@ -21,6 +21,20 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
+  .carica-classi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dynamic-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
+  }
   
   /* Pulsante "Inserimento Manuale" */
   .inserimento-manuale-button {

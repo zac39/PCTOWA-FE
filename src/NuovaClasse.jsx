@@ -18,7 +18,7 @@ export default function NuovaClasse() {
   
 
   function handleCaricaClick() {
-    navigate(`/caricaClassi`); // Naviga alla pagina dell'azienda passando l'ID
+    navigate('/caricaClassi', { state: { from: 'nuovaClasse' } });
   }
 
   return (

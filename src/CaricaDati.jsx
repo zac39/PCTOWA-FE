@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
-import './CaricaClassi.css';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa il hook per la navigazione
+import './CaricaDati.css';
 
-export default function CaricaClassi() {
+export default function CaricaDati() {
   const [files, setFiles] = useState([]); // Stato per memorizzare la lista dei file caricati
   const [parsedData, setParsedData] = useState([]); // Stato per memorizzare i dati JSON dal CSV
-  const navigate = useNavigate(); // Hook per la navigazione
+  const location = useLocation(); // Ottieni lo stato passato dalla navigazione
+  const navigate = useNavigate();
+
+  // Leggi la schermata precedente dal parametro "state"
+  const previousScreen = location.state?.from;
 
   function handleManualeClick() {
-    navigate(`/nuovaClasse`); // Naviga alla pagina NuovaClasse
+    if (previousScreen === 'nuovaClasse') {
+      navigate('/nuovaClasse'); // Torna alla schermata NuovaClasse
+    } else if (previousScreen === 'nuovaAzienda') {
+      navigate('/nuovaAzienda'); // Torna alla schermata NuovaAzienda
+    }
   }
 
   // Gestione degli eventi di drag & drop
@@ -84,12 +92,18 @@ export default function CaricaClassi() {
   return (
     <div className="carica-classi-container">
       <div className="carica-classi-card">
-        <button
-          className="inserimento-manuale-button"
-          onClick={() => handleManualeClick()} // Naviga alla pagina NuovaClasse
-        >
-          Inserimento Manuale
-        </button>
+        {/* Scritta dinamica in base alla pagina precedente */}
+        <div className="carica-classi-header">
+          <p className="dynamic-text">
+            {previousScreen === 'nuovaClasse' ? 'Carica nuove classi' : 'Carica nuove aziende'}
+          </p>
+          <button
+            className="inserimento-manuale-button"
+            onClick={handleManualeClick} // Naviga in base alla schermata precedente
+          >
+            Inserimento Manuale
+          </button>
+        </div>
 
         {/* Sezione per il caricamento dei file */}
         <div
