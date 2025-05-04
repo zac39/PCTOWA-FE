@@ -96,9 +96,14 @@
 }
 
 .tutorSingolo-nessun-dato {
-    font-size: 16px;
-    color: #ff0000; /* Rosso per enfatizzare */
+    font-size: 30px;
+    color: var(--on-bg-text-color); /* Rosso per enfatizzare */
     text-align: center;
-    margin-top: 20px;
     font-weight: bold;
-  }
+
+    /* Centrare verticalmente e orizzontalmente */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
