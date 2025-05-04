@@ -16,9 +16,12 @@ import TurniPage from './TurniPage';
 import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage';
 import NuovaClasse from './NuovaClasse';
-import CaricaClassi from './CaricaClassi';
+import CaricaClassi from './CaricaDati';
 import NuovaAzienda from './NuovaAzienda';
-import TutorPage from './TutorPage';
+import TutorPage from './TutorPage';import NuovoTurno from './NuovoTurno';
+import  TutorPage from './TutorPage'; // Importa la nuova pagina
+
+
 
 function MainApp({ onLogout }) {
   const location = useLocation();
@@ -68,6 +71,9 @@ function MainApp({ onLogout }) {
             <Link to="/nuovaAzienda" style={{ marginLeft: '10px' }}>
               <button>Nuova azienda</button>
             </Link>
+            <Link to="/nuovoTurno" style={{ marginLeft: '10px' }}>
+              <button>nuovo turno</button>
+            </Link>
           </nav>
         </>
       )}
@@ -80,6 +86,8 @@ function MainApp({ onLogout }) {
           <Route path="/nuovaClasse" element={<NuovaClasse />} />
           <Route path="/caricaClassi" element={<CaricaClassi />} />
           <Route path="/nuovaAzienda" element={<NuovaAzienda />} />
+          <Route path="/nuovaAzienda" element={<NuovaAzienda/>} />
+          <Route path="/nuovoTurno" element={<NuovoTurno/>} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />

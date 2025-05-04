@@ -113,7 +113,7 @@
   
 .materia-badge {
   display: inline-block;
-  color: #000; /* Testo nero */
+  color: var(--text-color); /* Testo nero */
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 12px;
@@ -124,7 +124,7 @@
   /* Dati Extra */
   .turno-dati-extra {
     font-size: 14px;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 15px;
     text-align: left !important; /* Forza l'allineamento a sinistra */
     flex-grow: 0; /* Non cresce per occupare spazio */
@@ -164,7 +164,7 @@
   
   .turno-button {
     background-color: var(--secondary-color);
-    color: #000;
+    color: var(--text-color);
     border: none;
     padding: 10px;
     border-radius: 5px;
@@ -175,5 +175,32 @@
   
   .turno-button:hover {
     background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
-    color: #fff; /* Colore del testo al passaggio del mouse */
+    color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+}
+
+/* Pulsante per aggiungere un nuovo turno */
+.add-turno-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  font-size: 32px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-turno-button:hover {
+  background-color: var(--tertiary-color); /* Cambia colore al passaggio del mouse */
+  color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+  transform: scale(1.1); /* Effetto zoom al passaggio del mouse */
 }
