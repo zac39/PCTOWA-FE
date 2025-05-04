@@ -1,0 +1,113 @@
+/* Contenitore principale */
+.nuova-azienda-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  background-color: var(--bg-color); /* Colore di sfondo */
+  margin: 0;
+}
+
+/* Card principale */
+.nuova-azienda-card {
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  padding: 20px;
+  width: 500px;
+  height: 70vh; /* Altezza totale della card */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Header (titolo e bottone "Carica file") */
+.nuova-azienda-header {
+  display: flex;
+  justify-content: space-between; /* Titolo a sinistra, bottone a destra */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.nuova-azienda-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Bottone Carica file */
+.carica-file-button {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.carica-file-button:hover {
+  background-color: var(--tertiary-color);
+  color: var(--on-tertiary-color);
+}
+
+/* Contenitore scorrevole per i campi di input */
+.nuova-azienda-scrollable {
+  flex: 1; /* Occupa lo spazio disponibile tra header e footer */
+  overflow-y: auto; /* Abilita lo scorrimento verticale */
+  padding-right: 10px; /* Spaziatura per il contenuto */
+  margin-bottom: 10px;
+}
+
+/* Form */
+.nuova-azienda-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Gruppo del form */
+.azienda-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.azienda-form-group label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+/* Input del form */
+.azienda-form-input {
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Bottone Crea (sempre visibile) */
+.azienda-crea-button {
+  flex-shrink: 0; /* Evita che il pulsante venga ridimensionato */
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.azienda-crea-button:hover {
+  background-color: var(--tertiary-color);
+  color: var(--on-tertiary-color);
+}
+
+
+.error-message{
+  font-size: 12px;
+  color: red;
+}

@@ -69,6 +69,8 @@ export default function SidebarMenu({ children }) {
           <li><a href="/">Home</a></li>
           <li><a href="/listaAziende">Aziende</a></li>
           <li><a href="/studenti">Studenti</a></li>
+          {/*TODO: questa parte si deve vedere solo se hai le autorizzazioni giuste */}
+          <li><a href="/studenti">Aggiungi dati</a></li>
         </ul>
       </div>
 

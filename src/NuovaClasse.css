@@ -1,0 +1,91 @@
+.nuova-classe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color); /* Colore di sfondo */
+    margin: 0;
+}
+
+.nuova-classe-card {
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    padding: 30px;
+    width: 500px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nuova-classe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.nuova-classe-header h2 {
+    margin: 0;
+    font-size: 22px; /* Font più grande per il titolo */
+    color: var(--text-color);
+}
+
+.carica-file-button,
+.crea-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.carica-file-button:hover,
+.crea-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+}
+
+.nuova-classe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+/* Stile uniforme per input e dropdown */
+.form-group input,
+.dropdown {
+    height: 50px; /* Altezza uniforme */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box; /* Assicura che padding e bordi non alterino la dimensione effettiva */
+}
+
+/* Sezione per i menu a tendina */
+.dropdown-section {
+    display: flex;
+    gap: 10px; /* Spaziatura tra i menu a tendina */
+}
+
+.dropdown {
+    flex: 1; /* Rende tutti i dropdown della stessa larghezza */
+    max-width: 100%; /* Assicura che occupino tutto lo spazio disponibile */
+}
+
+/* Stile per il menu a tendina quando aperto */
+.dropdown {
+    max-height: 300px; /* Altezza massima quando il menu è aperto */
+    overflow-y: auto; /* Scorrimento verticale se ci sono molte opzioni */
+}

@@ -14,6 +14,9 @@ import TurniPage from './TurniPage'; // Importa la nuova pagina
 import AziendaPage from './AziendaPage';
 import ContattiPage from './ContattiPage'; // Importa la nuova pagina
 import SidebarMenu from './SidebarMenu';
+import NuovaClasse from './NuovaClasse';
+import CaricaClassi from './CaricaClassi';
+import NuovaAzienda from './NuovaAzienda';
 
 
 
@@ -55,6 +58,15 @@ function MainApp({ onLogout }) {
             <Link to="/studenti" style={{ marginLeft: '10px' }}>
               <button>Vai agli studenti 🎓</button>
             </Link>
+            <Link to="/nuovaClasse" style={{ marginLeft: '10px' }}>
+              <button>Nuova classe</button>
+            </Link>
+            <Link to="/caricaClassi" style={{ marginLeft: '10px' }}>
+              <button>Carica classi</button>
+            </Link>
+            <Link to="/nuovaAzienda" style={{ marginLeft: '10px' }}>
+              <button>nuova azinda</button>
+            </Link>
           </nav>
         </>
 
@@ -66,6 +78,9 @@ function MainApp({ onLogout }) {
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
           <Route path="/studenti" element={<StudentiPage />} />
+          <Route path="/nuovaClasse" element={<NuovaClasse />} />
+          <Route path="/caricaClassi" element={<CaricaClassi />} />
+          <Route path="/nuovaAzienda" element={<NuovaAzienda/>} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
