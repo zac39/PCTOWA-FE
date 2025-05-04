@@ -13,8 +13,8 @@
 /* Stile per l'icona del menù */
 .menu-icon {
     position: fixed;
-    top: 20px;
-    left: 20px; /* Posizione quando il menù è aperto */
+    top: 10px;
+    left: 10px; /* Posizione quando il menù è aperto */
     font-size: 24px;
     cursor: pointer;
     color: var(--text-color);
@@ -119,7 +119,7 @@ pointer-events: auto; /* Riabilita l'interazione */
   /* Contenuto principale */
   .main-content {
     flex: 1; /* Occupa lo spazio rimanente */
-    padding: 20px;
+    padding: 0px;
     transition: margin-left 0.3s ease; /* Animazione per il ridimensionamento */
   }
 
