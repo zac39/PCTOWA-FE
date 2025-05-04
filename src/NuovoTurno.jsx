@@ -5,108 +5,173 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 import './NuovoTurno.css';
 
 export default function NuovoTurno() {
-    const navigate = useNavigate(); // Hook per la navigazione
-    const location = useLocation(); // Ottieni l'oggetto location
-    const aziendaId = location.state?.aziendaId; // Accedi a aziendaId dallo stato
-  
-    const [formData, setFormData] = useState({
-      dataInizio: { giorno: '', mese: '', anno: '' },
-      dataFine: { giorno: '', mese: '', anno: '' },
-      posti: '',
-      postiOccupati: '',
-      ore: '',
-      oraInizio: '',
-      oraFine: '',
-      giornoInizio: '',
-      giornoFine: '',
-      settori: [],
-      materie: [],
-    });
-  
-    const [formErrors, setFormErrors] = useState({});
-  
-    const giorniSettimana = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
-    const mesi = Array.from({ length: 12 }, (_, i) => i + 1); // Array dei mesi (1-12)
-    const anni = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i); // Array degli anni a partire dall'anno corrente
-  
-    const validateField = (name, value) => {
-      let error = '';
-  
-      if (name === 'giorno' && value !== '' && (isNaN(value) || value < 1 || value > 31)) {
-        error = 'Inserire un giorno valido (1-31).';
-      }
-      if (name === 'mese' && (isNaN(value) || value < 1 || value > 12)) {
-        error = 'Inserire un mese valido (1-12).';
-      }
-      if (name === 'anno' && (isNaN(value) || value.length !== 4)) {
-        error = 'Inserire un anno valido a 4 cifre.';
-      }
-  
-      return error;
+  const navigate = useNavigate(); // Hook per la navigazione
+  const location = useLocation(); // Ottieni l'oggetto location
+  const aziendaId = location.state?.aziendaId; // Accedi a aziendaId dallo stato
+
+
+  function handleCaricaClick() {
+    navigate('/caricaClassi', { state: { from: 'nuovoTurno' } }); // Passa lo stato "from" con valore "nuovoTurno"
+  }
+
+  const [formData, setFormData] = useState({
+    dataInizio: '',
+    dataFine: '',
+    posti: '',
+    postiOccupati: '',
+    ore: '',
+    oraInizio: '',
+    oraFine: '',
+    giornoInizio: '',
+    giornoFine: '',
+    settori: [], // Cambiato da stringa a array per supportare selezioni multiple
+    materie: [], // Nuovo campo per le materie
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const giorniSettimana = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
+  const settori = [
+    { value: 'Informatica', label: 'Informatica' },
+    { value: 'Telecomunicazioni', label: 'Telecomunicazioni' },
+    { value: 'Logistica', label: 'Logistica' },
+    { value: 'Elettronica', label: 'Elettronica' },
+    { value: 'Costruzione del mezzo', label: 'Costruzione del mezzo' }
+  ];
+
+  const materie = [
+    { value: 'Matematica', label: 'Matematica' },
+    { value: 'Fisica', label: 'Fisica' },
+    { value: 'Chimica', label: 'Chimica' },
+    { value: 'Informatica', label: 'Informatica' },
+    { value: 'Elettronica', label: 'Elettronica' },
+    { value: 'Letteratura', label: 'Letteratura' },
+    { value: 'Storia', label: 'Storia' },
+    { value: 'Geografia', label: 'Geografia' },
+    { value: 'Biologia', label: 'Biologia' },
+    { value: 'Educazione fisica', label: 'Educazione fisica' },
+    // Aggiungi tutte le altre materie necessarie...
+  ];
+
+  // Validazione dinamica
+  const validateField = (name, value) => {
+    let error = '';
+
+    const validators = {
+      dataInizio: /^\d{4}-\d{2}-\d{2}$/, // Formato data (YYYY-MM-DD)
+      dataFine: /^\d{4}-\d{2}-\d{2}$/, // Formato data (YYYY-MM-DD)
+      posti: /^\d+$/, // Intero positivo
+      postiOccupati: /^\d+$/, // Intero positivo
+      ore: /^\d+$/, // Intero positivo
+      oraInizio: /^([01]\d|2[0-3]):([0-5]\d)$/, // Formato orario (HH:mm)
+      oraFine: /^([01]\d|2[0-3]):([0-5]\d)$/, // Formato orario (HH:mm)
+      giornoInizio: new RegExp(`^(${giorniSettimana.join('|')})$`), // Menu a tendina (giorni della settimana)
+      giornoFine: new RegExp(`^(${giorniSettimana.join('|')})$`), // Menu a tendina (giorni della settimana)
+      settori: (value) => Array.isArray(value) && value.length >= 0, // Valida che almeno un settore sia selezionato
+      materie: (value) => Array.isArray(value) && value.length >= 0, // Valida che almeno una materia sia selezionata
     };
-  
-    const handleDateChange = (field, subField, value) => {
-      setFormData((prevData) => ({
-        ...prevData,
-        [field]: {
-          ...prevData[field],
-          [subField]: value,
-        },
-      }));
-  
-      const error = validateField(subField, value);
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        [field]: {
-          ...prevErrors[field],
-          [subField]: error,
-        },
-      }));
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      const validateDateField = (field) => {
-        const { giorno, mese, anno } = formData[field];
-        const errors = {};
-        if (!mese) errors.mese = 'Il mese è obbligatorio.';
-        if (!anno) errors.anno = "L'anno è obbligatorio.";
-        if (giorno !== '' && (isNaN(giorno) || giorno < 1 || giorno > 31)) {
-          errors.giorno = 'Inserire un giorno valido (1-31).';
+
+    if (validators[name]) {
+      const isValid = typeof validators[name] === 'function'
+        ? validators[name](value)
+        : validators[name].test(value);
+
+      if (!isValid) {
+        switch (name) {
+          case 'dataInizio':
+          case 'dataFine':
+            error = 'Inserire una data valida (YYYY-MM-DD).';
+            break;
+          case 'posti':
+          case 'postiOccupati':
+          case 'ore':
+            error = 'Inserire un numero intero positivo.';
+            break;
+          case 'oraInizio':
+          case 'oraFine':
+            error = 'Inserire un orario valido (HH:mm).';
+            break;
+          case 'giornoInizio':
+          case 'giornoFine':
+            error = 'Selezionare un giorno valido.';
+            break;
+          case 'settori':
+            error = 'Selezionare almeno un settore.';
+            break;
+          case 'materie':
+            error = 'Selezionare almeno una materia.';
+            break;
+          default:
+            error = `Il campo ${name} non è valido.`;
         }
-        return errors;
-      };
-  
-      const dataInizioErrors = validateDateField('dataInizio');
-      const dataFineErrors = validateDateField('dataFine');
-  
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        dataInizio: dataInizioErrors,
-        dataFine: dataFineErrors,
-      }));
-  
-      const hasErrors =
-        Object.values(dataInizioErrors).length > 0 || Object.values(dataFineErrors).length > 0;
-  
-      if (!hasErrors) {
-        alert('Form inviato con successo!');
-        console.log('Dati del form:', formData);
       }
-    };
-  
+    }
+
+    return error;
+  };
+
+  // Gestione dinamica del cambiamento degli input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    const error = validateField(name, value);
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+
+  // Gestione del cambiamento per il menu a tendina multiplo
+  const handleMultiSelectChange = (name, selectedOptions) => {
+    const selectedValues = selectedOptions ? selectedOptions.map(option => option.value) : [];
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: selectedValues,
+    }));
+
+    const error = validateField(name, selectedValues);
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+
+  // Gestione del submit del form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Controlla se ci sono errori
+    const newErrors = {};
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setFormErrors(newErrors);
+
+    // Se non ci sono errori, invia i dati
+    if (Object.keys(newErrors).length === 0) {
+      alert('Form inviato con successo!');
+      console.log('Dati del form:', formData);
+    }
+  };
 
   return (
     <div className="nuovo-turno-container">
-      {aziendaId ? <p>Azienda ID ricevuto: {aziendaId}</p> : <p>Errore: Azienda ID non disponibile.</p>}
       <div className="nuovo-turno-card">
         {/* Header con titolo */}
         <div className="nuovo-turno-header">
           <h2>Nuovo turno</h2>
-          <button className="carica-file-button" onClick={handleCaricaClick}>
-            Carica file
-          </button>
+          <button className="carica-file-button"
+            onClick={() => handleCaricaClick()} // Gestisce il click sul pulsante "Turni"
+          >Carica file</button>
         </div>
 
         {/* Contenitore scorrevole */}
@@ -153,9 +218,7 @@ export default function NuovoTurno() {
                 >
                   <option value="" disabled>Seleziona un giorno</option>
                   {giorniSettimana.map((giorno) => (
-                    <option key={giorno} value={giorno}>
-                      {giorno}
-                    </option>
+                    <option key={giorno} value={giorno}>{giorno}</option>
                   ))}
                 </select>
                 {formErrors[field.name] && <p className="error-message">{formErrors[field.name]}</p>}
@@ -169,10 +232,10 @@ export default function NuovoTurno() {
                 id="settori"
                 name="settori"
                 className="turno-form-select"
-                value={settori.filter((option) => formData.settori.includes(option.value))}
+                value={settori.filter(option => formData.settori.includes(option.value))}
                 onChange={(selectedOptions) => handleMultiSelectChange('settori', selectedOptions)}
                 options={settori}
-                isMulti
+                isMulti // Permette la selezione multipla
                 placeholder="Seleziona uno o più settori"
               />
               {formErrors.settori && <p className="error-message">{formErrors.settori}</p>}
@@ -185,12 +248,12 @@ export default function NuovoTurno() {
                 id="materie"
                 name="materie"
                 className="turno-form-select"
-                value={materie.filter((option) => formData.materie.includes(option.value))}
+                value={materie.filter(option => formData.materie.includes(option.value))}
                 onChange={(selectedOptions) => handleMultiSelectChange('materie', selectedOptions)}
                 options={materie}
-                isMulti
+                isMulti // Permette la selezione multipla
                 placeholder="Seleziona una o più materie"
-                isSearchable
+                isSearchable // Abilita la ricerca
               />
               {formErrors.materie && <p className="error-message">{formErrors.materie}</p>}
             </div>
