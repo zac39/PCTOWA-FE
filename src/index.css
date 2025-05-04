@@ -20,6 +20,7 @@ code {
   --primary-color: #abd6cd;
   --secondary-color: #7BA89F;
   --tertiary-color: #547d75;
+  --on-tertiary-color: #fff;
   --filter-border-color: #ccc;
 }
 
@@ -30,6 +31,7 @@ code {
   --primary-color: #d6abab;
   --secondary-color: #b97979;
   --tertiary-color: #9b4f4f;
+  --on-tertiary-color: #fff;
   --filter-border-color: #ccc;
 }
 
