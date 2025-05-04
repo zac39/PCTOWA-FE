@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css';
 
 function Login({ onLoginSuccess }) {
   const [email, setEmail] = useState('');
@@ -33,23 +34,36 @@ function Login({ onLoginSuccess }) {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-      {errore && <p style={{ color: 'red' }}>{errore}</p>}
-    </form>
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Inserisci la tua email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Inserisci la tua password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          
+          <a href="#" className="forgot-password">Password dimenticata</a>
+          {errore && <p className="error-message">{errore}</p>}
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

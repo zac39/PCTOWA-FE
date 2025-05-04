@@ -68,6 +68,9 @@ function MainApp({ onLogout }) {
             <Link to="/nuovaAzienda" style={{ marginLeft: '10px' }}>
               <button>nuova azinda</button>
             </Link>
+            <Link to="/login" style={{ marginLeft: '10px' }}>
+              <button>login</button>
+            </Link>
           </nav>
         </>
 
@@ -76,6 +79,7 @@ function MainApp({ onLogout }) {
       {/* Qui vengono mostrate solo le route */}
       <div style={{ marginTop: isHome ? '40px' : '0px' }}>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
           <Route path="/studenti" element={<StudentiPage />} />
