@@ -42,3 +42,16 @@ body {
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
 }
+
+
+
+
+
+
+
+/* Contenuto principale */
+.content-container {
+  flex: 1; /* Occupa tutto lo spazio disponibile */
+  overflow-y: auto; /* Scroll verticale per contenuti lunghi */
+  background-color: var(--bg-color); /* Colore di sfondo del contenuto */
+}
