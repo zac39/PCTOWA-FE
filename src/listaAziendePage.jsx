@@ -24,6 +24,24 @@ export default function VisAziendePage() {
     Mese: '',
   });
 
+   // Gestore per navigare alla pagina "azienda.jsx"
+   function handleAziendaClick(id) {
+    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
+  }
+
+  function handleTurniClick(id) {
+    navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
+  }
+  function handleContattiClick(id) {
+    navigate(`/contatti/${id}`); // Naviga alla pagina dei turni passando l'ID
+  }
+
+  function handleSelectChange(filtro, selectedOption) {
+    const valore = selectedOption ? selectedOption.value : '';
+    setValoriInput(prev => ({ ...prev, [filtro]: valore }));
+  }
+
+
   useEffect(() => {
     // Funzione per recuperare i dati dell'azienda tramite API
     const fetchAziendeData = async () => {
@@ -34,7 +52,7 @@ export default function VisAziendePage() {
           throw new Error("Token di accesso non trovato. Effettua il login.");
         }
 
-        const response = await fetch(`http://localhost:5000/api/v1/company/list?anno=2023&comune=Verona&settore=IT&mese=Gennaio&materia=Matematica`, {
+        const response = await fetch(`http://localhost:5000/api/v1/company/list`, {
           method: "GET", // Metodo HTTP
           headers: {
             "Authorization": `Bearer ${accessToken}`, // Aggiunge il token all'header
@@ -57,22 +75,14 @@ export default function VisAziendePage() {
     fetchAziendeData();
   }, []);
 
+  console.log(aziende);
+
   if (isLoading) {
     return <p>Caricamento in corso...</p>;
   }
 
   if (error) {
     return <p>Errore: {error}</p>;
-  }
-
-  // Gestore per navigare alla pagina "azienda.jsx"
-  function handleAziendaClick(id) {
-    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
-  }
-
-  function handleSelectChange(filtro, selectedOption) {
-    const valore = selectedOption ? selectedOption.value : '';
-    setValoriInput(prev => ({ ...prev, [filtro]: valore }));
   }
 
   // Stile personalizzato per react-select
@@ -125,6 +135,7 @@ export default function VisAziendePage() {
         {aziende.map((azienda, index) => (
           <div className="aziende-card" key={index}>
             <div className="aziende-dati">
+              {/* Aggiunto gestore di click sul nome */}
               <h2
                 className="aziende-titolo"
                 onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
@@ -132,32 +143,23 @@ export default function VisAziendePage() {
               >
                 {azienda.ragione_sociale}
               </h2>
-              <p className="aziende-indirizzo">
-                {azienda.addresses.length > 0 && (
-                  `${azienda.addresses[0].indirizzo}, ${azienda.addresses[0].cap}, ${azienda.addresses[0].comune}, ${azienda.addresses[0].provincia}, ${azienda.addresses[0].stato}`
-                )}
-              </p>
-              <p><strong>Categoria:</strong> {azienda.categoria}</p>
-              <p><strong>Codice Ateco:</strong> {azienda.codice_ateco}</p>
-              <p><strong>Partita IVA:</strong> {azienda.partita_iva}</p>
-              <p><strong>Data Convenzione:</strong> {azienda.data_convenzione}</p>
-              <p><strong>Scadenza Convenzione:</strong> {azienda.scadenza_convenzione}</p>
+              <p className="aziende-indirizzo">{azienda.turns[0]?.addresses[0]
+  ? `${azienda.turns[0].addresses[0].indirizzo}, ${azienda.turns[0].addresses[0].cap}, ${azienda.turns[0].addresses[0].comune}, ${azienda.turns[0].addresses[0].provincia}, ${azienda.turns[0].addresses[0].stato}`
+  : 'Indirizzo non disponibile'}</p>
             </div>
             <div className="azienda-sitoWeb">
               <a href={azienda.sito_web} target="_blank" rel="noopener noreferrer">
                 {azienda.sito_web}
               </a>
             </div>
-            <div className="azienda-contatti">
-              <p><strong>Email:</strong> {azienda.email_azienda}</p>
-              <p><strong>Pec:</strong> {azienda.pec}</p>
-              <p><strong>Telefono:</strong> {azienda.telefono_azienda}</p>
-              <p><strong>Fax:</strong> {azienda.fax}</p>
-            </div>
-            <div className="azienda-logo">
-              {azienda.indirizzo_logo && (
-                <img src={azienda.indirizzo_logo} alt={`Logo di ${azienda.ragione_sociale}`} />
-              )}
+            <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
+            <div className="bottoni">
+              <button className="btn contatti"
+                      onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
+                >Contatti</button>
+              <button className="btn turni" 
+                      onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
+                >Turni</button>
             </div>
           </div>
         ))}
