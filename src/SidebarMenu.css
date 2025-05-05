@@ -1,0 +1,222 @@
+/* Contenitore generale */
+.app-container {
+    display: flex;
+    min-height: 100vh; /* Assicura che il layout riempia tutta la pagina */
+    transition: margin-left 0.3s ease; /* Animazione per il ridimensionamento */
+    margin-left: 0; /* Nessuno spostamento iniziale */
+  }
+  
+  .app-container.menu-open {
+    margin-left: 200px; /* Sposta il contenuto a destra di 300px quando il menù è aperto */
+  }
+  
+/* Stile per l'icona del menù */
+.menu-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px; /* Posizione quando il menù è aperto */
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+    z-index: 1000; /* Sopra tutto il resto */
+    transition: left 0.3s ease; /* Aggiunge un'animazione fluida */
+  }
+  
+  /* Sposta l'icona più a sinistra quando il menù è chiuso */
+  .app-container:not(.menu-open) .menu-icon {
+    left: 10px; /* Posizione quando il menù è chiuso */
+  }
+
+  /* Stile per l'icona di chiusura del menù */
+.menu-close-icon {
+    width: 24px; /* Larghezza dell'immagine */
+    height: 24px; /* Altezza dell'immagine */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  }
+  
+/* Menù laterale */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -150px; /* Nasconde il menù inizialmente */
+    width: 200px;
+    height: 100%;
+    background-color: transparent; /* Sfondo trasparente quando chiuso */
+    box-shadow: none; /* Rimuovi l'ombra quando il menù è chiuso */
+    z-index: 999; /* Sopra il contenuto principale */
+    padding: 0px; 
+    transition: left 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Animazioni */
+  }
+  
+  .side-menu.open {
+    left: 0; /* Mostra il menù */
+    background-color: var(--primary-color); /* Colore azzurro trasparente quando aperto */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Aggiungi ombra quando il menù è aperto */
+  }
+  
+  /* Pulsante per chiudere il menù */
+  .close-menu {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* Disabilita l'interazione con gli elementi figli del menù quando è chiuso */
+.side-menu:not(.open) ul,
+.side-menu:not(.open) ul li,
+.side-menu:not(.open) ul li a {
+pointer-events: none; /* Disabilita l'interazione */
+}
+
+/* Riabilita l'interazione quando il menù è aperto */
+.side-menu.open ul,
+.side-menu.open ul li,
+.side-menu.open ul li a {
+pointer-events: auto; /* Riabilita l'interazione */
+}
+  
+  /* Voci del menù */
+  .side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0;
+  }
+  
+  .side-menu ul li {
+    margin: 0px 0;
+    width: 100%; /* Fa sì che gli elementi occupino tutta la larghezza del menù */
+    box-sizing: border-box; /* Include il padding nella larghezza totale */
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .side-menu ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .side-menu ul li a:hover {
+    text-decoration: underline;
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    transition: background-color 0.2s ease; /* Animazione per lo sfondo */
+  }
+
+  .side-menu ul :hover {
+    text-decoration: underline;
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    transition: background-color 0.2s ease; /* Animazione per lo sfondo */
+    background-color: var(--secondary-color); /* Colore di sfondo al passaggio del mouse */
+  }
+  
+  /* Contenuto principale */
+  .main-content {
+    flex: 1; /* Occupa lo spazio rimanente */
+    padding: 0px;
+    transition: margin-left 0.3s ease; /* Animazione per il ridimensionamento */
+  }
+
+
+/* Theme Switch */
+/* The switch - the box around the slider */
+.theme-switch {
+    padding-left: 5px; /* Spazio a sinistra */
+    padding-top: 10px; /* Spazio sopra */
+  }
+  
+  /* The switch - the box around the slider */
+
+.switch {
+    font-size: 14px; /* Riduci la dimensione del font */
+    position: relative;
+    display: inline-block;
+    width: 3em; /* Riduci la larghezza */
+    height: 1.8em; /* Riduci l'altezza */
+    border-radius: 20px; /* Mantieni proporzioni */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2a2a2a;
+    transition: 0.4s;
+    border-radius: 20px; /* Riduci il bordo arrotondato */
+    overflow: hidden;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1em; /* Riduci altezza */
+    width: 1em; /* Riduci larghezza */
+    border-radius: 15px;
+    left: 0.27em; /* Ridotto rispetto al valore precedente */
+    bottom: 0.4em;
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+    box-shadow: inset 6px -3px 0px 0px #fff; /* Riduci ombra */
+  }
+  
+  .switch input:checked + .slider {
+    background-color: #00a6ff;
+  }
+  
+  .switch input:checked + .slider:before {
+    transform: translateX(1.5em); /* Riduci traslazione */
+    box-shadow: inset 10px -3px 0px 10px #ffcf48; /* Riduci ombra */
+  }
+  
+  .star {
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    width: 3px; /* Riduci larghezza */
+    height: 3px; /* Riduci altezza */
+    transition: all 0.4s;
+  }
+  
+  .star_1 {
+    left: 2em; /* Adatta la posizione */
+    top: 0.4em;
+  }
+  
+  .star_2 {
+    left: 1.8em; /* Adatta la posizione */
+    top: 1em;
+  }
+  
+  .star_3 {
+    left: 2.5em; /* Adatta la posizione */
+    top: 0.7em;
+  }
+  
+  .switch input:checked ~ .slider .star {
+    opacity: 0;
+  }
+  
+  .cloud {
+    width: 2.5em; /* Riduci larghezza */
+    position: absolute;
+    bottom: -1em; /* Adatta la posizione */
+    left: -0.8em; /* Adatta la posizione */
+    opacity: 0;
+    transition: all 0.4s;
+  }
+  
+  .switch input:checked ~ .slider .cloud {
+    opacity: 1;
+  }
+  

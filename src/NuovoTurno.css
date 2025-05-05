@@ -1,0 +1,131 @@
+/* Contenitore principale */
+.nuovo-turno-container {
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Altezza del viewport */
+    background-color: var(--bg-color); /* Colore di sfondo */
+    margin: 0;
+}
+  
+/* Card principale */
+.nuovo-turno-card {
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    padding: 20px;
+    width: 800px;
+    height: 600px; /* Altezza totale della card */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+  
+/* Header (titolo e bottone "Carica file") */
+.nuovo-turno-header {
+    display: flex;
+    justify-content: space-between; /* Titolo a sinistra, bottone a destra */
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.nuovo-turno-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+  
+/* Bottone Carica file */
+.carica-file-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: larger;
+    cursor: pointer;
+}
+  
+.carica-file-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+}
+  
+/* Contenitore scorrevole per i campi di input */
+.nuovo-turno-scrollable {
+    flex: 1; /* Occupa lo spazio disponibile tra header e footer */
+    overflow-y: auto; /* Abilita lo scorrimento verticale */
+    margin-bottom: 10px;
+}
+  
+/* Form */
+.nuovo-turno-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+  
+/* Gruppo del form */
+.turno-form-group {
+    display: flex;
+    flex-direction: column;
+}
+  
+.turno-form-group label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #000;
+}
+  
+/* Input del form */
+.turno-form-input, .turno-form-select {
+    height: 50px; /* Altezza uniforme */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+    appearance: none; /* Rimuove lo stile predefinito del browser */
+}
+
+/* Aggiunge una freccia personalizzata per i menu a tendina */
+.turno-form-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    cursor: pointer;
+}
+  
+/* Contenitore del bottone Crea */
+.turno-crea-button-container {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--primary-color);
+    text-align: center;
+}
+  
+/* Bottone Crea */
+.turno-crea-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: larger;
+    cursor: pointer;
+    width: 100%; /* Occupa tutta la larghezza del contenitore */
+}
+  
+.turno-crea-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+}
+  
+/* Messaggio di errore */
+.error-message {
+    font-size: 12px;
+    color: red;
+}

@@ -14,21 +14,26 @@ code {
 
 :root {
   --bg-color: white;
+  --on-bg-text-color: rgb(174, 174, 174);
   --text-color: black;
   --text-color-light: rgba(0, 0, 0, 0.6);
   --primary-color: #abd6cd;
+  --faded-white: rgb(255, 255, 255, 0.5);
   --secondary-color: #7BA89F;
   --tertiary-color: #547d75;
+  --on-tertiary-color: #fff;
   --filter-border-color: #ccc;
 }
 
 [data-theme="dark"] {
   --bg-color: rgb(50, 50, 60);
+  --on-bg-text-color: rgb(147, 147, 147);
   --text-color: rgb(0, 0, 0);
   --primary-color: #d6abab;
+  --faded-white: rgba(255, 255, 255, 0.5);
   --secondary-color: #b97979;
   --tertiary-color: #9b4f4f;
-
+  --on-tertiary-color: #fff;
   --filter-border-color: #ccc;
 }
 
@@ -36,4 +41,17 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+
+
+
+
+/* Contenuto principale */
+.content-container {
+  flex: 1; /* Occupa tutto lo spazio disponibile */
+  overflow-y: auto; /* Scroll verticale per contenuti lunghi */
+  background-color: var(--bg-color); /* Colore di sfondo del contenuto */
 }

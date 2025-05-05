@@ -1,0 +1,151 @@
+/* Contenitore principale */
+.carica-classi-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    margin: 0;
+  }
+  
+  /* Card principale */
+  .carica-classi-card {
+    background-color: var(--primary-color);
+    border-radius: 16px;
+    padding: 30px;
+    width: 600px;
+    height: auto; /* Altezza flessibile */
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .carica-classi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dynamic-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
+  }
+  
+  /* Pulsante "Inserimento Manuale" */
+  .inserimento-manuale-button {
+    align-self: flex-end;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: larger;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .inserimento-manuale-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+  }
+  
+  /* Sezione per il caricamento dei file */
+  .file-upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    border: 2px dashed var(--tertiary-color);
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .file-upload-section.drag-active {
+    background-color: #e8f5e9;
+    border-color: #4caf50;
+  }
+  
+  .file-upload-section:hover {
+    background-color: #e8f5e9;
+  }
+  
+  .file-upload-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: var(--tertiary-color);
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .file-upload-input {
+    display: none;
+  }
+  
+  /* Lista dei file caricati */
+  .file-list {
+    margin: 10px 0;
+  }
+  
+  .file-list h4 {
+    font-size: 18px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+  
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .file-item span {
+    font-size: 16px;
+    color: var(--text-color);
+  }
+  
+  .remove-file-button {
+    background-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .remove-file-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+  }
+  
+  /* Pulsante "Carica" */
+  .carica-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: larger;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    align-self: center;
+  }
+  
+  .carica-button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--on-tertiary-color);
+  }
