@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
+import { useNavigate, useSearchParams } from 'react-router-dom'; // Importa il hook per la navigazione
 import './listaAziendePage.css';
 
 //TODO: prendere effettivamente i dati e fare le richieste
@@ -21,7 +21,10 @@ const opzioniFiltro = {
 };
 
 export default function VisAziendePage() {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate(); // Hook per la navigazione
+  const matricola = searchParams.get('matricola');
+  const comune = searchParams.get('comune');
 
   // Gestore per navigare alla pagina "azienda.jsx"
   function handleAziendaClick(id) {
@@ -80,6 +83,7 @@ export default function VisAziendePage() {
 
   return (
     <div className="container">
+      <p>{matricola}{comune}</p>
       <div className="filters">
         {Object.keys(opzioniFiltro).map((filtro) => (
           <div key={filtro} className="filter-container">

@@ -1,132 +1,70 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import Select from 'react-select';
 import './listaStudentiPage.css'; // Assicurati di avere il file CSS
 
 const studentiData = [
   {
+    matricola: 10001,
     nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
+    indirizzo: {
+      stato: "Italia",
+      provincia: "Verona",
+      comune: "Verona",
+      cap: "37132",
+      indirizzo: "Via Andrea d'Angeli 23",
+    },
     classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
     azione: 'Aziende',
     azienda: null, // Nessuna azienda associata
   },
   {
+    matricola: 10002,
     nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
+    indirizzo: {
+      stato: "Italia",
+      provincia: "Verona",
+      comune: "Verona",
+      cap: "37132",
+      indirizzo: "Via Andrea d'Angeli 23",
+    },
     classe: '5Bi 24/25',
-    stato: 'Assegnato',
-    statoColor: '#d4edda', // Verde per Assegnato
-    statoTextColor: '#155724',
     azione: 'Aziende',
     azienda: {
       nome: 'Università di Verona',
-      indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
+      indirizzo: {
+        stato: "Italia",
+        provincia: "Verona",
+        comune: "Verona",
+        cap: "37132",
+        indirizzo: "Via Andrea d'Angeli 23",
+      },
       classe: '06/06-10/07',
-      stato: '',
-      statoColor: 'transparent', // Nessuno stato
-      statoTextColor: '#000',
       azione: 'Turno',
     },
   },
   {
+    matricola: 10003,
     nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Assegnato',
-    statoColor: '#d4edda', // Verde per Assegnato
-    statoTextColor: '#155724',
-    azione: 'Aziende',
-    azienda: {
-      nome: 'Università di Verona',
-      indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-      classe: '06/06-10/07',
-      stato: '',
-      statoColor: 'transparent', // Nessuno stato
-      statoTextColor: '#000',
-      azione: 'Turno',
+    indirizzo: {
+      stato: "Italia",
+      provincia: "Verona",
+      comune: "Verona",
+      cap: "37132",
+      indirizzo: "Via Andrea d'Angeli 23",
     },
-  },
-
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
     classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Non assegnato',
-    statoColor: '#f8d7da', // Rosso per Non assegnato
-    statoTextColor: '#721c24',
-    azione: 'Aziende',
-    azienda: null, // Nessuna azienda associata
-  },
-  
-
-  {
-    nome: 'Federico Rigo',
-    indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-    classe: '5Bi 24/25',
-    stato: 'Assegnato',
-    statoColor: '#d4edda', // Verde per Assegnato
-    statoTextColor: '#155724',
     azione: 'Aziende',
     azienda: {
       nome: 'Università di Verona',
-      indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
+      indirizzo: {
+        stato: "Italia",
+        provincia: "Verona",
+        comune: "Verona",
+        cap: "37132",
+        indirizzo: "Via Andrea d'Angeli 23",
+      },
       classe: '06/06-10/07',
-      stato: '',
-      statoColor: 'transparent', // Nessuno stato
-      statoTextColor: '#000',
       azione: 'Turno',
     },
   },
@@ -141,6 +79,7 @@ const opzioniFiltro = {
 };
 
 export default function VisStudentiPage() {
+  const navigate = useNavigate(); // Hook per la navigazione
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
     Settore: '',
@@ -152,6 +91,11 @@ export default function VisStudentiPage() {
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
+  }
+
+  function handleAziendeClick(matricola, comune) {
+    // Naviga verso la pagina listaAziende passando matricola e comune come parametri
+    navigate(`/listaAziende?matricola=${matricola}&comune=${comune}`);
   }
 
   const customStyles = {
@@ -209,32 +153,42 @@ export default function VisStudentiPage() {
       <div className="studenti-list">
         {studentiData.map((studente, index) => (
           <div className="studente-card" key={index}>
-
             {/* Riga dello studente */}
             <div className="studente-info">
-                <h2 className="studente-nome">{studente.nome}</h2>
-                <p className="studente-indirizzo">{studente.indirizzo}</p>
+              <h2 className="studente-nome">{studente.nome}</h2>
+              <p className="studente-indirizzo">
+                {`${studente.indirizzo.indirizzo}, ${studente.indirizzo.cap}, ${studente.indirizzo.comune}, ${studente.indirizzo.stato}`}
+              </p>
               <div className="studente-classe">{studente.classe}</div>
               <div className="student-buttons">
                 <div
                   className="studente-stato"
                   style={{
-                    backgroundColor: studente.statoColor,
-                    color: studente.statoTextColor,
+                    backgroundColor: studente.azienda ? '#d4edda' : '#f8d7da', // Verde se assegnato, rosso se non assegnato
+                    color: studente.azienda ? '#155724' : '#721c24', // Testo verde scuro o rosso scuro
                   }}
                 >
-                  {studente.stato}
+                  {studente.azienda ? 'Assegnato' : 'Non assegnato'}
                 </div>
-                <button className="studente-azione">{studente.azione}</button>
+                <button
+                  className="studente-azione"
+                  onClick={() => 
+                    handleAziendeClick(studente.matricola, studente.indirizzo.comune)
+                  } // Gestisce il click sul pulsante "Turni"
+
+                >
+                  {studente.azione}
+                </button>
               </div>
             </div>
-
 
             {/* Riga dell'azienda, se presente */}
             {studente.azienda && (
               <div className="aziendaAssegnata-info">
                 <h2 className="aziendaAssegnata-nome">{studente.azienda.nome}</h2>
-                <p className="aziendaAssegnata-indirizzo">{studente.azienda.indirizzo}</p>
+                <p className="aziendaAssegnata-indirizzo">
+                  {`${studente.azienda.indirizzo.indirizzo}, ${studente.azienda.indirizzo.cap}, ${studente.azienda.indirizzo.comune}, ${studente.azienda.indirizzo.provincia}, ${studente.azienda.indirizzo.stato}`}
+                </p>
                 <div className="aziendaAssegnata-classe">{studente.azienda.classe}</div>
                 <button className="aziendaAssegnata-azione">{studente.azienda.azione}</button>
               </div>
