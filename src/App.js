@@ -18,8 +18,8 @@ import ContattiPage from './ContattiPage';
 import NuovaClasse from './NuovaClasse';
 import CaricaClassi from './CaricaDati';
 import NuovaAzienda from './NuovaAzienda';
-import TutorPage from './TutorPage';import NuovoTurno from './NuovoTurno';
-import  TutorPage from './TutorPage'; // Importa la nuova pagina
+import TutorPage from './TutorPage';
+import NuovoTurno from './NuovoTurno';
 
 
 
