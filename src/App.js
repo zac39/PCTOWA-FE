@@ -18,7 +18,9 @@ import ContattiPage from './ContattiPage';
 import NuovaClasse from './NuovaClasse';
 import CaricaClassi from './CaricaDati';
 import NuovaAzienda from './NuovaAzienda';
-import TutorPage from './TutorPage';import NuovoTurno from './NuovoTurno';
+import TutorPage from './TutorPage';
+import NuovoTurno from './NuovoTurno';
+import ListaUtenti from './listaUtentiPage'; // Importa la pagina degli utenti
 //import  TutorPage from './TutorPage'; // Importa la nuova pagina
 
 
@@ -82,6 +84,7 @@ function MainApp({ onLogout }) {
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
+          <Route path="/listaUtenti" element={<ListaUtenti />} />
           <Route path="/studenti" element={<StudentiPage />} />
           <Route path="/nuovaClasse" element={<NuovaClasse />} />
           <Route path="/caricaClassi" element={<CaricaClassi />} />

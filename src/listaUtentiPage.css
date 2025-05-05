@@ -1,0 +1,46 @@
+/* Contenitore principale */
+.utenti-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spaziatura tra le righe */
+    padding: 20px;
+    background-color: var(--bg-color); /* Colore di sfondo */
+  }
+  
+  /* Riga di un utente */
+  .utente-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--primary-color); /* Verde chiaro */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Nome e cognome */
+  .utente-nome {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-color); /* Colore del testo */
+    flex: 1; /* Spazio flessibile a sinistra */
+  }
+  
+  /* Email */
+  .utente-email {
+    font-size: 0.9em;
+    color: var(--text-color-light); /* Grigio */
+    flex: 2; /* Spazio flessibile al centro */
+    text-align: center;
+  }
+  
+  /* Riquadro del ruolo */
+  .ruolo-label {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--text-color); /* Bianco */
+    padding: 5px 10px;
+    border-radius: 7px;
+    text-align: center;
+    flex: 0.5; /* Spazio fisso a destra */
+  }

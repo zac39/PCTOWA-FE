@@ -4,6 +4,8 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 
 import './NuovoTurno.css';
 
+//TODO: finisci altri passaggi e controlla che funzioni tutto
+
 export default function NuovoTurno() {
   const navigate = useNavigate(); // Hook per la navigazione
   const location = useLocation(); // Ottieni l'oggetto location
