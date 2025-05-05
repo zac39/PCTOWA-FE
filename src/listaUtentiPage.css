@@ -5,42 +5,183 @@
     gap: 10px; /* Spaziatura tra le righe */
     padding: 20px;
     background-color: var(--bg-color); /* Colore di sfondo */
-  }
+}
   
-  /* Riga di un utente */
-  .utente-row {
+/* Riga di un utente */
+.utente-row {
     display: flex;
-    align-items: center;
+    align-items: center; /* Allinea verticalmente gli elementi */
     justify-content: space-between;
     padding: 15px;
     background-color: var(--primary-color); /* Verde chiaro */
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  /* Nome e cognome */
-  .utente-nome {
+/* Nome e cognome */
+.utente-nome {
     font-size: 1.2em;
     font-weight: bold;
     color: var(--text-color); /* Colore del testo */
     flex: 1; /* Spazio flessibile a sinistra */
-  }
+}
   
-  /* Email */
-  .utente-email {
+/* Email */
+.utente-email {
     font-size: 0.9em;
     color: var(--text-color-light); /* Grigio */
     flex: 2; /* Spazio flessibile al centro */
     text-align: center;
-  }
+}
   
-  /* Riquadro del ruolo */
-  .ruolo-label {
+/* Riquadro del ruolo */
+.ruolo-label {
     font-size: 0.9em;
     font-weight: bold;
     color: var(--text-color); /* Bianco */
     padding: 5px 10px;
     border-radius: 7px;
     text-align: center;
-    flex: 0.5; /* Spazio fisso a destra */
+    width: 120px; /* Larghezza fissa per tutti i riquadri */
+    display: flex;
+    align-items: center; /* Centra verticalmente il testo */
+    justify-content: center;
+    height: 30px; /* Altezza fissa per uniformare con il pulsante */
+    margin-right: 10px; /* Spazio tra il ruolo e il pulsante edit */
+}
+  
+/* Bottone Edit */
+.btn-edit {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.9em;
+    background-color: var(--secondary-color);
+    color: var(--text-color-light); /* Colore del testo */
+    height: 40px; /* Altezza fissa uguale al riquadro del ruolo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-edit:hover {
+    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+    color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+}
+
+/* Icona nel pulsante Edit */
+.edit-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px; /* Spaziatura tra icona e testo */
+}
+
+.btn-edit:hover .edit-icon {
+    content: url('./pencilWhite.png'); /* Cambia l'immagine al passaggio del mouse */
+}
+
+/* Pulsante per aggiungere un nuovo turno */
+.add-turno-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-size: 32px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
   }
+  
+  .add-turno-button:hover {
+    background-color: var(--tertiary-color); /* Cambia colore al passaggio del mouse */
+    color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+    transform: scale(1.1); /* Effetto zoom al passaggio del mouse */
+  }
+
+/* Contenitore per la barra di ricerca e i filtri */
+.filters-search-container {
+    display: flex;
+    justify-content: space-between; /* SearchBar a sinistra, filtri a destra */
+    align-items: center; /* Allinea verticalmente la searchbar e i filtri */
+    margin-bottom: 20px;
+}
+
+/* Barra di ricerca */
+.search-bar {
+    padding: 5px 10px;
+    border: 1px solid var(--filter-border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 200px; /* Larghezza della searchbar */
+    height: 40px; /* Altezza uguale ai filtri */
+    box-sizing: border-box; /* Considera il padding nella dimensione totale */
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 4px var(--secondary-color);
+}
+
+/* Contenitore per i filtri */
+.filters {
+    display: flex;
+    gap: 10px; /* Spaziatura tra i filtri */
+    align-items: center; /* Centra verticalmente i filtri */
+}
+
+/* Contenitore singolo filtro */
+.filter-container {
+    height: 40px; /* Altezza uguale alla searchbar */
+    display: flex;
+    align-items: center; /* Centra verticalmente il contenuto */
+}
+
+/* Controllo per i filtri (React Select) */
+.filters-search-container .react-select__control {
+    height: 40px; /* Altezza coerente con la searchbar */
+    display: flex;
+    align-items: center; /* Centra verticalmente il testo */
+    box-sizing: border-box; /* Considera il padding nella dimensione totale */
+}
+
+
+/* Pulsante Delete */
+.btn-delete {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.9em;
+    background-color: var(--secondary-color);
+    color: var(--text-color-light); /* Colore del testo */
+    height: 40px; /* Altezza fissa uguale al pulsante edit */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px; /* Spaziatura tra il pulsante edit e delete */
+}
+
+.btn-delete:hover {
+    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
+    color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+}
+
+.delete-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.btn-delete:hover .delete-icon {
+    content: url('./deleteWhite.png'); /* Cambia l'immagine al passaggio del mouse */
+}
