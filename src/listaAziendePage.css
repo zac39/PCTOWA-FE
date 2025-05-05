@@ -192,7 +192,7 @@
   }
 
   
-  .colore {
+  .settore {
     width: 20px;
     height: 20px;
     border-radius: 4px;
@@ -201,35 +201,39 @@
   
   .bottoni {
     display: flex;
-    gap: 10px;
-    height: max-content;
+    gap: 10px; /* Spaziatura tra i pulsanti */
+    margin-top: 10px;
   }
   
   .btn {
+    padding: 10px 15px;
     border: none;
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-weight: lighter;
-    color: black;
+    border-radius: 5px;
     cursor: pointer;
     font-size: larger;
-  }
-  
-  .contatti {
-    background-color: var(--secondary-color); /* dark gray */
+    background-color: var(--secondary-color);
+
   }
 
-  .contatti:hover {
+  .btn:hover {
     background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
-    color: #fff; /* Colore del testo al passaggio del mouse */
-}
-  
-  .turni {
-    background-color: var(--secondary-color); /* gray */
+    color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
   }
   
 
-  .turni:hover {
-    background-color: var(--tertiary-color); /* Colore al passaggio del mouse */
-    color: #fff; /* Colore del testo al passaggio del mouse */
-}
+  
+  
+  .btn.edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .btn.edit:hover .edit-icon {
+    content: url('./pencilWhite.png'); /* Cambia l'immagine al passaggio del mouse */
+  }

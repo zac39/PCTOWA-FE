@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './listaAziendePage.css';
-
-
-//TODO: prendere effettivamente i dati e fare le richieste
+import pencil from './pencilBlack.png'; // Importa l'icona della matita
 
 const aziende = [
-  { id: 1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'yellow' },
-  { id: 2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'blue' },
-  { id: 3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'purple' },
-  { id: 4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', colore: 'red' },
+  { id: 1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'pink' },
+  { id: 2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'blue' },
+  { id: 3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'purple' },
+  { id: 4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'red' },
 ];
 
 const opzioniFiltro = {
@@ -32,10 +30,14 @@ export default function VisAziendePage() {
   function handleTurniClick(id) {
     navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
   }
+
   function handleContattiClick(id) {
-    navigate(`/contatti/${id}`); // Naviga alla pagina dei turni passando l'ID
+    navigate(`/contatti/${id}`); // Naviga alla pagina dei contatti passando l'ID
   }
 
+  function handleEditClick(id) {
+    navigate(`/modifica/${id}`); // Naviga alla pagina di modifica passando l'ID
+  }
 
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
@@ -115,14 +117,19 @@ export default function VisAziendePage() {
                 {azienda.sitoWeb}
               </a>
             </div>
-            <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
+            <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
             <div className="bottoni">
               <button className="btn contatti"
-                      onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+                      onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Contatti"
                 >Contatti</button>
               <button className="btn turni" 
                       onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
                 >Turni</button>
+              <button className="btn edit" 
+                      onClick={() => handleEditClick(azienda.id)} // Gestisce il click sul pulsante di modifica
+                >
+                <img src={pencil} alt="Edit" className="edit-icon" />
+              </button>
             </div>
           </div>
         ))}
