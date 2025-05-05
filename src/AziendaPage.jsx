@@ -31,7 +31,7 @@ export default function VisAziendaPage() {
 
   const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
 
-  
+  console.log("ID Azienda:", aziendaId); // Logga l'ID dell'azienda per il debug
 
   return (
     <div className="azienda-container">
