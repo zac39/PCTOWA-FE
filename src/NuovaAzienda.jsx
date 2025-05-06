@@ -4,12 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Importa il hook per la naviga
 import './NuovaAzienda.css';
 
 export default function NuovaAzienda() {
-
   const navigate = useNavigate(); // Hook per la navigazione
-
-  function handleCaricaClick() {
-    navigate('/caricaClassi', { state: { from: 'nuovaAzienda' } }); // Passa lo stato "from" con valore "nuovaAzienda"
-  }
 
   const [formData, setFormData] = useState({
     codiceAteco: '',
@@ -99,11 +94,10 @@ export default function NuovaAzienda() {
     }));
   };
 
-  // Gestione del submit del form
-  const handleSubmit = (e) => {
+  // Gestione del click su Successivo
+  const handleCreaClick = (e) => {
     e.preventDefault();
 
-    // Controlla se ci sono errori
     const newErrors = {};
     Object.keys(formData).forEach((field) => {
       const error = validateField(field, formData[field]);
@@ -114,10 +108,10 @@ export default function NuovaAzienda() {
 
     setFormErrors(newErrors);
 
-    // Se non ci sono errori, invia i dati
+    // Se non ci sono errori, naviga verso NuovoIndirizzo e invia i dati
     if (Object.keys(newErrors).length === 0) {
-      alert('Form inviato con successo!');
-      console.log('Dati del form:', formData);
+      console.log('Form valido, navigazione verso NuovoIndirizzo');
+      navigate('/nuovoIndirizzo', { state: { formData } }); // Passa i dati del form come stato
     }
   };
 
@@ -127,15 +121,17 @@ export default function NuovaAzienda() {
         {/* Header con titolo */}
         <div className="nuova-azienda-header">
           <h2>Nuova azienda</h2>
-          <button className="carica-file-button"
-            onClick={() => handleCaricaClick()} // Gestisce il click sul pulsante "Turni"
-          >Carica file</button>
+          <button
+            className="carica-file-button"
+            onClick={() => navigate('/caricaClassi', { state: { from: 'nuovaAzienda' } })}
+          >
+            Carica file
+          </button>
         </div>
 
         {/* Contenitore scorrevole */}
         <div className="nuova-azienda-scrollable">
-          <form className="nuova-azienda-form" onSubmit={handleSubmit}>
-            {/* Esempio di input dinamico */}
+          <form className="nuova-azienda-form" onSubmit={handleCreaClick}>
             {[
               { label: 'Ragione Sociale', name: 'ragioneSociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
               { label: 'Codice Ateco', name: 'codiceAteco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
@@ -168,10 +164,10 @@ export default function NuovaAzienda() {
           </form>
         </div>
 
-        {/* Bottone Crea sempre visibile */}
+        {/* Bottone Successivo */}
         <div className="azienda-crea-button-container">
-          <button type="submit" className="azienda-crea-button" onClick={handleSubmit}>
-            Crea
+          <button type="submit" className="azienda-crea-button" onClick={handleCreaClick}>
+            Successivo
           </button>
         </div>
       </div>

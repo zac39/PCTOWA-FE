@@ -115,7 +115,6 @@ const ListaUtentiPage = () => {
       },
     }),
   };
-
   return (
     <div className="utenti-container">
       <div className="filters-search-container">

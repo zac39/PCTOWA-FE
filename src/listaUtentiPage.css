@@ -133,27 +133,7 @@
     box-shadow: 0 0 4px var(--secondary-color);
 }
 
-/* Contenitore per i filtri */
-.filters {
-    display: flex;
-    gap: 10px; /* Spaziatura tra i filtri */
-    align-items: center; /* Centra verticalmente i filtri */
-}
 
-/* Contenitore singolo filtro */
-.filter-container {
-    height: 40px; /* Altezza uguale alla searchbar */
-    display: flex;
-    align-items: center; /* Centra verticalmente il contenuto */
-}
-
-/* Controllo per i filtri (React Select) */
-.filters-search-container .react-select__control {
-    height: 40px; /* Altezza coerente con la searchbar */
-    display: flex;
-    align-items: center; /* Centra verticalmente il testo */
-    box-sizing: border-box; /* Considera il padding nella dimensione totale */
-}
 
 
 /* Pulsante Delete */

@@ -1,0 +1,74 @@
+.indirizzo-form-container {
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Altezza del viewport */
+    background-color: var(--bg-color); /* Colore di sfondo */
+    margin: 0;
+  }
+  
+ 
+
+
+  .indirizzo-form {
+    border-radius: 15px;
+    padding: 20px;
+    width: 500px;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Assicura che padding e bordi siano inclusi nella larghezza */
+  }
+  
+  .indirizzo-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+  }
+  
+  .indirizzo-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .indirizzo-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  .indirizzo-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--filter-border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Considera padding e bordi nella larghezza */
+  }
+  
+  .indirizzo-form-group input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 4px var(--secondary-color);
+  }
+  
+  .indirizzo-error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .indirizzo-successivo-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .indirizzo-successivo-btn:hover {
+    background-color: var(--tertiary-color);
+  }
