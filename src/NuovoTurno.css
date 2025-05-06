@@ -100,7 +100,7 @@
 }
   
 /* Contenitore del bottone Crea */
-.turno-crea-button-container {
+.turno-successivo-button-container {
     position: sticky;
     bottom: 0;
     background-color: var(--primary-color);
@@ -108,7 +108,7 @@
 }
   
 /* Bottone Crea */
-.turno-crea-button {
+.turno-successivo-button {
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: none;
@@ -119,7 +119,7 @@
     width: 100%; /* Occupa tutta la larghezza del contenitore */
 }
   
-.turno-crea-button:hover {
+.turno-successivo-button:hover {
     background-color: var(--tertiary-color);
     color: var(--on-tertiary-color);
 }
