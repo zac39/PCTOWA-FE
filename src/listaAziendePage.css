@@ -237,3 +237,31 @@
   .btn.edit:hover .edit-icon {
     content: url('./pencilWhite.png'); /* Cambia l'immagine al passaggio del mouse */
   }
+
+
+  /* Pulsante per aggiungere un nuovo turno */
+.add-azienda-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  font-size: 32px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-azienda-button:hover {
+  background-color: var(--tertiary-color); /* Cambia colore al passaggio del mouse */
+  color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
+  transform: scale(1.1); /* Effetto zoom al passaggio del mouse */
+}

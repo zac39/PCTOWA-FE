@@ -39,6 +39,10 @@ export default function VisAziendePage() {
     navigate(`/modifica/${id}`); // Naviga alla pagina di modifica passando l'ID
   }
 
+  function handleAddAziendaClick() {
+    navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno passando aziendaId
+  }
+
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
     Settore: '',
@@ -134,6 +138,12 @@ export default function VisAziendePage() {
           </div>
         ))}
       </div>
+
+      {/* Pulsante per aggiungere un nuovo turno */}
+      <button className="add-azienda-button" onClick={handleAddAziendaClick}>
+        +
+      </button>
+
     </div>
   );
 }
