@@ -7,32 +7,34 @@ function Login({ onLoginSuccess }) {
   const [errore, setErrore] = useState('');
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setErrore('');
+    onLoginSuccess();  // Vai avanti con il login riuscito
 
-    try {
-      const res = await fetch('http://localhost:5000/api/v1/user/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    // e.preventDefault();
+    // setErrore('');
 
-      const data = await res.json();
-      console.log('data ricevuto dal login:', data);  // Logga la risposta completa
+    // try {
+    //   const res = await fetch('http://localhost:5000/api/v1/user/auth/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ email, password }),
+    //   });
 
-      if (res.ok) {
-        localStorage.setItem("access_token", data.access_token);  // Usa data.access_token, non data.token
-        console.log('Access Token salvato:', data.access_token);  // Logga il token salvato
-        onLoginSuccess();  // Vai avanti con il login riuscito
-      } else {
-        setErrore(data.message || 'Credenziali errate');
-      }
-    } catch (err) {
-      console.error('Errore di rete:', err);
-      setErrore('Errore di rete');
-    }
+    //   const data = await res.json();
+    //   console.log('data ricevuto dal login:', data);  // Logga la risposta completa
+
+    //   if (res.ok) {
+    //     localStorage.setItem("access_token", data.access_token);  // Usa data.access_token, non data.token
+    //     console.log('Access Token salvato:', data.access_token);  // Logga il token salvato
+    //     onLoginSuccess();  // Vai avanti con il login riuscito
+    //   } else {
+    //     setErrore(data.message || 'Credenziali errate');
+    //   }
+    // } catch (err) {
+    //   console.error('Errore di rete:', err);
+    //   setErrore('Errore di rete');
+    // }
   };
 
   return (
