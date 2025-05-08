@@ -89,7 +89,7 @@ function MainApp({ onLogout }) {
           <Route path="/nuovaAzienda" element={<NuovaAzienda/>} />
           <Route path="/nuovoTurno" element={<NuovoTurno/>} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
-          <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
+          <Route path="/azienda/:aziendaId" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/tutor/:aziendaId" element={<TutorPage />} />
           <Route path="*" element={<Navigate to="/" />} />

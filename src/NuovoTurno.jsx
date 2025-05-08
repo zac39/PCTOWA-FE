@@ -156,10 +156,42 @@ export default function NuovoTurno() {
 
     setFormErrors(newErrors);
 
-    // Se non ci sono errori, invia i dati
     if (Object.keys(newErrors).length === 0) {
-      alert('Form inviato con successo!');
-      console.log('Dati del form:', formData);
+      // Costruzione del payload da inviare
+      const payload = {
+        ...formData,
+        aziendaId: aziendaId, // aggiunge anche l'aziendaId ricevuto tramite location.state
+      };
+
+      const accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        throw new Error("Token di accesso non trovato. Effettua il login.");
+      }
+    
+      fetch('http://localhost:5000/api/v1/turn', {
+        method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Errore nella richiesta: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Risposta dal server:', data);
+          alert('Turno creato con successo!');
+          // Naviga a un'altra pagina se necessario
+          // navigate('/paginaSuccessiva');
+        })
+        .catch((error) => {
+          console.error('Errore durante l\'invio:', error);
+          alert('Si è verificato un errore durante la creazione del turno.');
+        });
     }
   };
 

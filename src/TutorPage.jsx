@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Importa il hook per i parametri della rotta
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './TutorPage.css';
@@ -32,8 +32,45 @@ const tutorData = {
 
 export default function VistutorPage() {
   const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+  const [tutor, setTurot] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook per la navigazione
 
+useEffect(() => {
+    // Funzione per recuperare i dati dell'azienda tramite API
+    const fetchTutorData = async () => {
+      try {
+        // Configura l'header con il token access_data
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+          throw new Error("Token di accesso non trovato. Effettua il login.");
+        }
+
+        const response = await fetch(`http://localhost:5000/api/v1/tutor/${aziendaId}`, {
+          method: "GET", // Metodo HTTP
+          headers: {
+            "Authorization": `Bearer ${accessToken}`, // Aggiunge il token all'header
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Errore: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setTurot(data); // Salva i dati ricevuti nello stato
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTutorData();
+  }, [aziendaId]);
+
+console.log(tutor)
 
   function handleAziendaClick(id) {
     navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID

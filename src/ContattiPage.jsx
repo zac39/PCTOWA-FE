@@ -74,6 +74,7 @@ export default function ViscontattiPage() {
   }, [aziendaId]);
 
   console.log(azienda); // Logga i contatti per il debug
+  console.log(contatti);
 
   if (isLoading) {
     return <p>Caricamento in corso...</p>;

@@ -99,11 +99,9 @@ export default function NuovaAzienda() {
     }));
   };
 
-  // Gestione del submit del form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Controlla se ci sono errori
+  
     const newErrors = {};
     Object.keys(formData).forEach((field) => {
       const error = validateField(field, formData[field]);
@@ -111,15 +109,44 @@ export default function NuovaAzienda() {
         newErrors[field] = error;
       }
     });
-
+  
     setFormErrors(newErrors);
 
-    // Se non ci sono errori, invia i dati
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      throw new Error("Token di accesso non trovato. Effettua il login.");
+    }
+  
+  
     if (Object.keys(newErrors).length === 0) {
-      alert('Form inviato con successo!');
-      console.log('Dati del form:', formData);
+      try {
+        const response = await fetch('http://localhost:5000/api/v1/company', {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        alert('Azienda creata con successo!');
+        console.log('Risposta API:', data);
+  
+        // Eventuale redirect dopo la creazione
+        navigate('/aziende'); // modifica il percorso secondo le tue rotte
+  
+      } catch (error) {
+        console.error('Errore durante la creazione dell\'azienda:', error);
+        alert('Si è verificato un errore durante la creazione dell\'azienda.');
+      }
     }
   };
+  
 
   return (
     <div className="nuova-azienda-container">

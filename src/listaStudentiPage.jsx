@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './listaStudentiPage.css'; // Assicurati di avere il file CSS
 
@@ -141,6 +141,9 @@ const opzioniFiltro = {
 };
 
 export default function VisStudentiPage() {
+  const [studente, setStudente] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
     Settore: '',
@@ -153,6 +156,41 @@ export default function VisStudentiPage() {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
   }
+
+useEffect(() => {
+    // Funzione per recuperare i dati dell'azienda tramite API
+    const fetchAziendeData = async () => {
+      try {
+        // Configura l'header con il token access_data
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+          throw new Error("Token di accesso non trovato. Effettua il login.");
+        }
+
+        const response = await fetch(`http://localhost:5000/api/v1/student/class_list/1`, {
+          method: "GET", // Metodo HTTP
+          headers: {
+            "Authorization": `Bearer ${accessToken}`, // Aggiunge il token all'header
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Errore: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setStudente(data); // Salva i dati ricevuti nello stato
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAziendeData();
+  }, []);
+
+console.log(studente)
 
   const customStyles = {
     control: (provided) => ({
