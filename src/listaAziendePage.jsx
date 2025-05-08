@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import './listaAziendePage.css';
+import pencil from './pencilBlack.png'; // Importa l'icona della matita
+
+const aziende = [
+  { id: 1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'pink' },
+  { id: 2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'blue' },
+  { id: 3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'purple' },
+  { id: 4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'red' },
+];
 
 const opzioniFiltro = {
   Comune: ['Verona', 'Milano', 'Roma', 'Torino'],
@@ -32,9 +40,26 @@ export default function VisAziendePage() {
   function handleTurniClick(id) {
     navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
   }
+
   function handleContattiClick(id) {
-    navigate(`/contatti/${id}`); // Naviga alla pagina dei turni passando l'ID
+    navigate(`/contatti/${id}`); // Naviga alla pagina dei contatti passando l'ID
   }
+
+  function handleEditClick(id) {
+    navigate(`/modifica/${id}`); // Naviga alla pagina di modifica passando l'ID
+  }
+
+  function handleAddAziendaClick() {
+    navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno passando aziendaId
+  }
+
+  const [valoriInput, setValoriInput] = useState({
+    Comune: '',
+    Settore: '',
+    Materia: '',
+    Anno: '',
+    Mese: '',
+  });
 
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
@@ -152,7 +177,7 @@ export default function VisAziendePage() {
                 {azienda.sito_web}
               </a>
             </div>
-            <div className="colore" style={{ backgroundColor: azienda.colore }}></div>
+            <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
             <div className="bottoni">
               <button className="btn contatti"
                       onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
@@ -160,10 +185,21 @@ export default function VisAziendePage() {
               <button className="btn turni" 
                       onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
                 >Turni</button>
+              <button className="btn edit" 
+                      onClick={() => handleEditClick(azienda.id)} // Gestisce il click sul pulsante di modifica
+                >
+                <img src={pencil} alt="Edit" className="edit-icon" />
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Pulsante per aggiungere un nuovo turno */}
+      <button className="add-azienda-button" onClick={handleAddAziendaClick}>
+        +
+      </button>
+
     </div>
   );
 }
