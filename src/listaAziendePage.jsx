@@ -53,14 +53,6 @@ export default function VisAziendePage() {
     navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno passando aziendaId
   }
 
-  const [valoriInput, setValoriInput] = useState({
-    Comune: '',
-    Settore: '',
-    Materia: '',
-    Anno: '',
-    Mese: '',
-  });
-
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput(prev => ({ ...prev, [filtro]: valore }));

@@ -96,8 +96,7 @@ export default function NuovaAzienda() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Controlla se ci sono errori
+  
     const newErrors = {};
     Object.keys(formData).forEach((field) => {
       const error = validateField(field, formData[field]);
