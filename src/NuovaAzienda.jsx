@@ -22,7 +22,6 @@ export default function NuovaAzienda() {
     scadenzaConvenzione: '',
   });
 
-  //TODO: SETTOREE?????
 
   const [formErrors, setFormErrors] = useState({});
 

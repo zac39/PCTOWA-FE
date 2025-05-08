@@ -4,7 +4,6 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 
 import './NuovoTurno.css';
 
-//TODO: togli posti occupati che devono essere 0 di default
 
 export default function NuovoTurno() {
   const navigate = useNavigate(); // Hook per la navigazione
@@ -15,7 +14,6 @@ export default function NuovoTurno() {
     dataInizio: '',
     dataFine: '',
     posti: '',
-    postiOccupati: '',
     ore: '',
     oraInizio: '',
     oraFine: '',
@@ -93,7 +91,6 @@ export default function NuovoTurno() {
             {[{ label: 'Data Inizio', name: 'dataInizio', type: 'date' },
               { label: 'Data Fine', name: 'dataFine', type: 'date' },
               { label: 'Posti', name: 'posti', type: 'number', placeholder: 'Inserisci il numero di posti' },
-              { label: 'Posti Occupati', name: 'postiOccupati', type: 'number', placeholder: 'Inserisci il numero di posti occupati' },
               { label: 'Ore', name: 'ore', type: 'number', placeholder: 'Inserisci il numero di ore' },
               { label: 'Ora Inizio', name: 'oraInizio', type: 'time' },
               { label: 'Ora Fine', name: 'oraFine', type: 'time' },
