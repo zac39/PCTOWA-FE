@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import './ReferenteForm.css'; // Importa il file CSS per lo stile
 import { useLocation } from 'react-router-dom'; // Importa il hook per accedere ai dati passati tramite navigate
 
+
+//TODO: togli nome e cognome che tanto non servono e chiedi solo email
+//TODO: se l'email non corrisponde a nessun utente allora manda un errore che il docente non e stato collegato ma crea comunque il resto
+
 const ReferenteForm = () => {
   const location = useLocation(); // Hook per ottenere lo stato passato
 

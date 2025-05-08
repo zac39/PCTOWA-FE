@@ -4,6 +4,8 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 
 import './NuovoTurno.css';
 
+//TODO: togli posti occupati che devono essere 0 di default
+
 export default function NuovoTurno() {
   const navigate = useNavigate(); // Hook per la navigazione
   const location = useLocation(); // Ottieni l'oggetto location
@@ -19,6 +21,8 @@ export default function NuovoTurno() {
     oraFine: '',
     giornoInizio: '',
     giornoFine: '',
+
+  //TDOO: nel back questi si chiamano settore e materia e non sono array, prima di vedere se funziona vedi se il back e a posto
     settori: [], // Cambiato da stringa a array per supportare selezioni multiple
     materie: [], // Nuovo campo per le materie
   });
