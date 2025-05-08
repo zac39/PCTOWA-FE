@@ -9,8 +9,8 @@ export default function NuovaAzienda() {
   const [formData, setFormData] = useState({
     codiceAteco: '',
     partitaIVA: '',
-    telefono: '',
-    email: '',
+    telefonoAzienda: '',
+    emailAzienda: '',
     fax: '',
     pec: '',
     ragioneSociale: '',
@@ -22,6 +22,8 @@ export default function NuovaAzienda() {
     scadenzaConvenzione: '',
   });
 
+  //TODO: SETTOREE?????
+
   const [formErrors, setFormErrors] = useState({});
 
   // Validazione dinamica
@@ -31,9 +33,9 @@ export default function NuovaAzienda() {
     const validators = {
       codiceAteco: /^\d{6}$/, // Deve essere composto da 6 numeri
       partitaIVA: /^\d{11}$/, // Deve essere composto da 11 numeri
-      telefono: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
+      telefonoAzienda: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
       fax: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Stessa regex di telefono
-      email: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
+      emailAzienda: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
       pec: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Stessa regex di email
       sitoWeb: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
       indirizzoLogo: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
@@ -48,13 +50,13 @@ export default function NuovaAzienda() {
         case 'partitaIVA':
           error = 'La partita IVA deve essere composta da 11 numeri.';
           break;
-        case 'telefono':
+        case 'telefonoAzienda':
           error = 'Inserire un numero di telefono valido.';
           break;
         case 'fax':
           error = 'Inserire un numero di fax valido.';
           break;
-        case 'email':
+        case 'emailAzienda':
           error = "Inserire un'email valida.";
           break;
         case 'pec':
@@ -136,8 +138,8 @@ export default function NuovaAzienda() {
               { label: 'Ragione Sociale', name: 'ragioneSociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
               { label: 'Codice Ateco', name: 'codiceAteco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
               { label: 'Partita IVA', name: 'partitaIVA', type: 'text', placeholder: 'Inserisci la partita IVA' },
-              { label: 'Telefono', name: 'telefono', type: 'text', placeholder: 'Inserisci il numero di telefono' },
-              { label: 'Email', name: 'email', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
+              { label: 'Telefono', name: 'telefonoAzienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
+              { label: 'Email', name: 'emailAzienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
               { label: 'Sito Web', name: 'sitoWeb', type: 'url', placeholder: 'Inserisci il sito web' },
               { label: 'Fax', name: 'fax', type: 'text', placeholder: 'Inserisci il fax aziendale' },
               { label: 'PEC', name: 'pec', type: 'text', placeholder: 'Inserisci la PEC aziendale' },
