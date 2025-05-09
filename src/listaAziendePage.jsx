@@ -5,10 +5,58 @@ import './listaAziendePage.css';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 
 const aziende = [
-  { id: 1, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'pink' },
-  { id: 2, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'blue' },
-  { id: 3, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'purple' },
-  { id: 4, nome: 'Università di Verona', sitoWeb: "https://www.univr.it/it/", indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona', settore: 'red' },
+  { 
+    id: 1, 
+    ragioneSociale: 'Università di Verona', 
+    sitoWeb: "https://www.univr.it/it/", 
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    }, 
+    settore: 'pink' 
+  },
+  {
+    id: 2, 
+    ragioneSociale: 'Università di Verona', 
+    sitoWeb: "https://www.univr.it/it/", 
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    }, 
+    settore: 'blue' 
+  },
+  {
+    id: 3, 
+    ragioneSociale: 'Università di Verona', 
+    sitoWeb: "https://www.univr.it/it/", 
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    }, 
+    settore: 'purple' 
+  },
+  {
+    id: 4, 
+    ragioneSociale: 'Università di Verona', 
+    sitoWeb: "https://www.univr.it/it/", 
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    }, 
+    settore: 'red' 
+  },
 ];
 
 const opzioniFiltro = {
@@ -53,7 +101,7 @@ export default function VisAziendePage() {
 
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
-    setValoriInput(prev => ({ ...prev, [filtro]: valore }));
+    setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
   }
 
   // Stile personalizzato per react-select
@@ -91,7 +139,7 @@ export default function VisAziendePage() {
         {Object.keys(opzioniFiltro).map((filtro) => (
           <div key={filtro} className="filter-container">
             <Select
-              options={opzioniFiltro[filtro].map(opt => ({ value: opt, label: opt }))}
+              options={opzioniFiltro[filtro].map((opt) => ({ value: opt, label: opt }))}
               onChange={(selectedOption) => handleSelectChange(filtro, selectedOption)}
               placeholder={`${filtro}`}
               isClearable
@@ -103,8 +151,8 @@ export default function VisAziendePage() {
       </div>
 
       <div className="aziende-list">
-        {aziende.map((azienda, index) => (
-          <div className="aziende-card" key={index}>
+        {aziende.map((azienda) => (
+          <div className="aziende-card" key={azienda.id}>
             <div className="aziende-dati">
               {/* Aggiunto gestore di click sul nome */}
               <h2
@@ -112,9 +160,11 @@ export default function VisAziendePage() {
                 onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
                 style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
               >
-                {azienda.nome}
+                {azienda.ragioneSociale}
               </h2>
-              <p className="aziende-indirizzo">{azienda.indirizzo}</p>
+              <p className="aziende-indirizzo">
+                {`${azienda.indirizzo.indirizzo}, ${azienda.indirizzo.cap}, ${azienda.indirizzo.comune}, ${azienda.indirizzo.stato}`}
+              </p>
             </div>
             <div className="azienda-sitoWeb">
               <a href={azienda.sitoWeb} target="_blank" rel="noopener noreferrer">
@@ -123,15 +173,22 @@ export default function VisAziendePage() {
             </div>
             <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
             <div className="bottoni">
-              <button className="btn contatti"
-                      onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Contatti"
-                >Contatti</button>
-              <button className="btn turni" 
-                      onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
-                >Turni</button>
-              <button className="btn edit" 
-                      onClick={() => handleEditClick(azienda.id)} // Gestisce il click sul pulsante di modifica
-                >
+              <button
+                className="btn contatti"
+                onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Contatti"
+              >
+                Contatti
+              </button>
+              <button
+                className="btn turni"
+                onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+              >
+                Turni
+              </button>
+              <button
+                className="btn edit"
+                onClick={() => handleEditClick(azienda.id)} // Gestisce il click sul pulsante di modifica
+              >
                 <img src={pencil} alt="Edit" className="edit-icon" />
               </button>
             </div>
@@ -139,11 +196,10 @@ export default function VisAziendePage() {
         ))}
       </div>
 
-      {/* Pulsante per aggiungere un nuovo turno */}
+      {/* Pulsante per aggiungere una nuova azienda */}
       <button className="add-azienda-button" onClick={handleAddAziendaClick}>
         +
       </button>
-
     </div>
   );
 }

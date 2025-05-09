@@ -22,8 +22,9 @@ const turniData = {
       dataInizio: "06/06/2025",
       dataFine: "10/07/2025",
       postiDisponibili: 2,
-      postiTotali: 5,
+      postiAssegnati: 5,
       oreTotali: 140,
+      postiConfermati: true,
       orarioInizio: "9:00",
       orarioFine: "15:00",
       materie: [
@@ -36,7 +37,8 @@ const turniData = {
       dataInizio: "11/07/2025",
       dataFine: "15/08/2025",
       postiDisponibili: 3,
-      postiTotali: 6,
+      postiAssegnati: 6,
+      postiConfermati: false,
       oreTotali: 120,
       orarioInizio: "10:00",
       orarioFine: "16:00",
@@ -127,7 +129,11 @@ export default function VisturnoPage() {
                 <span>{turno.postiDisponibili}</span>
               </p>
               <p>
-                <strong>Posti totali:</strong> <span>{turno.postiTotali}</span>
+                <strong>Posti assegnati:</strong> <span>{turno.postiAssegnati}</span>
+              </p>
+              <p>
+                <strong>Numero posti confermati:</strong>{" "}
+                <span>{turno.postiConfermati ? "Si" : "No"}</span>
               </p>
               <p>
                 <strong>Ore totali:</strong> <span>{turno.oreTotali}</span>
