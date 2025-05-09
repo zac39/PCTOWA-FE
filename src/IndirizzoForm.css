@@ -1,4 +1,4 @@
-.tutor-form-container {
+.indirizzo-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     background-color: var(--bg-color);
   }
   
-  .tutor-form {
+  .indirizzo-form {
     background-color: var(--primary-color);
     padding: 20px 30px;
     border-radius: 10px;
@@ -15,21 +15,21 @@
     max-width: 400px;
   }
   
-  .tutor-form h2 {
+  .indirizzo-form h2 {
     margin-bottom: 20px;
     font-size: 1.5rem;
     text-align: center;
     color: var(--text-color);
   }
   
-  .tutor-select-container {
+  .indirizzo-select-container {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
   }
   
-  .tutor-select {
+  .indirizzo-select {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid var(--text-color);
@@ -37,7 +37,7 @@
     font-size: 1rem;
   }
   
-  .tutor-add-btn {
+  .indirizzo-add-btn {
     padding: 10px 15px;
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -47,12 +47,12 @@
     font-size: 1.2rem;
   }
   
-  .tutor-add-btn:hover {
+  .indirizzo-add-btn:hover {
     background-color: var(--tertiary-color);
     color: var(--on-tertiary-color);
   }
   
-  .tutor-next-btn {
+  .indirizzo-next-btn {
     width: 100%;
     padding: 10px;
     background-color: var(--secondary-color);
@@ -64,12 +64,29 @@
     cursor: pointer;
   }
   
-  .tutor-next-btn:hover {
+  .indirizzo-next-btn:hover {
     background-color: var(--tertiary-color);
     color: var(--on-tertiary-color);  
+}
+
+.indirizzo-successivo-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .indirizzo-successivo-btn:hover {
+    background-color: var(--tertiary-color);
   }
 
-  .new-tutor-form {
+
+  .new-address-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -77,14 +94,14 @@
     padding-bottom: 10px;
   }
   
-  .new-tutor-form input {
+  .new-address-form input {
     padding: 10px;
     border: 1px solid var(--text-color);
     border-radius: 5px;
     font-size: 1rem;
   }
   
-  .new-tutor-form input:focus {
+  .new-address-form input:focus {
     border-color: var(--secondary-color);
     outline: none;
   }

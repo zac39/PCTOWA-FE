@@ -68,15 +68,15 @@ export default function NuovoTurno() {
     e.preventDefault();
 
     // Crea un oggetto JSON dei dati da passare
-    const jsonData = {
+    const turnoData = {
       turno: formData,
       aziendaId, // Aggiungi aziendaId al JSON
     };
 
-    console.log('Dati del turno inviati:', jsonData);
+    console.log('Dati del turno inviati:', turnoData);
 
     // Naviga verso TutorForm passando i dati del turno come stato
-    navigate('/TutorForm', { state: { jsonData } });
+    navigate('/IndirizzoForm', { state: { turnoData } });
   };
 
   return (

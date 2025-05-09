@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'; // Importa il hook per accedere 
 
 //TODO: togli nome e cognome che tanto non servono e chiedi solo email
 //TODO: se l'email non corrisponde a nessun utente allora manda un errore che il docente non e stato collegato ma crea comunque il resto
+//TODO: togli il pop up 
 
 const ReferenteForm = () => {
   const location = useLocation(); // Hook per ottenere lo stato passato
