@@ -265,3 +265,40 @@
   color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
   transform: scale(1.1); /* Effetto zoom al passaggio del mouse */
 }
+
+
+/* Stile per il checkbox */
+.filter-checkbox {
+
+  background-color: var(--primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.checkbox-label {
+  font-size: 16px;
+  font-weight: redgular;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+
+/* Aggiunto stile per aziende sbiadite */
+.azienda-sbiadita {
+  opacity: 0.5; /* Sbiadisce l'azienda */
+}

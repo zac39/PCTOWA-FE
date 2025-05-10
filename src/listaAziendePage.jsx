@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom'; // Importa il hook per la naviga
 import './listaAziendePage.css';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 
+
+//TODO: sistemai i dati per gestire i filtri, settore , materia, anno e mese
+//TODO: vedi se usare true o false per posti disponibili oppure dei numeri
+
 const aziende = [
   { 
     id: 1, 
@@ -16,7 +20,8 @@ const aziende = [
       cap: '37132',
       indirizzo: "Via Andrea d'Angeli 23",
     }, 
-    settore: 'pink' 
+    settore: 'pink',
+    postiDisponibili: true,
   },
   {
     id: 2, 
@@ -29,7 +34,8 @@ const aziende = [
       cap: '37132',
       indirizzo: "Via Andrea d'Angeli 23",
     }, 
-    settore: 'blue' 
+    settore: 'blue',
+    postiDisponibili: false,
   },
   {
     id: 3, 
@@ -42,7 +48,8 @@ const aziende = [
       cap: '37132',
       indirizzo: "Via Andrea d'Angeli 23",
     }, 
-    settore: 'purple' 
+    settore: 'purple',
+    postiDisponibili: true,
   },
   {
     id: 4, 
@@ -55,7 +62,8 @@ const aziende = [
       cap: '37132',
       indirizzo: "Via Andrea d'Angeli 23",
     }, 
-    settore: 'red' 
+    settore: 'red',
+    postiDisponibili: true,
   },
 ];
 
@@ -70,7 +78,16 @@ const opzioniFiltro = {
 export default function VisAziendePage() {
   const navigate = useNavigate(); // Hook per la navigazione
 
-  // Gestore per navigare alla pagina "azienda.jsx"
+  const [valoriInput, setValoriInput] = useState({
+    Comune: '',
+    Settore: '',
+    Materia: '',
+    Anno: '',
+    Mese: '',
+  });
+
+  const [soloConPosti, setSoloConPosti] = useState(false); // Stato per il checkbox
+
   function handleAziendaClick(id) {
     navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
   }
@@ -91,18 +108,25 @@ export default function VisAziendePage() {
     navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno passando aziendaId
   }
 
-  const [valoriInput, setValoriInput] = useState({
-    Comune: '',
-    Settore: '',
-    Materia: '',
-    Anno: '',
-    Mese: '',
-  });
-
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
   }
+
+  // Funzione per ordinare le aziende
+  const aziendeOrdinate = aziende
+    .filter((azienda) => {
+      // Se il checkbox è selezionato, escludi le aziende senza posti disponibili
+      if (soloConPosti && !azienda.postiDisponibili) {
+        return false;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      // Ordina le aziende: quelle con posti disponibili per prime
+      if (a.postiDisponibili === b.postiDisponibili) return 0;
+      return a.postiDisponibili ? -1 : 1;
+    });
 
   // Stile personalizzato per react-select
   const customStyles = {
@@ -136,6 +160,17 @@ export default function VisAziendePage() {
   return (
     <div className="container">
       <div className="filters">
+        <div className="filter-checkbox">
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={soloConPosti}
+              onChange={(e) => setSoloConPosti(e.target.checked)}
+              className="checkbox-input"
+            />
+            Posti disponibili
+          </label>
+        </div>
         {Object.keys(opzioniFiltro).map((filtro) => (
           <div key={filtro} className="filter-container">
             <Select
@@ -151,10 +186,12 @@ export default function VisAziendePage() {
       </div>
 
       <div className="aziende-list">
-        {aziende.map((azienda) => (
-          <div className="aziende-card" key={azienda.id}>
+        {aziendeOrdinate.map((azienda) => (
+          <div
+            className={`aziende-card ${azienda.postiDisponibili ? '' : 'azienda-sbiadita'}`}
+            key={azienda.id}
+          >
             <div className="aziende-dati">
-              {/* Aggiunto gestore di click sul nome */}
               <h2
                 className="aziende-titolo"
                 onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
@@ -196,7 +233,6 @@ export default function VisAziendePage() {
         ))}
       </div>
 
-      {/* Pulsante per aggiungere una nuova azienda */}
       <button className="add-azienda-button" onClick={handleAddAziendaClick}>
         +
       </button>
