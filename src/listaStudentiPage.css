@@ -112,3 +112,13 @@
 .aziendaAssegnata-info {
   margin-top: 10px; /* Distanza tra studente e azienda */
 }
+
+.empty-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  text-align: center;
+  font-size: larger;
+  color: hsla(0, 0%, 0%, 0.5);
+}
