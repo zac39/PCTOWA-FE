@@ -152,7 +152,7 @@ const aziende = [
         ora_inizio: "09:00",
         ore: 120,
         posti: 2,
-        posti_occupati: 2,
+        posti_occupati: 1,
         addresses: {
           stato: "Italia",
           provincia: "Verona",
@@ -199,7 +199,7 @@ const aziende = [
         ora_inizio: "09:00",
         ore: 120,
         posti: 2,
-        posti_occupati: 2,
+        posti_occupati: 3,
         addresses: {
           stato: "Italia",
           provincia: "Verona",
@@ -258,7 +258,7 @@ export default function VisAziendePage() {
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
   }
 
-  // Funzione per ordinare le aziende
+  // Funzione per ordinare e filtrare le aziende
   const aziendeOrdinate = aziende
     .filter((azienda) => {
       // Se il checkbox è selezionato, escludi le aziende senza posti disponibili nei turni
@@ -340,55 +340,62 @@ export default function VisAziendePage() {
       </div>
 
       <div className="aziende-list">
-        {aziendeOrdinate.map((azienda) => (
-          <div
-            className={`aziende-card`}
-            key={azienda.id_azienda}
-          >
-            <div className="aziende-header">
-              <h2
-                className="aziende-titolo"
-                onClick={() => handleAziendaClick(azienda.id_azienda)} // Naviga alla pagina dell'azienda
-                style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
-              >
-                {azienda.ragione_sociale}
-              </h2>
-              <div className="aziende-indirizzi-scrollable">
-                {azienda.addresses.map((address, index) => (
-                  <p key={index} className="aziende-indirizzo">
-                    {`${address.indirizzo}, ${address.cap}, ${address.comune}, ${address.provincia}, ${address.stato}`}
-                  </p>
-                ))}
+        {aziendeOrdinate.map((azienda) => {
+          // Determina se l'azienda deve essere sbiadita
+          const isSbiadita = !soloConPosti && !azienda.turni.some(
+            (turno) => turno.posti > turno.posti_occupati
+          );
+
+          return (
+            <div
+              className={`aziende-card ${isSbiadita ? 'azienda-sbiadita' : ''}`}
+              key={azienda.id_azienda}
+            >
+              <div className="aziende-header">
+                <h2
+                  className="aziende-titolo"
+                  onClick={() => handleAziendaClick(azienda.id_azienda)} // Naviga alla pagina dell'azienda
+                  style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
+                >
+                  {azienda.ragione_sociale}
+                </h2>
+                <div className="aziende-indirizzi-scrollable">
+                  {azienda.addresses.map((address, index) => (
+                    <p key={index} className="aziende-indirizzo">
+                      {`${address.indirizzo}, ${address.cap}, ${address.comune}, ${address.provincia}, ${address.stato}`}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <div className="azienda-sitoWeb">
+                <a href={azienda.sito_web} target="_blank" rel="noopener noreferrer">
+                  {azienda.sito_web}
+                </a>
+              </div>
+              <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
+              <div className="bottoni">
+                <button
+                  className="btn contatti"
+                  onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Contatti"
+                >
+                  Contatti
+                </button>
+                <button
+                  className="btn turni"
+                  onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
+                >
+                  Turni
+                </button>
+                <button
+                  className="btn edit"
+                  onClick={() => handleEditClick(azienda)} // Gestisce il click sul pulsante di modifica
+                >
+                  <img src={pencil} alt="Edit" className="edit-icon" />
+                </button>
               </div>
             </div>
-            <div className="azienda-sitoWeb">
-              <a href={azienda.sito_web} target="_blank" rel="noopener noreferrer">
-                {azienda.sito_web}
-              </a>
-            </div>
-            <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
-            <div className="bottoni">
-              <button
-                className="btn contatti"
-                onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Contatti"
-              >
-                Contatti
-              </button>
-              <button
-                className="btn turni"
-                onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
-              >
-                Turni
-              </button>
-              <button
-                className="btn edit"
-                onClick={() => handleEditClick(azienda)} // Gestisce il click sul pulsante di modifica
-              >
-                <img src={pencil} alt="Edit" className="edit-icon" />
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <button className="add-azienda-button" onClick={handleAddAziendaClick}>
