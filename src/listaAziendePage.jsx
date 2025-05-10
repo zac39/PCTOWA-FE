@@ -4,67 +4,213 @@ import { useNavigate } from 'react-router-dom'; // Importa il hook per la naviga
 import './listaAziendePage.css';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 
-
-//TODO: sistemai i dati per gestire i filtri, settore , materia, anno e mese
-//TODO: vedi se usare true o false per posti disponibili oppure dei numeri
-
+// Dati aggiornati per il nuovo formato JSON
 const aziende = [
-  { 
-    id: 1, 
-    ragioneSociale: 'Università di Verona', 
-    sitoWeb: "https://www.univr.it/it/", 
-    indirizzo: {
-      stato: 'Italia',
-      provincia: 'Verona',
-      comune: 'Verona',
-      cap: '37132',
-      indirizzo: "Via Andrea d'Angeli 23",
-    }, 
-    settore: 'pink',
-    postiDisponibili: true,
+  {
+    categoria: "Tecnologia",
+    codice_ateco: "627801",
+    email_azienda: "info@techsolutions.it",
+    fax: "0123456789",
+    forma_giuridica: "S.r.l.",
+    id_azienda: 1,
+    indirizzo_logo: "logo1.png",
+    partita_iva: "12345678901",
+    pec: "tech@pec.it",
+    ragione_sociale: "Tech Solutions",
+    data_convenzione: "2023-03-01",
+    scadenza_convenzione: "2024-05-31",
+    sito_web: "https://techsolutions.it/",
+    telefono_azienda: "1234567890",
+    addresses: [
+      {
+        stato: "Italia",
+        provincia: "Verona",
+        comune: "Verona",
+        cap: "37132",
+        indirizzo: "Via Andrea d'Angeli 23"
+      },
+      {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+    ],
+    turni: [
+      {
+        data_fine: "Fri, 31 May 2024 00:00:00 GMT",
+        data_inizio: "Fri, 01 Mar 2024 00:00:00 GMT",
+        giorno_fine: "venerdì",
+        giorno_inizio: "lunedì",
+        id_indirizzo: 1,
+        id_turno: 1,
+        ora_fine: "13:00",
+        ora_inizio: "09:00",
+        ore: 120,
+        posti: 2,
+        posti_occupati: 2,
+        addresses: {
+          stato: "Italia",
+          provincia: "Verona",
+          comune: "Verona",
+          cap: "37132",
+          indirizzo: "Via Andrea d'Angeli 23"
+        },
+      },
+    ],
   },
   {
-    id: 2, 
-    ragioneSociale: 'Università di Verona', 
-    sitoWeb: "https://www.univr.it/it/", 
-    indirizzo: {
-      stato: 'Italia',
-      provincia: 'Verona',
-      comune: 'Verona',
-      cap: '37132',
-      indirizzo: "Via Andrea d'Angeli 23",
-    }, 
-    settore: 'blue',
-    postiDisponibili: false,
+    categoria: "Tecnologia",
+    codice_ateco: "627801",
+    email_azienda: "info@techsolutions.it",
+    fax: "0123456789",
+    forma_giuridica: "S.r.l.",
+    id_azienda: 2,
+    indirizzo_logo: "logo1.png",
+    partita_iva: "12345678901",
+    pec: "tech@pec.it",
+    ragione_sociale: "Tech Solutions",
+    data_convenzione: "2023-03-01",
+    scadenza_convenzione: "2024-05-31",
+    sito_web: "https://techsolutions.it/",
+    telefono_azienda: "1234567890",
+    addresses: [
+      {
+        stato: "Italia",
+        provincia: "Verona",
+        comune: "Verona",
+        cap: "37132",
+        indirizzo: "Via Andrea d'Angeli 23"
+      },
+      {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+            {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+                  {
+        stato: "Italia",
+        provincia: "Milano",
+        comune: "Milano",
+        cap: "20100",
+        indirizzo: "Via Roma 10"
+      },
+    ],
+    turni: [
+      {
+        data_fine: "Fri, 31 May 2024 00:00:00 GMT",
+        data_inizio: "Fri, 01 Mar 2024 00:00:00 GMT",
+        giorno_fine: "venerdì",
+        giorno_inizio: "lunedì",
+        id_indirizzo: 1,
+        id_turno: 1,
+        ora_fine: "13:00",
+        ora_inizio: "09:00",
+        ore: 120,
+        posti: 2,
+        posti_occupati: 2,
+        addresses: {
+          stato: "Italia",
+          provincia: "Verona",
+          comune: "Verona",
+          cap: "37132",
+          indirizzo: "Via Andrea d'Angeli 23"
+        },
+      },
+    ],
   },
   {
-    id: 3, 
-    ragioneSociale: 'Università di Verona', 
-    sitoWeb: "https://www.univr.it/it/", 
-    indirizzo: {
-      stato: 'Italia',
-      provincia: 'Verona',
-      comune: 'Verona',
-      cap: '37132',
-      indirizzo: "Via Andrea d'Angeli 23",
-    }, 
-    settore: 'purple',
-    postiDisponibili: true,
+    categoria: "Tecnologia",
+    codice_ateco: "627801",
+    email_azienda: "info@techsolutions.it",
+    fax: "0123456789",
+    forma_giuridica: "S.r.l.",
+    id_azienda: 3,
+    indirizzo_logo: "logo1.png",
+    partita_iva: "12345678901",
+    pec: "tech@pec.it",
+    ragione_sociale: "Tech Solutions",
+    data_convenzione: "2023-03-01",
+    scadenza_convenzione: "2024-05-31",
+    sito_web: "https://techsolutions.it/",
+    telefono_azienda: "1234567890",
+    addresses: [
+      {
+        stato: "Italia",
+        provincia: "Verona",
+        comune: "Verona",
+        cap: "37132",
+        indirizzo: "Via Andrea d'Angeli 23"
+      },
+    ],
+    turni: [
+      {
+        data_fine: "Fri, 31 May 2024 00:00:00 GMT",
+        data_inizio: "Fri, 01 Mar 2024 00:00:00 GMT",
+        giorno_fine: "venerdì",
+        giorno_inizio: "lunedì",
+        id_indirizzo: 1,
+        id_turno: 1,
+        ora_fine: "13:00",
+        ora_inizio: "09:00",
+        ore: 120,
+        posti: 2,
+        posti_occupati: 2,
+        addresses: {
+          stato: "Italia",
+          provincia: "Verona",
+          comune: "Verona",
+          cap: "37132",
+          indirizzo: "Via Andrea d'Angeli 23"
+        },
+      },
+    ],
   },
-  {
-    id: 4, 
-    ragioneSociale: 'Università di Verona', 
-    sitoWeb: "https://www.univr.it/it/", 
-    indirizzo: {
-      stato: 'Italia',
-      provincia: 'Verona',
-      comune: 'Verona',
-      cap: '37132',
-      indirizzo: "Via Andrea d'Angeli 23",
-    }, 
-    settore: 'red',
-    postiDisponibili: true,
-  },
+  // Altri oggetti azienda...
 ];
 
 const opzioniFiltro = {
@@ -77,7 +223,6 @@ const opzioniFiltro = {
 
 export default function VisAziendePage() {
   const navigate = useNavigate(); // Hook per la navigazione
-
   const [valoriInput, setValoriInput] = useState({
     Comune: '',
     Settore: '',
@@ -100,8 +245,8 @@ export default function VisAziendePage() {
     navigate(`/contatti/${id}`); // Naviga alla pagina dei contatti passando l'ID
   }
 
-  function handleEditClick(id) {
-    navigate(`/modifica/${id}`); // Naviga alla pagina di modifica passando l'ID
+  function handleEditClick(azienda) {
+    navigate(`/nuovaAzienda`, { state: { azienda } }); // Naviga alla pagina di modifica passando l'azienda
   }
 
   function handleAddAziendaClick() {
@@ -116,16 +261,25 @@ export default function VisAziendePage() {
   // Funzione per ordinare le aziende
   const aziendeOrdinate = aziende
     .filter((azienda) => {
-      // Se il checkbox è selezionato, escludi le aziende senza posti disponibili
-      if (soloConPosti && !azienda.postiDisponibili) {
-        return false;
+      // Se il checkbox è selezionato, escludi le aziende senza posti disponibili nei turni
+      if (soloConPosti) {
+        const postiDisponibili = azienda.turni.some(
+          (turno) => turno.posti > turno.posti_occupati
+        );
+        return postiDisponibili;
       }
       return true;
     })
     .sort((a, b) => {
       // Ordina le aziende: quelle con posti disponibili per prime
-      if (a.postiDisponibili === b.postiDisponibili) return 0;
-      return a.postiDisponibili ? -1 : 1;
+      const postiDisponibiliA = a.turni.some(
+        (turno) => turno.posti > turno.posti_occupati
+      );
+      const postiDisponibiliB = b.turni.some(
+        (turno) => turno.posti > turno.posti_occupati
+      );
+      if (postiDisponibiliA === postiDisponibiliB) return 0;
+      return postiDisponibiliA ? -1 : 1;
     });
 
   // Stile personalizzato per react-select
@@ -188,43 +342,47 @@ export default function VisAziendePage() {
       <div className="aziende-list">
         {aziendeOrdinate.map((azienda) => (
           <div
-            className={`aziende-card ${azienda.postiDisponibili ? '' : 'azienda-sbiadita'}`}
-            key={azienda.id}
+            className={`aziende-card`}
+            key={azienda.id_azienda}
           >
-            <div className="aziende-dati">
+            <div className="aziende-header">
               <h2
                 className="aziende-titolo"
-                onClick={() => handleAziendaClick(azienda.id)} // Naviga alla pagina dell'azienda
+                onClick={() => handleAziendaClick(azienda.id_azienda)} // Naviga alla pagina dell'azienda
                 style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
               >
-                {azienda.ragioneSociale}
+                {azienda.ragione_sociale}
               </h2>
-              <p className="aziende-indirizzo">
-                {`${azienda.indirizzo.indirizzo}, ${azienda.indirizzo.cap}, ${azienda.indirizzo.comune}, ${azienda.indirizzo.stato}`}
-              </p>
+              <div className="aziende-indirizzi-scrollable">
+                {azienda.addresses.map((address, index) => (
+                  <p key={index} className="aziende-indirizzo">
+                    {`${address.indirizzo}, ${address.cap}, ${address.comune}, ${address.provincia}, ${address.stato}`}
+                  </p>
+                ))}
+              </div>
             </div>
             <div className="azienda-sitoWeb">
-              <a href={azienda.sitoWeb} target="_blank" rel="noopener noreferrer">
-                {azienda.sitoWeb}
+              <a href={azienda.sito_web} target="_blank" rel="noopener noreferrer">
+                {azienda.sito_web}
               </a>
             </div>
             <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
             <div className="bottoni">
               <button
                 className="btn contatti"
-                onClick={() => handleContattiClick(azienda.id)} // Gestisce il click sul pulsante "Contatti"
+                onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Contatti"
               >
                 Contatti
               </button>
               <button
                 className="btn turni"
-                onClick={() => handleTurniClick(azienda.id)} // Gestisce il click sul pulsante "Turni"
+                onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
               >
                 Turni
               </button>
               <button
                 className="btn edit"
-                onClick={() => handleEditClick(azienda.id)} // Gestisce il click sul pulsante di modifica
+                onClick={() => handleEditClick(azienda)} // Gestisce il click sul pulsante di modifica
               >
                 <img src={pencil} alt="Edit" className="edit-icon" />
               </button>
