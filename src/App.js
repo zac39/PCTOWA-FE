@@ -24,6 +24,8 @@ import ListaUtenti from './listaUtentiPage'; // Importa la pagina degli utenti
 import NuovoUtente from './NuovoUtente'; // Importa la pagina per aggiungere un nuovo utente
 import NuovoIndirizzo from './NuovoIndirizzo'; // Importa la pagina per aggiungere un nuovo indirizzo
 import ReferenteForm from './ReferenteForm';
+import NuovoTutor from './NuovoTutor';
+import IndirizzoForm from './IndirizzoForm';
 import TutorForm from './TutorForm';
 //import  TutorPage from './TutorPage'; // Importa la nuova pagina
 
@@ -98,6 +100,8 @@ function MainApp({ onLogout }) {
           <Route path="/nuovoIndirizzo" element={<NuovoIndirizzo />} />
           <Route path="/referenteForm" element={<ReferenteForm />} />
           <Route path="/tutorForm" element={<TutorForm />} />
+          <Route path="/nuovoTutor" element={<NuovoTutor />} />
+          <Route path="/indirizzoForm" element={<IndirizzoForm />} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />

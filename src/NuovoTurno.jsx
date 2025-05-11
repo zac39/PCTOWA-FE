@@ -4,6 +4,7 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 
 import './NuovoTurno.css';
 
+
 export default function NuovoTurno() {
   const navigate = useNavigate(); // Hook per la navigazione
   const location = useLocation(); // Ottieni l'oggetto location
@@ -13,12 +14,13 @@ export default function NuovoTurno() {
     dataInizio: '',
     dataFine: '',
     posti: '',
-    postiOccupati: '',
     ore: '',
     oraInizio: '',
     oraFine: '',
     giornoInizio: '',
     giornoFine: '',
+
+  //TDOO: nel back questi si chiamano settore e materia e non sono array, prima di vedere se funziona vedi se il back e a posto
     settori: [], // Cambiato da stringa a array per supportare selezioni multiple
     materie: [], // Nuovo campo per le materie
   });
@@ -66,15 +68,15 @@ export default function NuovoTurno() {
     e.preventDefault();
 
     // Crea un oggetto JSON dei dati da passare
-    const jsonData = {
+    const turnoData = {
       turno: formData,
       aziendaId, // Aggiungi aziendaId al JSON
     };
 
-    console.log('Dati del turno inviati:', jsonData);
+    console.log('Dati del turno inviati:', turnoData);
 
     // Naviga verso TutorForm passando i dati del turno come stato
-    navigate('/TutorForm', { state: { jsonData } });
+    navigate('/IndirizzoForm', { state: { turnoData } });
   };
 
   return (
@@ -89,7 +91,6 @@ export default function NuovoTurno() {
             {[{ label: 'Data Inizio', name: 'dataInizio', type: 'date' },
               { label: 'Data Fine', name: 'dataFine', type: 'date' },
               { label: 'Posti', name: 'posti', type: 'number', placeholder: 'Inserisci il numero di posti' },
-              { label: 'Posti Occupati', name: 'postiOccupati', type: 'number', placeholder: 'Inserisci il numero di posti occupati' },
               { label: 'Ore', name: 'ore', type: 'number', placeholder: 'Inserisci il numero di ore' },
               { label: 'Ora Inizio', name: 'oraInizio', type: 'time' },
               { label: 'Ora Fine', name: 'oraFine', type: 'time' },
