@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa i hook per la navigazione e il passaggio di stato
 import './listaAziendePage.css';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 
-// Dati aggiornati per il nuovo formato JSON
 const aziende = [
   {
     categoria: "Tecnologia",
@@ -58,6 +57,26 @@ const aziende = [
           indirizzo: "Via Andrea d'Angeli 23"
         },
       },
+            {
+        data_fine: "Fri, 31 May 2024 00:00:00 GMT",
+        data_inizio: "Fri, 01 Mar 2024 00:00:00 GMT",
+        giorno_fine: "venerdì",
+        giorno_inizio: "lunedì",
+        id_indirizzo: 1,
+        id_turno: 1,
+        ora_fine: "13:00",
+        ora_inizio: "09:00",
+        ore: 120,
+        posti: 2,
+        posti_occupati: 0,
+        addresses: {
+          stato: "Italia",
+          provincia: "Verona",
+          comune: "Verona",
+          cap: "37132",
+          indirizzo: "Via Andrea d'Angeli 23"
+        },
+      }
     ],
   },
   {
@@ -222,10 +241,14 @@ const opzioniFiltro = {
 };
 
 export default function VisAziendePage() {
+  const location = useLocation(); // Ottieni i dati passati dalla pagina precedente
+  const { idStudente, settore, comune } = location.state || {}; // Destructuring dei dati
   const navigate = useNavigate(); // Hook per la navigazione
+
+  // Stato per i filtri, con valori predefiniti da `settore` e `comune`
   const [valoriInput, setValoriInput] = useState({
-    Comune: '',
-    Settore: '',
+    Comune: comune || '', // Comune passato come valore di default
+    Settore: settore || '', // Settore passato come valore di default
     Materia: '',
     Anno: '',
     Mese: '',
@@ -233,26 +256,7 @@ export default function VisAziendePage() {
 
   const [soloConPosti, setSoloConPosti] = useState(false); // Stato per il checkbox
 
-  function handleAziendaClick(id) {
-    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
-  }
-
-  function handleTurniClick(id) {
-    navigate(`/turni/${id}`); // Naviga alla pagina dei turni passando l'ID
-  }
-
-  function handleContattiClick(id) {
-    navigate(`/contatti/${id}`); // Naviga alla pagina dei contatti passando l'ID
-  }
-
-  function handleEditClick(azienda) {
-    navigate(`/nuovaAzienda`, { state: { azienda } }); // Naviga alla pagina di modifica passando l'azienda
-  }
-
-  function handleAddAziendaClick() {
-    navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno passando aziendaId
-  }
-
+  // Funzione per aggiornare i filtri
   function handleSelectChange(filtro, selectedOption) {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
@@ -261,7 +265,7 @@ export default function VisAziendePage() {
   // Funzione per ordinare e filtrare le aziende
   const aziendeOrdinate = aziende
     .filter((azienda) => {
-      // Se il checkbox è selezionato, escludi le aziende senza posti disponibili nei turni
+      // Filtra in base ai posti disponibili
       if (soloConPosti) {
         const postiDisponibili = azienda.turni.some(
           (turno) => turno.posti > turno.posti_occupati
@@ -281,6 +285,31 @@ export default function VisAziendePage() {
       if (postiDisponibiliA === postiDisponibiliB) return 0;
       return postiDisponibiliA ? -1 : 1;
     });
+
+  // Funzione per aprire la pagina dei dettagli di un'azienda
+  function handleAziendaClick(id) {
+    navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda
+  }
+
+  // Funzione per aprire la pagina dei turni
+  function handleTurniClick(idAzienda) {
+    navigate(`/turni/${idAzienda}`, { state: { idStudente } }); // Passa idStudente alla pagina dei turni
+  }
+
+  // Funzione per aprire la pagina dei contatti
+  function handleContattiClick(id) {
+    navigate(`/contatti/${id}`); // Naviga alla pagina dei contatti
+  }
+
+  // Funzione per modificare un'azienda
+  function handleEditClick(azienda) {
+    navigate(`/nuovaAzienda`, { state: { azienda } }); // Naviga alla pagina di modifica
+  }
+
+  // Funzione per aggiungere una nuova azienda
+  function handleAddAziendaClick() {
+    navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno
+  }
 
   // Stile personalizzato per react-select
   const customStyles = {
@@ -328,12 +357,22 @@ export default function VisAziendePage() {
         {Object.keys(opzioniFiltro).map((filtro) => (
           <div key={filtro} className="filter-container">
             <Select
-              options={opzioniFiltro[filtro].map((opt) => ({ value: opt, label: opt }))}
-              onChange={(selectedOption) => handleSelectChange(filtro, selectedOption)}
+              options={opzioniFiltro[filtro].map((opt) => ({
+                value: opt,
+                label: opt,
+              }))}
+              onChange={(selectedOption) =>
+                handleSelectChange(filtro, selectedOption)
+              }
               placeholder={`${filtro}`}
               isClearable
               styles={customStyles} // Applica lo stile personalizzato
               classNamePrefix="react-select"
+              value={
+                valoriInput[filtro]
+                  ? { value: valoriInput[filtro], label: valoriInput[filtro] }
+                  : null
+              } // Imposta il valore predefinito
             />
           </div>
         ))}
@@ -342,9 +381,9 @@ export default function VisAziendePage() {
       <div className="aziende-list">
         {aziendeOrdinate.map((azienda) => {
           // Determina se l'azienda deve essere sbiadita
-          const isSbiadita = !soloConPosti && !azienda.turni.some(
-            (turno) => turno.posti > turno.posti_occupati
-          );
+          const isSbiadita =
+            !soloConPosti &&
+            !azienda.turni.some((turno) => turno.posti > turno.posti_occupati);
 
           return (
             <div
@@ -354,8 +393,12 @@ export default function VisAziendePage() {
               <div className="aziende-header">
                 <h2
                   className="aziende-titolo"
-                  onClick={() => handleAziendaClick(azienda.id_azienda)} // Naviga alla pagina dell'azienda
-                  style={{ cursor: 'pointer', color: 'var(--text-color)', textDecoration: 'underline' }} // Stile per enfatizzare il link
+                  onClick={() => handleAziendaClick(azienda.id_azienda)} // Apri i dettagli dell'azienda
+                  style={{
+                    cursor: 'pointer',
+                    color: 'var(--text-color)',
+                    textDecoration: 'underline',
+                  }}
                 >
                   {azienda.ragione_sociale}
                 </h2>
@@ -368,27 +411,34 @@ export default function VisAziendePage() {
                 </div>
               </div>
               <div className="azienda-sitoWeb">
-                <a href={azienda.sito_web} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={azienda.sito_web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {azienda.sito_web}
                 </a>
               </div>
-              <div className="settore" style={{ backgroundColor: azienda.settore }}></div>
+              <div
+                className="settore"
+                style={{ backgroundColor: azienda.settore }}
+              ></div>
               <div className="bottoni">
                 <button
                   className="btn contatti"
-                  onClick={() => handleContattiClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Contatti"
+                  onClick={() => handleContattiClick(azienda.id_azienda)} // Apri contatti
                 >
                   Contatti
                 </button>
                 <button
                   className="btn turni"
-                  onClick={() => handleTurniClick(azienda.id_azienda)} // Gestisce il click sul pulsante "Turni"
+                  onClick={() => handleTurniClick(azienda.id_azienda)} // Apri turni
                 >
                   Turni
                 </button>
                 <button
                   className="btn edit"
-                  onClick={() => handleEditClick(azienda)} // Gestisce il click sul pulsante di modifica
+                  onClick={() => handleEditClick(azienda)} // Modifica azienda
                 >
                   <img src={pencil} alt="Edit" className="edit-icon" />
                 </button>

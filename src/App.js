@@ -50,43 +50,7 @@ function MainApp({ onLogout }) {
   }, [theme]);
 
   return (
-    <div>
-      {isHome && (
-        <>
-          <h1>Benvenuto! 🎉</h1>
-          <button id="theme-toggle" onClick={toggleTheme}>
-            Cambia Tema
-          </button>
-          <button onClick={onLogout} style={{ marginLeft: '10px' }}>
-            Logout
-          </button>
-          <nav style={{ marginTop: '20px' }}>
-            <Link to="/indirizzi">
-              <button>Vai agli indirizzi 📍</button>
-            </Link>
-            <Link to="/listaAziende" style={{ marginLeft: '10px' }}>
-              <button>Vai alle aziende 🏢</button>
-            </Link>
-            <Link to="/studenti" style={{ marginLeft: '10px' }}>
-              <button>Vai agli studenti 🎓</button>
-            </Link>
-            <Link to="/nuovaClasse" style={{ marginLeft: '10px' }}>
-              <button>Nuova classe</button>
-            </Link>
-            <Link to="/caricaClassi" style={{ marginLeft: '10px' }}>
-              <button>Carica classi</button>
-            </Link>
-            <Link to="/nuovaAzienda" style={{ marginLeft: '10px' }}>
-              <button>Nuova azienda</button>
-            </Link>
-            <Link to="/nuovoTurno" style={{ marginLeft: '10px' }}>
-              <button>nuovo turno</button>
-            </Link>
-          </nav>
-        </>
-      )}
-
-      <div style={{ marginTop: isHome ? '40px' : '0px' }}>
+      <div >
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
@@ -106,10 +70,9 @@ function MainApp({ onLogout }) {
           <Route path="/azienda/:idAzienda" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/tutor/:aziendaId" element={<TutorPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<ListaAziendePage />} />
         </Routes>
       </div>
-    </div>
   );
 }
 

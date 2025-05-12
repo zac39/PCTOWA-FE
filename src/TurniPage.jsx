@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Importa il hook per i parametri della rotta
+import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Importa il hook per i parametri della rotta
 import './TurniPage.css';
 
 
@@ -48,8 +48,17 @@ const turniData = {
 };
 
 export default function VisturnoPage() {
-  const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+  const { aziendaId } = useParams();
+  const location = useLocation(); // Ottieni lo stato passato dalla pagina precedente
   const navigate = useNavigate(); // Hook per la navigazione
+  const { idStudente } = location.state || {}; // Ottieni idStudente
+
+  function handleAssegnaClick(turnoId) {
+    if (idStudente) {
+      alert(`Lo studente con ID ${idStudente} è stato assegnato al turno ${turnoId}`);
+    }
+  }
+
 
   function handleAziendaClick(id) {
     navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
@@ -154,7 +163,7 @@ export default function VisturnoPage() {
             >
               Tutor
             </button>
-            <button className="turno-button">Assegna</button>
+            <button className="turno-button" onClick={() => handleAssegnaClick(turno.idTurno)}>Assegna</button>
           </div>
         </div>
       ))}
