@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'; // Importa i hook p
 const NuovoIndirizzo = () => {
   const navigate = useNavigate(); // Hook per la navigazione
   const location = useLocation(); // Hook per ottenere i dati passati tramite stato
-  const aziendaData = location.state?.formData || {}; // Dati dell'azienda dalla pagina precedente
+  const [AziendaId, setAziendaId] = useState([]); // Dati dell'azienda dalla pagina precedente
 
   const [formData, setFormData] = useState({
     stato: '',
@@ -13,9 +13,12 @@ const NuovoIndirizzo = () => {
     comune: '',
     cap: '',
     indirizzo: '',
+    id_azienda: localStorage.getItem("id_azienda")
   });
 
   const [errors, setErrors] = useState({});
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +28,14 @@ const NuovoIndirizzo = () => {
     });
   };
 
-  const handleSuccessivoClick = (e) => {
+  const handleSuccessivoClick= async (e) => {
     e.preventDefault();
     const newErrors = {};
+
+    const accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        throw new Error("Token di accesso non trovato. Effettua il login.");
+      }
 
     // Validazione dei campi
     if (!formData.stato) newErrors.stato = 'Il campo Stato è obbligatorio';
@@ -38,19 +46,42 @@ const NuovoIndirizzo = () => {
 
     setErrors(newErrors);
 
+ 
+
     // Naviga a ReferenteForm se non ci sono errori
     if (Object.keys(newErrors).length === 0) {
-      console.log('Dati inviati:', formData);
+try {
+        const response = await fetch('http://localhost:5000/api/v1/address', {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        alert('Azienda creata con successo!');
+        console.log('Risposta API:', data);
+        const location=data.location;
+        const id_indirizzo=location.substring(location.lastIndexOf("/") + 1); // → "8"
+        localStorage.setItem("id_indirizzo", id_indirizzo);  // Usa data.access_token, non data.token
+        console.log('id_indirizzo salvata:', id_indirizzo); 
+  
+        // Eventuale redirect dopo la creazione
+        navigate('/aziende'); // modifica il percorso secondo le tue rotte
+  
+      } catch (error) {
+        console.error('Errore durante la creazione dell\'azienda:', error);
+        alert('Si è verificato un errore durante la creazione dell\'azienda.');
+      }
+      console.log('Dati combinati (JSON):'); // Stampa il JSON per verifica
 
-      // Combina i dati dell'azienda con i dati dell'indirizzo in un JSON
-      const combinedData = {
-        azienda: aziendaData, // Dati dell'azienda
-        indirizzo: formData, // Dati dell'indirizzo
-      };
-
-      console.log('Dati combinati (JSON):', JSON.stringify(combinedData)); // Stampa il JSON per verifica
-
-      navigate('/ReferenteForm', { state: { combinedData } }); // Passa i dati combinati a ReferenteForm
+      navigate('/ReferenteForm'); // Passa i dati combinati a ReferenteForm
     }
   };
 

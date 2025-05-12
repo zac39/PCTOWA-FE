@@ -7,19 +7,19 @@ export default function NuovaAzienda() {
   const navigate = useNavigate(); // Hook per la navigazione
 
   const [formData, setFormData] = useState({
-    codiceAteco: '',
-    partitaIVA: '',
-    telefono: '',
-    email: '',
+    codice_ateco: '',
+    partita_iva: '',
+    telefono_azienda: '',
+    email_azienda: '',
     fax: '',
     pec: '',
-    ragioneSociale: '',
-    sitoWeb: '',
-    formaGiuridica: '',
+    ragione_sociale: '',
+    sito_web: '',
+    forma_giuridica: '',
     categoria: '',
-    indirizzoLogo: '',
-    dataConvenzione: '',
-    scadenzaConvenzione: '',
+    indirizzo_logo: '',
+    data_convenzione: '',
+    scadenza_convenzione: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -29,26 +29,26 @@ export default function NuovaAzienda() {
     let error = '';
 
     const validators = {
-      codiceAteco: /^\d{6}$/, // Deve essere composto da 6 numeri
-      partitaIVA: /^\d{11}$/, // Deve essere composto da 11 numeri
-      telefono: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
+      codice_ateco: /^\d{6}$/, // Deve essere composto da 6 numeri
+      partita_iva: /^\d{11}$/, // Deve essere composto da 11 numeri
+      telefono_azienda: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
       fax: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Stessa regex di telefono
       email: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
       pec: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Stessa regex di email
-      sitoWeb: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
-      indirizzoLogo: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
+      sito_web: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
+      indirizzo_logo: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
       // Aggiungi ulteriori validatori se necessario
     };
 
     if (validators[name] && !validators[name].test(value)) {
       switch (name) {
-        case 'codiceAteco':
+        case 'codice_ateco':
           error = 'Il codice Ateco deve essere composto da 6 numeri.';
           break;
-        case 'partitaIVA':
+        case 'partita_iva':
           error = 'La partita IVA deve essere composta da 11 numeri.';
           break;
-        case 'telefono':
+        case 'telefono_azienda':
           error = 'Inserire un numero di telefono valido.';
           break;
         case 'fax':
@@ -60,10 +60,10 @@ export default function NuovaAzienda() {
         case 'pec':
           error = "Inserire una PEC valida.";
           break;
-        case 'sitoWeb':
+        case 'sito_web':
           error = "Inserire un URL valido.";
           break;
-        case 'indirizzoLogo':
+        case 'indirizzo_logo':
           error = "Inserire un URL valido.";
           break;
         default:
@@ -131,6 +131,10 @@ export default function NuovaAzienda() {
         const data = await response.json();
         alert('Azienda creata con successo!');
         console.log('Risposta API:', data);
+        const location=data.location;
+        const id_azienda=location.substring(location.lastIndexOf("/") + 1); // → "8"
+        localStorage.setItem("id_azienda", id_azienda);  // Usa data.access_token, non data.token
+        console.log('id_azienda salvata:', id_azienda); 
   
         // Eventuale redirect dopo la creazione
         navigate('/aziende'); // modifica il percorso secondo le tue rotte
@@ -161,21 +165,21 @@ export default function NuovaAzienda() {
 
         {/* Contenitore scorrevole */}
         <div className="nuova-azienda-scrollable">
-          <form className="nuova-azienda-form" onSubmit={handleCreaClick}>
+          <form className="nuova-azienda-form" onSubmit={handleSubmit}>
             {[
-              { label: 'Ragione Sociale', name: 'ragioneSociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
-              { label: 'Codice Ateco', name: 'codiceAteco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
-              { label: 'Partita IVA', name: 'partitaIVA', type: 'text', placeholder: 'Inserisci la partita IVA' },
-              { label: 'Telefono', name: 'telefono', type: 'text', placeholder: 'Inserisci il numero di telefono' },
-              { label: 'Email', name: 'email', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
-              { label: 'Sito Web', name: 'sitoWeb', type: 'url', placeholder: 'Inserisci il sito web' },
+              { label: 'Ragione Sociale', name: 'ragione_sociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
+              { label: 'Codice Ateco', name: 'codice_ateco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
+              { label: 'Partita IVA', name: 'partita_iva', type: 'text', placeholder: 'Inserisci la partita IVA' },
+              { label: 'Telefono', name: 'telefono_azienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
+              { label: 'Email', name: 'email_azienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
+              { label: 'Sito Web', name: 'sito_web', type: 'url', placeholder: 'Inserisci il sito web' },
               { label: 'Fax', name: 'fax', type: 'text', placeholder: 'Inserisci il fax aziendale' },
               { label: 'PEC', name: 'pec', type: 'text', placeholder: 'Inserisci la PEC aziendale' },
-              { label: 'Data Convenzione', name: 'dataConvenzione', type: 'date' },
-              { label: 'Scadenza Convenzione', name: 'scadenzaConvenzione', type: 'date' },
+              { label: 'Data Convenzione', name: 'data_convenzione', type: 'date' },
+              { label: 'Scadenza Convenzione', name: 'scadenza_convenzione', type: 'date' },
               { label: 'Categoria', name: 'categoria', type: 'text', placeholder: 'Inserisci la categoria' },
-              { label: 'Indirizzo Logo', name: 'indirizzoLogo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
-              { label: 'Forma Giuridica', name: 'formaGiuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
+              { label: 'Indirizzo Logo', name: 'indirizzo_logo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
+              { label: 'Forma Giuridica', name: 'forma_giuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
             ].map((field) => (
               <div className="azienda-form-group" key={field.name}>
                 <label htmlFor={field.name}>{field.label}</label>
@@ -196,7 +200,7 @@ export default function NuovaAzienda() {
 
         {/* Bottone Successivo */}
         <div className="azienda-crea-button-container">
-          <button type="submit" className="azienda-crea-button" onClick={handleCreaClick}>
+          <button type="submit" className="azienda-crea-button" onClick={handleSubmit}>
             Successivo
           </button>
         </div>

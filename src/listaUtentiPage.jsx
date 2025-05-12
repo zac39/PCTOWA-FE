@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import "./listaUtentiPage.css"; // Importa il file CSS per lo stile
 import Select from 'react-select';
@@ -47,6 +47,9 @@ const ListaUtentiPage = () => {
   const navigate = useNavigate(); // Hook per la navigazione
 
   const [searchTerm, setSearchTerm] = useState(''); // Stato per la barra di ricerca
+    const [urentiData2, setUtenti] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
   const [valoriInput, setValoriInput] = useState({
     Ruolo: '',
   });
@@ -75,6 +78,49 @@ const ListaUtentiPage = () => {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput(prev => ({ ...prev, [filtro]: valore }));
   }
+
+    useEffect(() => {
+      // Funzione per recuperare i dati dell'azienda tramite API
+      const fetchUtenteData = async () => {
+        try {
+          // Configura l'header con il token access_data
+          const accessToken = localStorage.getItem("access_token");
+          if (!accessToken) {
+            throw new Error("Token di accesso non trovato. Effettua il login.");
+          }
+  
+          const response = await fetch(`http://localhost:5000/api/v1/user`, {
+            method: "GET", // Metodo HTTP
+            headers: {
+              "Authorization": `Bearer ${accessToken}`, // Aggiunge il token all'header
+            },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Errore: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          setUtenti(data); // Salva i dati ricevuti nello stato
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      fetchUtenteData();
+    }, []);
+  
+    console.log(urentiData2);
+  
+    if (isLoading) {
+      return <p>Caricamento in corso...</p>;
+    }
+  
+    if (error) {
+      return <p>Errore: {error}</p>;
+    }
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

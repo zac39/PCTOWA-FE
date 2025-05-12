@@ -62,6 +62,9 @@ export default function VisAziendePage() {
   useEffect(() => {
     // Funzione per recuperare i dati dell'azienda tramite API
     const fetchAziendeData = async () => {
+      setAziende([]); // Reset iniziale, facoltativo
+      setIsLoading(true); // Riporta in stato di caricamento
+      setError(null);     // Pulisce eventuali errori precedenti
       try {
         // Configura l'header con il token access_data
         const accessToken = localStorage.getItem("access_token");
@@ -81,6 +84,7 @@ export default function VisAziendePage() {
         }
 
         const data = await response.json();
+        console.log(data);
         setAziende(data); // Salva i dati ricevuti nello stato
       } catch (err) {
         setError(err.message);
@@ -90,9 +94,10 @@ export default function VisAziendePage() {
     };
 
     fetchAziendeData();
+    console.log("aggiornato");
   }, []);
 
-  console.log(aziende);
+    console.log(aziende);
 
   if (isLoading) {
     return <p>Caricamento in corso...</p>;
