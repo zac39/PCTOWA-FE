@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa il hook per la navigazione
 import Select from 'react-select';
 import './listaStudentiPage.css'; // Assicurati di avere il file CSS
 
 const studentiData = [
   {
+    idStudente: 1,
     nome: 'Federico Rigo',
     indirizzo: {
       stato: 'Italia',
@@ -21,6 +23,7 @@ const studentiData = [
     azienda: null, // Nessuna azienda associata
   },
   {
+    idStudente: 2,
     nome: 'Marco Rossi',
     indirizzo: {
       stato: 'Italia',
@@ -66,10 +69,12 @@ const opzioniFiltro = {
 };
 
 export default function VisStudentiPage() {
-  const [valoriInput, setValoriInput] = useState({
+    const navigate = useNavigate(); // Hook per la navigazione
+
+ const [valoriInput, setValoriInput] = useState({
     Classe: '',
     Comune: '',
-    Anno: annoCorrente.toString(), // Valore di default: anno corrente
+    Anno: new Date().getFullYear().toString(), // Valore di default: anno corrente
   });
 
   const [classiFiltrate, setClassiFiltrate] = useState(opzioniFiltro.Classe); // Classi filtrate per anno
@@ -91,6 +96,18 @@ export default function VisStudentiPage() {
     const valore = selectedOption ? selectedOption.value : '';
     setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
   }
+
+   function handleAziendeClick(studente) {
+    // Naviga verso la pagina delle aziende passando idStudente, settore e comune
+    navigate('/listaAziende', {
+      state: {
+        idStudente: studente.idStudente, // ID dello studente
+        settore: studente.settore, // Settore dello studente
+        comune: studente.indirizzo.comune, // Comune dello studente
+      },
+    });
+  }
+
 
   // Funzione per filtrare gli studenti
   const studentiFiltrati = valoriInput.Classe
@@ -196,7 +213,9 @@ export default function VisStudentiPage() {
                   >
                     {studente.stato}
                   </div>
-                  <button className="studente-azione">{studente.azione}</button>
+                  <button className="studente-azione"
+                    onClick={() => handleAziendeClick(studente)} // Naviga verso la lista delle aziende
+                  >{studente.azione}</button>
                 </div>
               </div>
 
