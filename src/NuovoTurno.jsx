@@ -4,6 +4,7 @@ import Select from 'react-select'; // Importa il componente Select da react-sele
 
 import './NuovoTurno.css';
 
+
 export default function NuovoTurno() {
   const navigate = useNavigate(); // Hook per la navigazione
   const location = useLocation(); // Ottieni l'oggetto location
@@ -13,12 +14,13 @@ export default function NuovoTurno() {
     dataInizio: '',
     dataFine: '',
     posti: '',
-    postiOccupati: '',
     ore: '',
     oraInizio: '',
     oraFine: '',
     giornoInizio: '',
     giornoFine: '',
+
+  //TDOO: nel back questi si chiamano settore e materia e non sono array, prima di vedere se funziona vedi se il back e a posto
     settori: [], // Cambiato da stringa a array per supportare selezioni multiple
     materie: [], // Nuovo campo per le materie
   });
@@ -65,47 +67,16 @@ export default function NuovoTurno() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Crea un oggetto JSON dei dati da passare
+    const turnoData = {
+      turno: formData,
+      aziendaId, // Aggiungi aziendaId al JSON
+    };
 
-    if (0 === 0) {
-      // Costruzione del payload da inviare
-      const payload = {
-        ...formData,
-        aziendaId: aziendaId, // aggiunge anche l'aziendaId ricevuto tramite location.state
-      };
+    console.log('Dati del turno inviati:', turnoData);
 
-      const accessToken = localStorage.getItem("access_token");
-      if (!accessToken) {
-        throw new Error("Token di accesso non trovato. Effettua il login.");
-      }
-    
-      fetch('http://localhost:5000/api/v1/turn', {
-        method: 'POST',
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Errore nella richiesta: ${response.statusText}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Risposta dal server:', data);
-          alert('Turno creato con successo!');
-          // Naviga a un'altra pagina se necessario
-          // navigate('/paginaSuccessiva');
-        })
-        .catch((error) => {
-          console.error('Errore durante l\'invio:', error);
-          alert('Si è verificato un errore durante la creazione del turno.');
-        });
-
-        // Naviga verso TutorForm passando i dati del turno come stato
-        navigate('/TutorForm', { });        
-    }
+    // Naviga verso TutorForm passando i dati del turno come stato
+    navigate('/IndirizzoForm', { state: { turnoData } });
   };
 
   return (
@@ -120,7 +91,6 @@ export default function NuovoTurno() {
             {[{ label: 'Data Inizio', name: 'dataInizio', type: 'date' },
               { label: 'Data Fine', name: 'dataFine', type: 'date' },
               { label: 'Posti', name: 'posti', type: 'number', placeholder: 'Inserisci il numero di posti' },
-              { label: 'Posti Occupati', name: 'postiOccupati', type: 'number', placeholder: 'Inserisci il numero di posti occupati' },
               { label: 'Ore', name: 'ore', type: 'number', placeholder: 'Inserisci il numero di ore' },
               { label: 'Ora Inizio', name: 'oraInizio', type: 'time' },
               { label: 'Ora Fine', name: 'oraFine', type: 'time' },

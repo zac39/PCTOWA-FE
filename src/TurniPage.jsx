@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Importa il hook per i parametri della rotta
+import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Importa il hook per i parametri della rotta
 import './TurniPage.css';
 
-// TODO: sistema il logo 
 
 const turniData = {
   idAzienda: 1,
   ragioneSociale: "Università di Verona",
+  //indirizzoLogo: null,
   indirizzoLogo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.F5sVfnFWuwpVehf1J1SIMAHaE7%26pid%3DApi&f=1&ipt=d766df7c72080b158906873cd3235b5e4cfe64d9f13063684c0a7db2485e1bab&ipo=images",
   sitoWeb: "https://www.google.it/search?q=campo+minato",
   indirizzo: {
@@ -22,8 +22,9 @@ const turniData = {
       dataInizio: "06/06/2025",
       dataFine: "10/07/2025",
       postiDisponibili: 2,
-      postiTotali: 5,
+      postiAssegnati: 5,
       oreTotali: 140,
+      postiConfermati: true,
       orarioInizio: "9:00",
       orarioFine: "15:00",
       materie: [
@@ -36,7 +37,8 @@ const turniData = {
       dataInizio: "11/07/2025",
       dataFine: "15/08/2025",
       postiDisponibili: 3,
-      postiTotali: 6,
+      postiAssegnati: 6,
+      postiConfermati: false,
       oreTotali: 120,
       orarioInizio: "10:00",
       orarioFine: "16:00",
@@ -46,11 +48,19 @@ const turniData = {
 };
 
 export default function VisturnoPage() {
-  const { aziendaId } = useParams(); // Ottieni l'ID dell'azienda dalla rotta
+  const { aziendaId } = useParams();
+  const location = useLocation(); // Ottieni lo stato passato dalla pagina precedente
   const navigate = useNavigate(); // Hook per la navigazione
     const [azienda, setAzienda] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null); 
+    const { idStudente } = location.state || {}; // Ottieni idStudente
+
+  function handleAssegnaClick(turnoId) {
+    if (idStudente) {
+      alert(`Lo studente con ID ${idStudente} è stato assegnato al turno ${turnoId}`);
+    }
+  }    
 
   useEffect(() => {
       // Funzione per recuperare i dati dell'azienda tramite API
@@ -86,6 +96,8 @@ export default function VisturnoPage() {
     }, [aziendaId]);  
 
     console.log(azienda);
+
+
 
   function handleAziendaClick(id) {
     navigate(`/azienda/${id}`); // Naviga alla pagina dell'azienda passando l'ID
@@ -165,7 +177,11 @@ export default function VisturnoPage() {
                 <span>{turno.postiDisponibili}</span>
               </p>
               <p>
-                <strong>Posti totali:</strong> <span>{turno.postiTotali}</span>
+                <strong>Posti assegnati:</strong> <span>{turno.postiAssegnati}</span>
+              </p>
+              <p>
+                <strong>Numero posti confermati:</strong>{" "}
+                <span>{turno.postiConfermati ? "Si" : "No"}</span>
               </p>
               <p>
                 <strong>Ore totali:</strong> <span>{turno.oreTotali}</span>
@@ -186,7 +202,7 @@ export default function VisturnoPage() {
             >
               Tutor
             </button>
-            <button className="turno-button">Assegna</button>
+            <button className="turno-button" onClick={() => handleAssegnaClick(turno.idTurno)}>Assegna</button>
           </div>
         </div>
       ))}

@@ -23,8 +23,8 @@ const NuovoUtente = () => {
   console.log('Dati utente:', utente); // Log dei dati dell'utente
 
   const [formData, setFormData] = useState({
-    nome: '',
-    cognome: '',
+    name: '',
+    surname: '',
     email: '',
     password: '',
     ruolo: '',
@@ -36,8 +36,8 @@ const NuovoUtente = () => {
   useEffect(() => {
     if (utente) {
       setFormData({
-        nome: utente.nome || '',
-        cognome: utente.cognome || '',
+        name: utente.name || '',
+        surname: utente.surname || '',
         email: utente.email || '',
         password: '', // La password non viene mai pre-riempita per motivi di sicurezza
         ruolo: roleMapping[utente.ruolo] || '', // Mappa il valore numerico al ruolo
@@ -82,8 +82,8 @@ const NuovoUtente = () => {
     const newErrors = {};
 
     // Validazione dei campi
-    if (!formData.nome) newErrors.nome = 'Il nome è obbligatorio';
-    if (!formData.cognome) newErrors.cognome = 'Il cognome è obbligatorio';
+    if (!formData.name) newErrors.name = 'Il nome è obbligatorio';
+    if (!formData.surname) newErrors.surname = 'Il cognome è obbligatorio';
     if (!formData.email) {
       newErrors.email = 'L\'email è obbligatoria';
     } else if (!validateEmail(formData.email)) {
@@ -119,10 +119,10 @@ const NuovoUtente = () => {
             type="text"
             name="nome"
             placeholder="Inserisci il nome"
-            value={formData.nome}
+            value={formData.name}
             onChange={handleChange}
           />
-          {errors.nome && <span className="error">{errors.nome}</span>}
+          {errors.name && <span className="error">{errors.name}</span>}
         </div>
 
         {/* Cognome */}
@@ -132,10 +132,10 @@ const NuovoUtente = () => {
             type="text"
             name="cognome"
             placeholder="Inserisci il cognome"
-            value={formData.cognome}
+            value={formData.surname}
             onChange={handleChange}
           />
-          {errors.cognome && <span className="error">{errors.cognome}</span>}
+          {errors.surname && <span className="error">{errors.surname}</span>}
         </div>
 
         {/* Email */}

@@ -24,6 +24,8 @@ import ListaUtenti from './listaUtentiPage'; // Importa la pagina degli utenti
 import NuovoUtente from './NuovoUtente'; // Importa la pagina per aggiungere un nuovo utente
 import NuovoIndirizzo from './NuovoIndirizzo'; // Importa la pagina per aggiungere un nuovo indirizzo
 import ReferenteForm from './ReferenteForm';
+import NuovoTutor from './NuovoTutor';
+import IndirizzoForm from './IndirizzoForm';
 import TutorForm from './TutorForm';
 //import  TutorPage from './TutorPage'; // Importa la nuova pagina
 
@@ -48,43 +50,7 @@ function MainApp({ onLogout }) {
   }, [theme]);
 
   return (
-    <div>
-      {isHome && (
-        <>
-          <h1>Benvenuto! 🎉</h1>
-          <button id="theme-toggle" onClick={toggleTheme}>
-            Cambia Tema
-          </button>
-          <button onClick={onLogout} style={{ marginLeft: '10px' }}>
-            Logout
-          </button>
-          <nav style={{ marginTop: '20px' }}>
-            <Link to="/indirizzi">
-              <button>Vai agli indirizzi 📍</button>
-            </Link>
-            <Link to="/listaAziende" style={{ marginLeft: '10px' }}>
-              <button>Vai alle aziende 🏢</button>
-            </Link>
-            <Link to="/studenti" style={{ marginLeft: '10px' }}>
-              <button>Vai agli studenti 🎓</button>
-            </Link>
-            <Link to="/nuovaClasse" style={{ marginLeft: '10px' }}>
-              <button>Nuova classe</button>
-            </Link>
-            <Link to="/caricaClassi" style={{ marginLeft: '10px' }}>
-              <button>Carica classi</button>
-            </Link>
-            <Link to="/nuovaAzienda" style={{ marginLeft: '10px' }}>
-              <button>Nuova azienda</button>
-            </Link>
-            <Link to="/nuovoTurno" style={{ marginLeft: '10px' }}>
-              <button>nuovo turno</button>
-            </Link>
-          </nav>
-        </>
-      )}
-
-      <div style={{ marginTop: isHome ? '40px' : '0px' }}>
+      <div >
         <Routes>
           <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
@@ -98,14 +64,15 @@ function MainApp({ onLogout }) {
           <Route path="/nuovoIndirizzo" element={<NuovoIndirizzo />} />
           <Route path="/referenteForm" element={<ReferenteForm />} />
           <Route path="/tutorForm" element={<TutorForm />} />
+          <Route path="/nuovoTutor" element={<NuovoTutor />} />
+          <Route path="/indirizzoForm" element={<IndirizzoForm />} />
           <Route path="/turni/:aziendaId" element={<TurniPage />} />
           <Route path="/azienda/:aziendaId" element={<AziendaPage />} />
           <Route path="/contatti/:aziendaId" element={<ContattiPage />} />
           <Route path="/tutor/:aziendaId" element={<TutorPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<ListaAziendePage />} />
         </Routes>
       </div>
-    </div>
   );
 }
 

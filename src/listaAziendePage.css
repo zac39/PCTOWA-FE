@@ -179,12 +179,15 @@
     text-decoration: underline;
   }
   
-  .aziende-titolo {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
+
+
+.aziende-titolo {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex; /* Imposta il titolo come flex container */
+  align-items: center; /* Centra verticalmente il testo */
+}
   .aziende-indirizzo {
     margin: 4px 0 0;
     font-size: 13px;
@@ -202,7 +205,6 @@
   .bottoni {
     display: flex;
     gap: 10px; /* Spaziatura tra i pulsanti */
-    margin-top: 10px;
   }
   
   .btn {
@@ -264,4 +266,79 @@
   background-color: var(--tertiary-color); /* Cambia colore al passaggio del mouse */
   color: var(--on-tertiary-color); /* Colore del testo al passaggio del mouse */
   transform: scale(1.1); /* Effetto zoom al passaggio del mouse */
+}
+
+
+/* Stile per il checkbox */
+.filter-checkbox {
+
+  background-color: var(--primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.checkbox-label {
+  font-size: 16px;
+  font-weight: redgular;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+
+/* Aggiunto stile per aziende sbiadite */
+.azienda-sbiadita {
+  opacity: 0.5; /* Sbiadisce l'azienda */
+}
+
+
+/* Scroll per gli indirizzi accanto al nome */
+.aziende-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centra verticalmente */
+    display: flex; /* Imposta il titolo come flex container */
+  align-items: center; /* Centra verticalmente il testo */
+}
+
+
+.aziende-indirizzo {
+  margin: 2px 0;
+  color: var(--text-color-light);
+  font-size: 13px;
+}
+
+.aziende-indirizzi-scrollable {
+  max-height: 50px; /* Altezza massima */
+  overflow-y: scroll; /* Abilita lo scroll verticale */
+  margin-left: 20px;
+  padding: 6px;
+  border-radius: 10px;
+
+  /* Nascondi la barra di scorrimento per WebKit (Chrome, Safari, Edge) */
+  -webkit-overflow-scrolling: touch; /* Per uno scrolling fluido su dispositivi touch */
+}
+  
+/* Nascondi la barra di scorrimento per Firefox */
+.aziende-indirizzi-scrollable {
+  scrollbar-width: none; /* Nasconde la scrollbar su Firefox */
+}
+
+/* Nascondi la barra di scorrimento per WebKit (Chrome, Safari, Edge) */
+.aziende-indirizzi-scrollable::-webkit-scrollbar {
+  display: none; /* Nasconde la scrollbar */
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NuovaClasse.css';
 
+// Funzione per generare un array di anni dall'anno corrente al 1900
+
 const generateYears = () => {
   const currentYear = new Date().getFullYear();
   const years = [];

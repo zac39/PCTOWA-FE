@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa il hook per la navigazione
 
 import './NuovaAzienda.css';
 
 export default function NuovaAzienda() {
   const navigate = useNavigate(); // Hook per la navigazione
+  const location = useLocation(); // Hook per ottenere i dati passati tramite stato
+  const aziendaData = location.state?.azienda || {}; // Recupera i dati dell'azienda o un oggetto vuoto
 
   const [formData, setFormData] = useState({
+    codice_ateco: '',
+    partita_iva: '',
+    telefono_azienda: '',
+    email_azienda: '',
     codice_ateco: '',
     partita_iva: '',
     telefono_azienda: '',
@@ -16,13 +22,29 @@ export default function NuovaAzienda() {
     ragione_sociale: '',
     sito_web: '',
     forma_giuridica: '',
+    ragione_sociale: '',
+    sito_web: '',
+    forma_giuridica: '',
     categoria: '',
+    indirizzo_logo: '',
+    data_convenzione: '',
+    scadenza_convenzione: '',
     indirizzo_logo: '',
     data_convenzione: '',
     scadenza_convenzione: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
+
+  // Popola i campi con i dati di aziendaData all'inizio, solo quando il componente viene montato
+  useEffect(() => {
+    if (aziendaData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        ...aziendaData,
+      }));
+    }
+  }, []); // Dipendenza vuota per assicurarsi che venga eseguito solo al primo render
 
   // Validazione dinamica
   const validateField = (name, value) => {
@@ -32,8 +54,11 @@ export default function NuovaAzienda() {
       codice_ateco: /^\d{6}$/, // Deve essere composto da 6 numeri
       partita_iva: /^\d{11}$/, // Deve essere composto da 11 numeri
       telefono_azienda: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
+      codice_ateco: /^\d{6}$/, // Deve essere composto da 6 numeri
+      partita_iva: /^\d{11}$/, // Deve essere composto da 11 numeri
+      telefono_azienda: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Formato telefono
       fax: /^(\+39\s?)?(\d{3}\s?\d{3}\s?\d{4})$/, // Stessa regex di telefono
-      email: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
+      email_azienda: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Email valida
       pec: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/, // Stessa regex di email
       sito_web: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
       indirizzo_logo: /^(https?:\/\/)?([\w\-]+\.)+[\w-]{2,}(\:[0-9]+)?(\/.*)?$/, // URL valido
@@ -43,26 +68,31 @@ export default function NuovaAzienda() {
     if (validators[name] && !validators[name].test(value)) {
       switch (name) {
         case 'codice_ateco':
+        case 'codice_ateco':
           error = 'Il codice Ateco deve essere composto da 6 numeri.';
           break;
         case 'partita_iva':
+        case 'partita_iva':
           error = 'La partita IVA deve essere composta da 11 numeri.';
           break;
+        case 'telefono_azienda':
         case 'telefono_azienda':
           error = 'Inserire un numero di telefono valido.';
           break;
         case 'fax':
           error = 'Inserire un numero di fax valido.';
           break;
-        case 'email':
+        case 'email_azienda':
           error = "Inserire un'email valida.";
           break;
         case 'pec':
           error = "Inserire una PEC valida.";
           break;
         case 'sito_web':
+        case 'sito_web':
           error = "Inserire un URL valido.";
           break;
+        case 'indirizzo_logo':
         case 'indirizzo_logo':
           error = "Inserire un URL valido.";
           break;
@@ -107,6 +137,13 @@ export default function NuovaAzienda() {
   
     setFormErrors(newErrors);
 
+    const modifica = Boolean(location.state?.azienda); // Determina se è una modifica
+
+    const formDataToSend = {
+      modifica, // Indica se è una modifica o una nuova azienda
+      azienda: formData, // Dati dell'azienda aggiornati
+    };
+
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
       throw new Error("Token di accesso non trovato. Effettua il login.");
@@ -144,7 +181,7 @@ export default function NuovaAzienda() {
         alert('Si è verificato un errore durante la creazione dell\'azienda.');
       }
       console.log('Form valido, navigazione verso NuovoIndirizzo');
-      navigate('/nuovoIndirizzo', { state: { formData } }); // Passa i dati del form come stato
+      navigate('/nuovoIndirizzo', { state: { formData: formDataToSend } }); // Passa i dati del form come stato
     }
   };
   
@@ -154,7 +191,7 @@ export default function NuovaAzienda() {
       <div className="nuova-azienda-card">
         {/* Header con titolo */}
         <div className="nuova-azienda-header">
-          <h2>Nuova azienda</h2>
+          <h2>{location.state?.azienda ? 'Modifica azienda' : 'Nuova azienda'}</h2>
           <button
             className="carica-file-button"
             onClick={() => navigate('/caricaClassi', { state: { from: 'nuovaAzienda' } })}
@@ -173,11 +210,21 @@ export default function NuovaAzienda() {
               { label: 'Telefono', name: 'telefono_azienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
               { label: 'Email', name: 'email_azienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
               { label: 'Sito Web', name: 'sito_web', type: 'url', placeholder: 'Inserisci il sito web' },
+              { label: 'Ragione Sociale', name: 'ragione_sociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
+              { label: 'Codice Ateco', name: 'codice_ateco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
+              { label: 'Partita IVA', name: 'partita_iva', type: 'text', placeholder: 'Inserisci la partita IVA' },
+              { label: 'Telefono', name: 'telefono_azienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
+              { label: 'Email', name: 'email_azienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
+              { label: 'Sito Web', name: 'sito_web', type: 'url', placeholder: 'Inserisci il sito web' },
               { label: 'Fax', name: 'fax', type: 'text', placeholder: 'Inserisci il fax aziendale' },
               { label: 'PEC', name: 'pec', type: 'text', placeholder: 'Inserisci la PEC aziendale' },
               { label: 'Data Convenzione', name: 'data_convenzione', type: 'date' },
               { label: 'Scadenza Convenzione', name: 'scadenza_convenzione', type: 'date' },
+              { label: 'Data Convenzione', name: 'data_convenzione', type: 'date' },
+              { label: 'Scadenza Convenzione', name: 'scadenza_convenzione', type: 'date' },
               { label: 'Categoria', name: 'categoria', type: 'text', placeholder: 'Inserisci la categoria' },
+              { label: 'Indirizzo Logo', name: 'indirizzo_logo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
+              { label: 'Forma Giuridica', name: 'forma_giuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
               { label: 'Indirizzo Logo', name: 'indirizzo_logo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
               { label: 'Forma Giuridica', name: 'forma_giuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
             ].map((field) => (
