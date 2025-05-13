@@ -65,18 +65,8 @@ export default function NuovoTurno() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Controlla se ci sono errori
-    const newErrors = {};
-    Object.keys(formData).forEach((field) => {
-      const error = validateField(field, formData[field]);
-      if (error) {
-        newErrors[field] = error;
-      }
-    });
 
-    setFormErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
+    if (0 === 0) {
       // Costruzione del payload da inviare
       const payload = {
         ...formData,
@@ -112,10 +102,9 @@ export default function NuovoTurno() {
           console.error('Errore durante l\'invio:', error);
           alert('Si è verificato un errore durante la creazione del turno.');
         });
-        console.log('Dati del turno inviati:', jsonData);
 
         // Naviga verso TutorForm passando i dati del turno come stato
-        navigate('/TutorForm', { state: { jsonData } });        
+        navigate('/TutorForm', { });        
     }
   };
 
