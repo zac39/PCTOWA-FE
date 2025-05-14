@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './NuovoUtente.css'; // Importa il file CSS per lo stile
-import { useLocation } from 'react-router-dom';
+import {  useNavigate, useLocation } from 'react-router-dom';
 
 const roles = [
   { value: 'docente', label: 'Docente' },
@@ -19,6 +19,7 @@ const roleMapping = {
 
 const NuovoUtente = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Hook per la navigazione
   const utente = location.state || {}; // Recupera i dati dell'utente o un oggetto vuoto
   console.log('Dati utente:', utente); // Log dei dati dell'utente
 
@@ -64,6 +65,11 @@ const NuovoUtente = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
+      const accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        throw new Error("Token di accesso non trovato. Effettua il login.");
+      }
 
   const addUtente = async () => {
     console.log('Nuovo utente:', formData);

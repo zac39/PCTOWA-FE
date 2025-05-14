@@ -5,12 +5,6 @@ import Select from 'react-select';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 import deleteIcon from './deleteBlack.png'; // Importa l'icona delete
 
-// const utentiData = [
-//   { id: 1, nome: "Mario", cognome: "Rossi", email: "mario.rossi@gmail.com", ruolo: 1 },
-//   { id: 2, nome: "Luigi", cognome: "Verdi", email: "luigi.verdi@gmail.com", ruolo: 2 },
-//   { id: 3, nome: "Anna", cognome: "Bianchi", email: "anna.bianchi@gmail.com", ruolo: 3 },
-//   { id: 4, nome: "Carla", cognome: "Neri", email: "carla.neri@gmail.com", ruolo: 4 },
-// ];
 
 const opzioniFiltro = {
   Ruolo: ['Docente', 'Tutor', 'SuperTutor', 'Admin'],

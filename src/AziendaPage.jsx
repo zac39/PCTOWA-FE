@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa il hook per la navigazione
 import { useParams } from 'react-router-dom';
 import "./AziendaPage.css";
 
@@ -29,7 +30,6 @@ const aziendaData = {
 
 export default function VisAziendaPage() {
   const navigate = useNavigate(); // Hook per la navigazione
-  const [contatti, setContatti] = useState([]);
   const [aziendaData, setAzienda] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -68,6 +68,23 @@ export default function VisAziendaPage() {
   }, [aziendaId]);    
 
   console.log("ID Azienda:", aziendaId); // Logga l'ID dell'azienda per il debug
+  console.log(aziendaData); // Logga l'ID dell'azienda per il debug
+
+  if (isLoading) {
+  return (
+    <div className="azienda-container">
+      <p>Caricamento in corso...</p>
+    </div>
+  );
+}
+
+if (error) {
+  return (
+    <div className="azienda-container">
+      <p>Errore: {error}</p>
+    </div>
+  );
+}
 
   return (
     <div className="azienda-container">
@@ -78,7 +95,7 @@ export default function VisAziendaPage() {
             <div className="azienda-info">
               <h2 className="azienda-title">{aziendaData.ragione_sociale}</h2>
               <p className="azienda-address">
-                {`${aziendaData.turns[0].address.indirizzo}, ${aziendaData.turns[0].address.cap}, ${aziendaData.turns[0].address.comune}, ${aziendaData.turns[0].address.stato}`}
+                {`${aziendaData.addresses[0].indirizzo}, ${aziendaData.addresses[0].cap}, ${aziendaData.addresses[0].comune}, ${aziendaData.addresses[0].stato}`}
               </p>
               <a
                 href={aziendaData.sito_web}

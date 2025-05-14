@@ -9,7 +9,7 @@ import './TutorPage.css';
 const tutorData = {
   idAzienda: 1,
   ragioneSociale: "Università di Verona",
-  indirizzoLogo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.F5sVfnFWuwpVehf1J1SIMAHaE7%26pid%3DApi&f=1&ipt=d766df7c72080b158906873cd3235b5e4cfe64d9f13063684c0a7db2485e1bab&ipo=images",
+  indirizzoLogo: "",
   sitoWeb: "https://www.google.it/search?q=campo+minato",
   indirizzo: {
     stato: "Italia",

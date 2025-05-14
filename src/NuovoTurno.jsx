@@ -11,14 +11,14 @@ export default function NuovoTurno() {
   const aziendaId = location.state?.aziendaId; // Accedi a aziendaId dallo stato
 
   const [formData, setFormData] = useState({
-    dataInizio: '',
-    dataFine: '',
+    data_inizio: '',
+    data_fine: '',
     posti: '',
     ore: '',
-    oraInizio: '',
-    oraFine: '',
-    giornoInizio: '',
-    giornoFine: '',
+    ora_inizio: '',
+    ora_fine: '',
+    giorno_inizio: '',
+    giorno_fine: '',
 
   //TDOO: nel back questi si chiamano settore e materia e non sono array, prima di vedere se funziona vedi se il back e a posto
     settori: [], // Cambiato da stringa a array per supportare selezioni multiple
@@ -34,7 +34,7 @@ export default function NuovoTurno() {
   ];
 
   const materie = [
-    { value: 'Matematica', label: 'Matematica' },
+    { value: 'Sistemista', label: 'Sistemista' },
     { value: 'Fisica', label: 'Fisica' },
     { value: 'Chimica', label: 'Chimica' },
     { value: 'Informatica', label: 'Informatica' },
@@ -46,7 +46,7 @@ export default function NuovoTurno() {
     { value: 'Educazione fisica', label: 'Educazione fisica' },
   ];
 
-  const giorniSettimana = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
+  const giorniSettimana = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì'];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -88,12 +88,12 @@ export default function NuovoTurno() {
 
         <div className="nuovo-turno-scrollable">
           <form className="nuovo-turno-form" onSubmit={handleSubmit}>
-            {[{ label: 'Data Inizio', name: 'dataInizio', type: 'date' },
-              { label: 'Data Fine', name: 'dataFine', type: 'date' },
+            {[{ label: 'Data Inizio', name: 'data_inizio', type: 'date' },
+              { label: 'Data Fine', name: 'data_fine', type: 'date' },
               { label: 'Posti', name: 'posti', type: 'number', placeholder: 'Inserisci il numero di posti' },
               { label: 'Ore', name: 'ore', type: 'number', placeholder: 'Inserisci il numero di ore' },
-              { label: 'Ora Inizio', name: 'oraInizio', type: 'time' },
-              { label: 'Ora Fine', name: 'oraFine', type: 'time' },
+              { label: 'Ora Inizio', name: 'ora_inizio', type: 'time' },
+              { label: 'Ora Fine', name: 'ora_fine', type: 'time' },
             ].map((field) => (
               <div className="turno-form-group" key={field.name}>
                 <label htmlFor={field.name}>{field.label}</label>
@@ -109,8 +109,8 @@ export default function NuovoTurno() {
               </div>
             ))}
 
-            {[{ label: 'Giorno Inizio', name: 'giornoInizio' },
-              { label: 'Giorno Fine', name: 'giornoFine' },
+            {[{ label: 'Giorno Inizio', name: 'giorno_inizio' },
+              { label: 'Giorno Fine', name: 'giorno_fine' },
             ].map((field) => (
               <div className="turno-form-group" key={field.name}>
                 <label htmlFor={field.name}>{field.label}</label>

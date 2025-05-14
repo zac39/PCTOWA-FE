@@ -7,6 +7,7 @@ const TutorForm = () => {
   const navigate = useNavigate();
   const { combinedData } = location.state || {}; // Recupera i dati passati dalla pagina precedente
 
+  console.log(combinedData);
   // Dati dei tutor
   const tutorData = [
     {
@@ -32,6 +33,7 @@ const TutorForm = () => {
     cognome: '',
     telefono: '',
     email: '',
+
   });
 
   const handleTutorSelect = (e) => {
@@ -50,10 +52,47 @@ const TutorForm = () => {
     }));
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (!selectedTutor && !showNewTutorForm) {
       alert('Per favore seleziona un tutor!');
     } else {
+      if (selectedTutor){
+
+      }else{
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+          throw new Error("Token di accesso non trovato. Effettua il login.");
+            }
+           
+        try {
+        const response = await fetch('http://localhost:5000/api/v1/tutor', {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newTutor),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        alert('Azienda creata con successo!');
+        console.log('Risposta API:', data);
+        //const location=data.location;
+        //const id_tutor=location.substring(location.lastIndexOf("/") + 1); 
+  
+      } catch (error) {
+        console.error('Errore durante la creazione dell\'azienda:', error);
+        alert('Si è verificato un errore durante la creazione dell\'azienda.');
+      }
+      console.log('Form valido, navigazione verso NuovoIndirizzo');
+
+      }
+
+
       const tutorDetails = showNewTutorForm
         ? newTutor // Usa i dati del nuovo tutor
         : tutorData.find((tutor) => tutor.idtutor.toString() === selectedTutor); // Usa il tutor selezionato

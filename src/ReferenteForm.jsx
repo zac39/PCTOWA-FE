@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './ReferenteForm.css'; // Importa il file CSS per lo stile
-import { useLocation } from 'react-router-dom'; // Importa il hook per accedere ai dati passati tramite navigate
 import { useNavigate, useLocation } from 'react-router-dom'; // Importa i hook per la navigazione
 
 
@@ -58,11 +57,13 @@ const ReferenteForm = () => {
     // Invia i dati se non ci sono errori
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/user/${formData.email}/${localStorage.getItem("id_azienda")}` , {
+        const response = await fetch(`http://localhost:5000/api/v1/user/bind/${formData.email}` , {
           method: 'POST',
           headers: {
             "Authorization": `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ id_azienda: localStorage.getItem("id_azienda") }),
         });
   
         if (!response.ok) {
@@ -72,19 +73,15 @@ const ReferenteForm = () => {
         const data = await response.json();
         alert('Azienda creata con successo!');
         console.log('Risposta API:', data);
-        const location=data.location;
-        const id_azienda=location.substring(location.lastIndexOf("/") + 1); // → "8"
-        localStorage.setItem("id_azienda", id_azienda);  // Usa data.access_token, non data.token
-        console.log('id_azienda salvata:', id_azienda); 
-  
         // Eventuale redirect dopo la creazione
-        navigate('/aziende'); // modifica il percorso secondo le tue rotte
+
   
       } catch (error) {
         console.error('Errore durante la creazione dell\'azienda:', error);
         alert('Si è verificato un errore durante la creazione dell\'azienda.');
       }
       console.log('Form valido, navigazione verso NuovoIndirizzo');
+      navigate('/nuovoTurno'); // modifica il percorso secondo le tue rotte
     }
   };
 
