@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ReferenteForm.css'; // Importa il file CSS per lo stile
 import { useLocation } from 'react-router-dom'; // Importa il hook per accedere ai dati passati tramite navigate
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa i hook per la navigazione
 
 
 //TODO: togli nome e cognome che tanto non servono e chiedi solo email
@@ -9,6 +10,7 @@ import { useLocation } from 'react-router-dom'; // Importa il hook per accedere 
 
 const ReferenteForm = () => {
   const location = useLocation(); // Hook per ottenere lo stato passato
+  const navigate = useNavigate(); // Hook per la navigazione
 
   const { combinedData } = location.state || {}; // Recupera i dati passati dallo stato
   console.log('Dati azienda iniziali:', combinedData); // Stampa i dati dell'azienda per il debug
@@ -34,7 +36,7 @@ const ReferenteForm = () => {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -48,18 +50,41 @@ const ReferenteForm = () => {
     }
 
     setErrors(newErrors);
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      throw new Error("Token di accesso non trovato. Effettua il login.");
+    }
 
     // Invia i dati se non ci sono errori
     if (Object.keys(newErrors).length === 0) {
-      // Aggiungi il referente all'oggetto combinedData
-      const updatedData = {
-        ...combinedData,
-        referente: formData, // Aggiungi i dati del referente
-      };
-
-      console.log('Dati aggiornati con il referente:', updatedData);
-      alert('Dati salvati con successo!');
-      // Puoi aggiungere qui una chiamata API per inviare i dati aggiornati
+      try {
+        const response = await fetch(`http://localhost:5000/api/v1/user/${formData.email}/${localStorage.getItem("id_azienda")}` , {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        alert('Azienda creata con successo!');
+        console.log('Risposta API:', data);
+        const location=data.location;
+        const id_azienda=location.substring(location.lastIndexOf("/") + 1); // → "8"
+        localStorage.setItem("id_azienda", id_azienda);  // Usa data.access_token, non data.token
+        console.log('id_azienda salvata:', id_azienda); 
+  
+        // Eventuale redirect dopo la creazione
+        navigate('/aziende'); // modifica il percorso secondo le tue rotte
+  
+      } catch (error) {
+        console.error('Errore durante la creazione dell\'azienda:', error);
+        alert('Si è verificato un errore durante la creazione dell\'azienda.');
+      }
+      console.log('Form valido, navigazione verso NuovoIndirizzo');
     }
   };
 

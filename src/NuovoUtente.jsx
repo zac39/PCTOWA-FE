@@ -65,10 +65,34 @@ const NuovoUtente = () => {
     return emailRegex.test(email);
   };
 
-  const addUtente = () => {
+  const addUtente = async () => {
     console.log('Nuovo utente:', formData);
     alert('Utente creato con successo!');
-    // Aggiungi qui la logica per inviare i dati al server
+    try {
+        const response = await fetch('http://localhost:5000/api/v1/user', {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        alert('Azienda creata con successo!');
+        console.log('Risposta API:', data);
+  
+        // Eventuale redirect dopo la creazione
+        navigate('/aziende'); // modifica il percorso secondo le tue rotte
+  
+      } catch (error) {
+        console.error('Errore durante la creazione dell\'azienda:', error);
+        alert('Si è verificato un errore durante la creazione dell\'azienda.');
+      }
   };
 
   const editUtente = () => {

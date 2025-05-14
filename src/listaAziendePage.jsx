@@ -247,6 +247,7 @@ export default function VisAziendePage() {
   const [aziende, setAziende] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
   // Stato per i filtri, con valori predefiniti da `settore` e `comune`
   const [valoriInput, setValoriInput] = useState({
     Comune: comune || '', // Comune passato come valore di default
@@ -269,24 +270,24 @@ export default function VisAziendePage() {
     .filter((azienda) => {
       // Filtra in base ai posti disponibili
       if (soloConPosti) {
-        const postiDisponibili = azienda.turni.some(
+        const postiDisponibili = azienda.turns.some(
           (turno) => turno.posti > turno.posti_occupati
         );
         return postiDisponibili;
       }
       return true;
-    })
-    .sort((a, b) => {
-      // Ordina le aziende: quelle con posti disponibili per prime
-      const postiDisponibiliA = a.turni.some(
-        (turno) => turno.posti > turno.posti_occupati
-      );
-      const postiDisponibiliB = b.turni.some(
-        (turno) => turno.posti > turno.posti_occupati
-      );
-      if (postiDisponibiliA === postiDisponibiliB) return 0;
-      return postiDisponibiliA ? -1 : 1;
     });
+    // .sort((a, b) => {
+    //   // Ordina le aziende: quelle con posti disponibili per prime
+    //   const postiDisponibiliA = a.turni.some(
+    //     (turno) => turno.posti > turno.posti_occupati
+    //   );
+    //   const postiDisponibiliB = b.turni.some(
+    //     (turno) => turno.posti > turno.posti_occupati
+    //   );
+    //   if (postiDisponibiliA === postiDisponibiliB) return 0;
+    //   return postiDisponibiliA ? -1 : 1;
+    // });
 
   // Funzione per aprire la pagina dei dettagli di un'azienda
   function handleAziendaClick(id) {
@@ -311,6 +312,8 @@ export default function VisAziendePage() {
   // Funzione per aggiungere una nuova azienda
   function handleAddAziendaClick() {
     navigate(`/nuovaAzienda`); // Naviga alla pagina NuovoTurno
+  }
+
 
   useEffect(() => {
     // Funzione per recuperare i dati dell'azienda tramite API
@@ -359,7 +362,7 @@ export default function VisAziendePage() {
   if (error) {
     return <p>Errore: {error}</p>;
   }
-  }
+
   // Stile personalizzato per react-select
   const customStyles = {
     control: (provided) => ({
@@ -432,7 +435,7 @@ export default function VisAziendePage() {
           // Determina se l'azienda deve essere sbiadita
           const isSbiadita =
             !soloConPosti &&
-            !azienda.turni.some((turno) => turno.posti > turno.posti_occupati);
+            !azienda.turns.some((turno) => turno.posti > turno.posti_occupati);
 
           return (
             <div
@@ -452,7 +455,7 @@ export default function VisAziendePage() {
                   {azienda.ragione_sociale}
                 </h2>
                 <div className="aziende-indirizzi-scrollable">
-                  {azienda.addresses.map((address, index) => (
+                  {azienda.turns[0].addresses.map((address, index) => (
                     <p key={index} className="aziende-indirizzo">
                       {`${address.indirizzo}, ${address.cap}, ${address.comune}, ${address.provincia}, ${address.stato}`}
                     </p>

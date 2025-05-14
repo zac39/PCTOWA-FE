@@ -13,22 +13,12 @@ export default function NuovaAzienda() {
     partita_iva: '',
     telefono_azienda: '',
     email_azienda: '',
-    codice_ateco: '',
-    partita_iva: '',
-    telefono_azienda: '',
-    email_azienda: '',
     fax: '',
     pec: '',
-    ragione_sociale: '',
-    sito_web: '',
     forma_giuridica: '',
     ragione_sociale: '',
     sito_web: '',
-    forma_giuridica: '',
     categoria: '',
-    indirizzo_logo: '',
-    data_convenzione: '',
-    scadenza_convenzione: '',
     indirizzo_logo: '',
     data_convenzione: '',
     scadenza_convenzione: '',
@@ -68,14 +58,11 @@ export default function NuovaAzienda() {
     if (validators[name] && !validators[name].test(value)) {
       switch (name) {
         case 'codice_ateco':
-        case 'codice_ateco':
           error = 'Il codice Ateco deve essere composto da 6 numeri.';
           break;
         case 'partita_iva':
-        case 'partita_iva':
           error = 'La partita IVA deve essere composta da 11 numeri.';
           break;
-        case 'telefono_azienda':
         case 'telefono_azienda':
           error = 'Inserire un numero di telefono valido.';
           break;
@@ -89,10 +76,8 @@ export default function NuovaAzienda() {
           error = "Inserire una PEC valida.";
           break;
         case 'sito_web':
-        case 'sito_web':
           error = "Inserire un URL valido.";
           break;
-        case 'indirizzo_logo':
         case 'indirizzo_logo':
           error = "Inserire un URL valido.";
           break;
@@ -210,21 +195,11 @@ export default function NuovaAzienda() {
               { label: 'Telefono', name: 'telefono_azienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
               { label: 'Email', name: 'email_azienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
               { label: 'Sito Web', name: 'sito_web', type: 'url', placeholder: 'Inserisci il sito web' },
-              { label: 'Ragione Sociale', name: 'ragione_sociale', type: 'text', placeholder: 'Inserisci la ragione sociale' },
-              { label: 'Codice Ateco', name: 'codice_ateco', type: 'text', placeholder: 'Inserisci il codice Ateco' },
-              { label: 'Partita IVA', name: 'partita_iva', type: 'text', placeholder: 'Inserisci la partita IVA' },
-              { label: 'Telefono', name: 'telefono_azienda', type: 'text', placeholder: 'Inserisci il numero di telefono' },
-              { label: 'Email', name: 'email_azienda', type: 'email', placeholder: 'Inserisci l\'email aziendale' },
-              { label: 'Sito Web', name: 'sito_web', type: 'url', placeholder: 'Inserisci il sito web' },
               { label: 'Fax', name: 'fax', type: 'text', placeholder: 'Inserisci il fax aziendale' },
               { label: 'PEC', name: 'pec', type: 'text', placeholder: 'Inserisci la PEC aziendale' },
               { label: 'Data Convenzione', name: 'data_convenzione', type: 'date' },
               { label: 'Scadenza Convenzione', name: 'scadenza_convenzione', type: 'date' },
-              { label: 'Data Convenzione', name: 'data_convenzione', type: 'date' },
-              { label: 'Scadenza Convenzione', name: 'scadenza_convenzione', type: 'date' },
               { label: 'Categoria', name: 'categoria', type: 'text', placeholder: 'Inserisci la categoria' },
-              { label: 'Indirizzo Logo', name: 'indirizzo_logo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
-              { label: 'Forma Giuridica', name: 'forma_giuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
               { label: 'Indirizzo Logo', name: 'indirizzo_logo', type: 'text', placeholder: 'Inserisci l\'indirizzo del logo' },
               { label: 'Forma Giuridica', name: 'forma_giuridica', type: 'text', placeholder: 'Inserisci la forma giuridica' },
             ].map((field) => (

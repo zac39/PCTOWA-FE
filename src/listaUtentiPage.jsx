@@ -5,12 +5,12 @@ import Select from 'react-select';
 import pencil from './pencilBlack.png'; // Importa l'icona della matita
 import deleteIcon from './deleteBlack.png'; // Importa l'icona delete
 
-const utentiData = [
-  { id: 1, nome: "Mario", cognome: "Rossi", email: "mario.rossi@gmail.com", ruolo: 1 },
-  { id: 2, nome: "Luigi", cognome: "Verdi", email: "luigi.verdi@gmail.com", ruolo: 2 },
-  { id: 3, nome: "Anna", cognome: "Bianchi", email: "anna.bianchi@gmail.com", ruolo: 3 },
-  { id: 4, nome: "Carla", cognome: "Neri", email: "carla.neri@gmail.com", ruolo: 4 },
-];
+// const utentiData = [
+//   { id: 1, nome: "Mario", cognome: "Rossi", email: "mario.rossi@gmail.com", ruolo: 1 },
+//   { id: 2, nome: "Luigi", cognome: "Verdi", email: "luigi.verdi@gmail.com", ruolo: 2 },
+//   { id: 3, nome: "Anna", cognome: "Bianchi", email: "anna.bianchi@gmail.com", ruolo: 3 },
+//   { id: 4, nome: "Carla", cognome: "Neri", email: "carla.neri@gmail.com", ruolo: 4 },
+// ];
 
 const opzioniFiltro = {
   Ruolo: ['Docente', 'Tutor', 'SuperTutor', 'Admin'],
@@ -20,16 +20,16 @@ const RuoloLabel = ({ ruolo }) => {
   let label = "";
 
   switch (ruolo) {
-    case 1:
+    case 'docente':
       label = "Docente";
       break;
-    case 2:
+    case 'tutor':
       label = "Tutor";
       break;
-    case 3:
+    case 'supertutor':
       label = "SuperTutor";
       break;
-    case 0:
+    case 'admin':
       label = "Admin";
       break;
     default:
@@ -47,7 +47,7 @@ const ListaUtentiPage = () => {
   const navigate = useNavigate(); // Hook per la navigazione
 
   const [searchTerm, setSearchTerm] = useState(''); // Stato per la barra di ricerca
-    const [urentiData2, setUtenti] = useState([]);
+    const [utentiData, setUtenti] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
   const [valoriInput, setValoriInput] = useState({
@@ -112,7 +112,7 @@ const ListaUtentiPage = () => {
       fetchUtenteData();
     }, []);
   
-    console.log(urentiData2);
+    console.log(utentiData);
   
     if (isLoading) {
       return <p>Caricamento in corso...</p>;
