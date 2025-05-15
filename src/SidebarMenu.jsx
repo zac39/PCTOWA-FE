@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './SidebarMenu.css';
 import menuIcon from './menu.png'; // Assicurati che il percorso sia corretto
 
 export default function SidebarMenu({ children }) {
+  const location = useLocation(); // Hook per ottenere lo stato passato
+  const navigate = useNavigate(); // Hook per la navigazione
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     // Rileva il tema predefinito del sistema operativo
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     return localStorage.getItem('theme') || (systemPrefersDark ? 'dark' : 'light');
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    // Ottieni lo stato di autenticazione dalla memoria locale
+    return localStorage.getItem('autenticato') === 'true';
   });
 
   const toggleMenu = () => {
@@ -18,10 +27,22 @@ export default function SidebarMenu({ children }) {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+  const handleLogout = () => {
+    localStorage.setItem('autenticato', 'false');
+    setIsAuthenticated(false); // Aggiorna lo stato di autenticazione
+    navigate('/listaAziende'); // Reindirizza alla pagina "listaAziende"
+    window.location.reload(); // Forza un aggiornamento completo della pagina
+  };
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Monitora il cambiamento nella posizione attuale per aggiornare lo stato
+    setIsAuthenticated(localStorage.getItem('autenticato') === 'true');
+  }, [location]);
 
   return (
     <div
@@ -63,15 +84,14 @@ export default function SidebarMenu({ children }) {
             </label>
         </div>
 
-
-
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/listaAziende">Aziende</a></li>
-          <li><a href="/studenti">Studenti</a></li>
+          {isAuthenticated && <li><a href="/listaAziende">Aziende</a></li>}
+          {isAuthenticated && <li><a href="/studenti">Studenti</a></li>}
           {/*TODO: questa parte si deve vedere solo se hai le autorizzazioni giuste */}
-          <li><a href="/listaUtenti">Utenti</a></li>
-
+          {isAuthenticated && <li><a href="/listaUtenti">Utenti</a></li>}
+          {isAuthenticated && <li><a onClick={handleLogout}>Log out</a></li>}
+          {!isAuthenticated && <li><a href="/login">Login</a></li>}
         </ul>
       </div>
 
@@ -81,4 +101,4 @@ export default function SidebarMenu({ children }) {
       </div>
     </div>
   );
-}   
+}
