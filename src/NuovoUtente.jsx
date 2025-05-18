@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './NuovoUtente.css'; // Importa il file CSS per lo stile
-import {  useNavigate, useLocation } from 'react-router-dom';
+import './NuovoUtente.css';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const roles = [
   { value: 'docente', label: 'Docente' },
@@ -9,7 +9,6 @@ const roles = [
   { value: 'admin', label: 'Admin' },
 ];
 
-// Mappa dei ruoli numerici ai valori stringa
 const roleMapping = {
   0: 'admin',
   1: 'docente',
@@ -19,13 +18,11 @@ const roleMapping = {
 
 const NuovoUtente = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Hook per la navigazione
-  const utente = location.state || {}; // Recupera i dati dell'utente o un oggetto vuoto
-  console.log('Dati utente:', utente); // Log dei dati dell'utente
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
+    nome: '',
+    cognome: '',
     email: '',
     password: '',
     ruolo: '',
@@ -33,32 +30,19 @@ const NuovoUtente = () => {
 
   const [errors, setErrors] = useState({});
 
-  // Popola il form con i dati di default se `utente` è valorizzato
-  useEffect(() => {
-    if (utente) {
-      setFormData({
-        name: utente.name || '',
-        surname: utente.surname || '',
-        email: utente.email || '',
-        password: '', // La password non viene mai pre-riempita per motivi di sicurezza
-        ruolo: roleMapping[utente.ruolo] || '', // Mappa il valore numerico al ruolo
-      });
-    }
-  }, [utente]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleRoleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       ruolo: e.target.value,
-    });
+    }));
   };
 
   const validateEmail = (email) => {
@@ -66,73 +50,52 @@ const NuovoUtente = () => {
     return emailRegex.test(email);
   };
 
-      const accessToken = localStorage.getItem("access_token");
-      if (!accessToken) {
-        throw new Error("Token di accesso non trovato. Effettua il login.");
-      }
-
-  const addUtente = async () => {
-    console.log('Nuovo utente:', formData);
-    alert('Utente creato con successo!');
-    try {
-        const response = await fetch('http://localhost:5000/api/v1/user', {
-          method: 'POST',
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (!response.ok) {
-          throw new Error(`Errore nella richiesta: ${response.statusText}`);
-        }
-  
-        const data = await response.json();
-        alert('Azienda creata con successo!');
-        console.log('Risposta API:', data);
-  
-        // Eventuale redirect dopo la creazione
-        navigate('/aziende'); // modifica il percorso secondo le tue rotte
-  
-      } catch (error) {
-        console.error('Errore durante la creazione dell\'azienda:', error);
-        alert('Si è verificato un errore durante la creazione dell\'azienda.');
-      }
-  };
-
-  const editUtente = () => {
-    console.log('Modifiche salvate per l\'utente:', formData);
-    alert('Modifiche salvate con successo!');
-    // Aggiungi qui la logica per inviare le modifiche al server
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
-    // Validazione dei campi
-    if (!formData.name) newErrors.name = 'Il nome è obbligatorio';
-    if (!formData.surname) newErrors.surname = 'Il cognome è obbligatorio';
+    if (!formData.nome) newErrors.name = 'Il nome è obbligatorio';
+    if (!formData.cognome) newErrors.surname = 'Il cognome è obbligatorio';
     if (!formData.email) {
-      newErrors.email = 'L\'email è obbligatoria';
+      newErrors.email = "L'email è obbligatoria";
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'L\'email non è valida';
+      newErrors.email = "L'email non è valida";
     }
-    if (!formData.password && !utente.id) {
-      // La password è obbligatoria solo per la creazione di un nuovo utente
+    if (!formData.password) {
       newErrors.password = 'La password è obbligatoria';
     }
     if (!formData.ruolo) newErrors.ruolo = 'Il ruolo è obbligatorio';
 
     setErrors(newErrors);
 
-    // Invia i dati se non ci sono errori
     if (Object.keys(newErrors).length === 0) {
-      if (utente.id) {
-        editUtente();
-      } else {
-        addUtente();
+      const accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        alert("Token di accesso non trovato. Effettua il login.");
+        navigate('/login');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/api/v1/user', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        alert('Utente creato con successo!');
+        console.log('Risposta API:', data);
+      } catch (error) {
+        console.error("Errore durante la creazione dell'utente:", error);
+        alert("Errore durante la creazione dell'utente.");
       }
     }
   };
@@ -140,9 +103,8 @@ const NuovoUtente = () => {
   return (
     <div className="nuovo-utente-form-container">
       <form className="nuovo-utente-form" onSubmit={handleSubmit}>
-        <h2>{utente.id ? 'Modifica Utente' : 'Crea Nuovo Utente'}</h2>
+        <h2>{'Crea Nuovo Utente'}</h2>
 
-        {/* Nome */}
         <div className="nuovo-utente-form-group">
           <label>Nome</label>
           <input
@@ -155,7 +117,6 @@ const NuovoUtente = () => {
           {errors.name && <span className="error">{errors.name}</span>}
         </div>
 
-        {/* Cognome */}
         <div className="nuovo-utente-form-group">
           <label>Cognome</label>
           <input
@@ -168,7 +129,6 @@ const NuovoUtente = () => {
           {errors.surname && <span className="error">{errors.surname}</span>}
         </div>
 
-        {/* Email */}
         <div className="nuovo-utente-form-group">
           <label>Email</label>
           <input
@@ -181,7 +141,6 @@ const NuovoUtente = () => {
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
-        {/* Password */}
         <div className="nuovo-utente-form-group">
           <label>Password</label>
           <input
@@ -194,7 +153,6 @@ const NuovoUtente = () => {
           {errors.password && <span className="error">{errors.password}</span>}
         </div>
 
-        {/* Ruolo */}
         <div className="nuovo-utente-form-group">
           <label>Ruolo</label>
           <select name="ruolo" value={formData.ruolo} onChange={handleRoleChange}>
@@ -208,9 +166,8 @@ const NuovoUtente = () => {
           {errors.ruolo && <span className="error">{errors.ruolo}</span>}
         </div>
 
-        {/* Pulsante di invio */}
         <button type="submit" className="invio-btn">
-          {utente.id ? 'Salva Modifiche' : 'Crea Utente'}
+          {'Crea Utente'}
         </button>
       </form>
     </div>

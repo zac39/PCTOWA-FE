@@ -33,7 +33,8 @@ const TutorForm = () => {
     cognome: '',
     telefono: '',
     email: '',
-
+    id_azienda: localStorage.getItem("id_azienda"),
+    id_turno: localStorage.getItem("id_turno"),
   });
 
   const handleTutorSelect = (e) => {

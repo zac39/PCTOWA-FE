@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Impor
 import './TurniPage.css';
 
 
-const turniData = {
+const turniData2 = {
   idAzienda: 1,
   ragioneSociale: "Università di Verona",
   //indirizzoLogo: null,
@@ -51,10 +51,11 @@ export default function VisturnoPage() {
   const { aziendaId } = useParams();
   const location = useLocation(); // Ottieni lo stato passato dalla pagina precedente
   const navigate = useNavigate(); // Hook per la navigazione
-    const [azienda, setAzienda] = useState([]);
+    const [turniData, setAzienda] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null); 
     const { idStudente } = location.state || {}; // Ottieni idStudente
+    localStorage.setItem("id_azienda", aziendaId); 
 
   function handleAssegnaClick(turnoId) {
     if (idStudente) {
@@ -95,7 +96,7 @@ export default function VisturnoPage() {
       fetchAziendeData();
     }, [aziendaId]);  
 
-    console.log(azienda);
+    console.log(turniData);
 
 
 
@@ -111,11 +112,15 @@ export default function VisturnoPage() {
     navigate(`/nuovoTurno`, { state: { aziendaId } }); // Naviga alla pagina NuovoTurno passando aziendaId
   }
 
+  const turni = turniData.turns || [];
+
+  console.log(turni);
+
   return (
     <div className="turno-container">
       <p>{aziendaId}</p>
 
-      {turniData.turni.map((turno) => (
+      {turni.map((turno) => (
         <div className="turno-card" key={turno.idTurno}>
           <div className="turno-header">
             <div className="turno-info">
@@ -124,13 +129,13 @@ export default function VisturnoPage() {
                 onClick={() => handleAziendaClick(aziendaId)} // Naviga alla pagina dell'azienda
                 style={{ cursor: "pointer", color: "var(--text-color)", textDecoration: "underline" }}
               >
-                {turniData.ragioneSociale}
+                {turniData.ragione_sociale}
               </h2>
               <p className="turno-address">
-                {`${turniData.indirizzo.indirizzo}, ${turniData.indirizzo.cap}, ${turniData.indirizzo.comune}, ${turniData.indirizzo.stato}`}
+                {`${turniData.addresses[0].indirizzo}, ${turniData.addresses[0].cap}, ${turniData.addresses[0].comune}, ${turniData.addresses[0].stato}`}
               </p>
               <a
-                href={turniData.sitoWeb}
+                href={turniData.sito_web}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="turno-link"
@@ -141,8 +146,8 @@ export default function VisturnoPage() {
             <div className="turno-logo">
               {turniData.indirizzoLogo ? (
                 <img
-                  src={turniData.indirizzoLogo}
-                  alt={`Logo di ${turniData.ragioneSociale}`}
+                  src={turniData.indirizzo_logo}
+                  alt={`Logo di ${turniData.ragione_sociale}`}
                 />
               ) : (
                 <div className="turno-logo-placeholder"></div>
@@ -167,30 +172,30 @@ export default function VisturnoPage() {
           <div className="turno-dati-extra">
             <div className="dati-extra-grid">
               <p>
-                <strong>Data inizio:</strong> <span>{turno.dataInizio}</span>
+                <strong>Data inizio:</strong> <span>{turno.data_inizio}</span>
               </p>
               <p>
-                <strong>Data fine:</strong> <span>{turno.dataFine}</span>
+                <strong>Data fine:</strong> <span>{turno.data_fine}</span>
               </p>
               <p>
                 <strong>Posti disponibili:</strong>{" "}
-                <span>{turno.postiDisponibili}</span>
+                <span>{turno.posti}</span>
               </p>
               <p>
-                <strong>Posti assegnati:</strong> <span>{turno.postiAssegnati}</span>
+                <strong>Posti assegnati:</strong> <span>{turno.posti_occupati}</span>
               </p>
               <p>
                 <strong>Numero posti confermati:</strong>{" "}
-                <span>{turno.postiConfermati ? "Si" : "No"}</span>
+                <span>{turno.posti_confermati ? "Si" : "No"}</span>
               </p>
               <p>
-                <strong>Ore totali:</strong> <span>{turno.oreTotali}</span>
+                <strong>Ore totali:</strong> <span>{turno.ore}</span>
               </p>
               <p>
-                <strong>Orario inizio:</strong> <span>{turno.orarioInizio}</span>
+                <strong>Orario inizio:</strong> <span>{turno.ora_inizio}</span>
               </p>
               <p>
-                <strong>Orario fine:</strong> <span>{turno.orarioFine}</span>
+                <strong>Orario fine:</strong> <span>{turno.ora_fine}</span>
               </p>
             </div>
           </div>

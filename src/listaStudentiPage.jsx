@@ -6,105 +6,62 @@ import './listaStudentiPage.css'; // Assicurati di avere il file CSS
 
 
 export default function VisStudentiPage() {
-  const [studente, setStudente] = useState([]);
+  const [studentiData, setStudente] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
     const navigate = useNavigate(); // Hook per la navigazione
 
-    const studentiData = [
-      {
-        idStudente: 1,
-        nome: 'Federico Rigo',
-        indirizzo: {
-          stato: 'Italia',
-          provincia: 'Verona',
-          comune: 'Verona',
-          cap: '37132',
-          indirizzo: "Via Andrea d'Angeli 23",
-        },
-        settore: 'Informatica',
-        classe: '5Bi 24/25',
-        stato: 'Non assegnato',
-        statoColor: '#f8d7da', // Rosso per Non assegnato
-        statoTextColor: '#721c24',
-        azione: 'Aziende',
-        azienda: null, // Nessuna azienda associata
-      },
-      {
-        idStudente: 2,
-        nome: 'Marco Rossi',
-        indirizzo: {
-          stato: 'Italia',
-          provincia: 'Verona',
-          comune: 'Verona',
-          cap: '37132',
-          indirizzo: "Via Andrea d'Angeli 23",
-        },
-        settore: 'Logistica',
-        classe: '5Ai 24/25',
-        stato: 'Assegnato',
-        statoColor: '#d4edda', // Verde per Assegnato
-        statoTextColor: '#155724',
-        azione: 'Aziende',
-        azienda: {
-          nome: 'Università di Verona',
-          indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
-          classe: '06/06-10/07',
-          stato: '',
-          statoColor: 'transparent', // Nessuno stato
-          statoTextColor: '#000',
-          azione: 'Turno',
-        },
-      },
-      // Altri studenti...
-    ];
-    
-    // Genera dinamicamente l'array degli anni (fino a 20 anni prima dell'anno corrente)
-    const annoCorrente = new Date().getFullYear();
-    const opzioniAnno = Array.from({ length: 20 }, (_, i) => (annoCorrente - i).toString());
-    
-    // Genera dinamicamente l'array dei comuni presenti nella lista degli studenti
-    const opzioniComune = Array.from(
-      new Set(studentiData.map((studente) => studente.indirizzo.comune))
-    ).sort(); // Rimuove duplicati e ordina alfabeticamente
-    
-    const opzioniClasse = ['5Bi 24/25', '5Ci 24/25', '5Ai 24/25', '5Bi 23/24', '5Ci 23/24', '5Ai 23/24'];
-    
-    const opzioniFiltro = {
-      Classe: opzioniClasse,
-      Comune: opzioniComune, // Usa la lista dinamica dei comuni
-      Anno: opzioniAnno, // Usa l'array dinamico per gli anni
-    };
-
- const [valoriInput, setValoriInput] = useState({
-    Classe: '',
-    Comune: '',
-    Anno: new Date().getFullYear().toString(), // Valore di default: anno corrente
-  });
-
-  const [classiFiltrate, setClassiFiltrate] = useState(opzioniFiltro.Classe); // Classi filtrate per anno
-
-  useEffect(() => {
-    // Filtra le classi in base all'anno selezionato
-    if (valoriInput.Anno) {
-      const anno = valoriInput.Anno.slice(-2); // Prendi gli ultimi 2 caratteri dell'anno
-      const classiFiltrate = opzioniFiltro.Classe.filter((classe) =>
-        classe.endsWith(anno)
-      );
-      setClassiFiltrate(classiFiltrate);
-    } else {
-      setClassiFiltrate(opzioniFiltro.Classe);
-    }
-  }, [valoriInput.Anno]);
-
-  function handleSelectChange(filtro, selectedOption) {
-    const valore = selectedOption ? selectedOption.value : '';
-    setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
-  }
+  const studentiData2 = [
+  {
+    idStudente: 1,
+    nome: 'Federico Rigo',
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    },
+    settore: 'Informatica',
+    classe: '5Bi 24/25',
+    stato: 'Non assegnato',
+    statoColor: '#f8d7da', // Rosso per Non assegnato
+    statoTextColor: '#721c24',
+    azione: 'Aziende',
+    azienda: null, // Nessuna azienda associata
+  },
+  {
+    idStudente: 2,
+    nome: 'Marco Rossi',
+    indirizzo: {
+      stato: 'Italia',
+      provincia: 'Verona',
+      comune: 'Verona',
+      cap: '37132',
+      indirizzo: "Via Andrea d'Angeli 23",
+    },
+    settore: 'Logistica',
+    classe: '5Ai 24/25',
+    stato: 'Assegnato',
+    statoColor: '#d4edda', // Verde per Assegnato
+    statoTextColor: '#155724',
+    azione: 'Aziende',
+    azienda: {
+      nome: 'Università di Verona',
+      indirizzo: 'Via Andrea d’Angeli 4, 37132, Verona',
+      classe: '06/06-10/07',
+      stato: '',
+      statoColor: 'transparent', // Nessuno stato
+      statoTextColor: '#000',
+      azione: 'Turno',
+    },
+  },
+  // Altri studenti...
+];
 
 useEffect(() => {
     // Funzione per recuperare i dati dell'azienda tramite API
-    const fetchAziendeData = async () => {
+    const fetchStudentiData = async () => {
       try {
         // Configura l'header con il token access_data
         const accessToken = localStorage.getItem("access_token");
@@ -132,10 +89,52 @@ useEffect(() => {
       }
     };
 
-    fetchAziendeData();
+    fetchStudentiData();
   }, []);
 
-console.log(studente)
+console.log(studentiData)
+// Genera dinamicamente l'array degli anni (fino a 20 anni prima dell'anno corrente)
+const annoCorrente = new Date().getFullYear();
+const opzioniAnno = Array.from({ length: 20 }, (_, i) => (annoCorrente - i).toString());
+
+// Genera dinamicamente l'array dei comuni presenti nella lista degli studenti
+const opzioniComune = Array.from(
+  new Set(studentiData.map((studente) => studente.comune))
+).sort(); // Rimuove duplicati e ordina alfabeticamente
+
+const opzioniClasse = ['5Bi 24/25', '5Ci 24/25', '5Ai 24/25', '5Bi 23/24', '5Ci 23/24', '5Ai 23/24'];
+
+const opzioniFiltro = {
+  Classe: opzioniClasse,
+  Comune: opzioniComune, // Usa la lista dinamica dei comuni
+  Anno: opzioniAnno, // Usa l'array dinamico per gli anni
+};  
+
+ const [valoriInput, setValoriInput] = useState({
+    Classe: '',
+    Comune: '',
+    Anno: new Date().getFullYear().toString(), // Valore di default: anno corrente
+  });
+
+  const [classiFiltrate, setClassiFiltrate] = useState(opzioniFiltro.Classe); // Classi filtrate per anno
+
+  useEffect(() => {
+    // Filtra le classi in base all'anno selezionato
+    if (valoriInput.Anno) {
+      const anno = valoriInput.Anno.slice(-2); // Prendi gli ultimi 2 caratteri dell'anno
+      const classiFiltrate = opzioniFiltro.Classe.filter((classe) =>
+        classe.endsWith(anno)
+      );
+      setClassiFiltrate(classiFiltrate);
+    } else {
+      setClassiFiltrate(opzioniFiltro.Classe);
+    }
+  }, [valoriInput.Anno]);
+
+  function handleSelectChange(filtro, selectedOption) {
+    const valore = selectedOption ? selectedOption.value : '';
+    setValoriInput((prev) => ({ ...prev, [filtro]: valore }));
+  }
 
   function handleAziendeClick(studente) {
     // Naviga verso la pagina delle aziende passando idStudente, settore e comune
@@ -153,7 +152,7 @@ console.log(studente)
   const studentiFiltrati = valoriInput.Classe
     ? studentiData.filter((studente) => {
         // Filtra per comune
-        if (valoriInput.Comune && studente.indirizzo.comune !== valoriInput.Comune) {
+        if (valoriInput.Comune && studente.comune !== valoriInput.Comune) {
           return false;
         }
         // Filtra per anno
