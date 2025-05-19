@@ -9,7 +9,6 @@ import {
 } from 'react-router-dom';
 import Login from './Login';
 import SidebarMenu from './SidebarMenu'; // Importa il menu laterale
-import IndirizziPage from './IndirizziPage'; // Importa la pagina degli indirizzi
 import ListaAziendePage from './listaAziendePage';
 import StudentiPage from './listaStudentiPage';
 import TurniPage from './TurniPage';
@@ -52,7 +51,6 @@ function MainApp({ onLogout }) {
   return (
       <div >
         <Routes>
-          <Route path="/indirizzi" element={<IndirizziPage />} />
           <Route path="/listaAziende" element={<ListaAziendePage />} />
           <Route path="/listaUtenti" element={<ListaUtenti />} />
           <Route path="/studenti" element={<StudentiPage />} />

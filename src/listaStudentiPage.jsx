@@ -6,7 +6,8 @@ import './listaStudentiPage.css'; // Assicurati di avere il file CSS
 
 
 export default function VisStudentiPage() {
-  const [studentiData, setStudente] = useState([]);
+  const [classiData, setClassi] = useState([]);
+  const [studentiData, setStudenti] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
     const navigate = useNavigate(); // Hook per la navigazione
@@ -61,7 +62,7 @@ export default function VisStudentiPage() {
 
 useEffect(() => {
     // Funzione per recuperare i dati dell'azienda tramite API
-    const fetchStudentiData = async () => {
+    const fetchClassiData = async () => {
       try {
         // Configura l'header con il token access_data
         const accessToken = localStorage.getItem("access_token");
@@ -69,7 +70,7 @@ useEffect(() => {
           throw new Error("Token di accesso non trovato. Effettua il login.");
         }
 
-        const response = await fetch(`http://localhost:5000/api/v1/student/class_list/1`, {
+        const response = await fetch(`http://localhost:5000/api/v1/class/fsearch?input_str=`, {
           method: "GET", // Metodo HTTP
           headers: {
             "Authorization": `Bearer ${accessToken}`, // Aggiunge il token all'header
@@ -81,7 +82,7 @@ useEffect(() => {
         }
 
         const data = await response.json();
-        setStudente(data); // Salva i dati ricevuti nello stato
+        setClassi(data); // Salva i dati ricevuti nello stato
       } catch (err) {
         setError(err.message);
       } finally {
@@ -89,10 +90,10 @@ useEffect(() => {
       }
     };
 
-    fetchStudentiData();
+    fetchClassiData();
   }, []);
 
-console.log(studentiData)
+console.log(classiData)
 // Genera dinamicamente l'array degli anni (fino a 20 anni prima dell'anno corrente)
 const annoCorrente = new Date().getFullYear();
 const opzioniAnno = Array.from({ length: 20 }, (_, i) => (annoCorrente - i).toString());
@@ -102,7 +103,15 @@ const opzioniComune = Array.from(
   new Set(studentiData.map((studente) => studente.comune))
 ).sort(); // Rimuove duplicati e ordina alfabeticamente
 
-const opzioniClasse = ['5Bi 24/25', '5Ci 24/25', '5Ai 24/25', '5Bi 23/24', '5Ci 23/24', '5Ai 23/24'];
+
+
+//TODO: SISTEMA QUA
+const opzioniClasse = Array.from(
+  new Set(studentiData.map((item => `${item.sigla} ${item.anno}`)))
+)// Rimuove duplicati e ordina alfabeticamente
+//const opzioniClasse = ['5Bi 24/25', '5Ci 24/25', '5Ai 24/25', '5Bi 23/24', '5Ci 23/24', '5Ai 23/24'];
+console.log(studentiData)
+console.log(opzioniClasse)
 
 const opzioniFiltro = {
   Classe: opzioniClasse,
